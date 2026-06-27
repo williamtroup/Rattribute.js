@@ -1,6 +1,5 @@
 /**
  * Rattribute.js
-
  * 
  * A JavaScript library that generates responsive attribute setters for any HTML element.
  * 
@@ -25,6 +24,7 @@ import { DocumentElement } from "./ts/dom/document-element";
 import { Constant } from "./ts/constant";
 import { Char, ScreenSize, Value } from "./ts/data/enum";
 import { Default } from "./ts/data/default";
+import { Observation } from "./ts/data/observation";
 
 
 ( () : void => {
@@ -345,6 +345,8 @@ import { Default } from "./ts/data/default";
                 if ( configurationOptionsHaveChanged ) {
                     _configurationOptions = Configuration.Options.get( existingConfigurationOptions );
                     _enabled = _configurationOptions.enabled!;
+
+                    Observation.setup( _configurationOptions, () : void => fetchAll() );
                 }
             }
 
@@ -375,7 +377,11 @@ import { Default } from "./ts/data/default";
         _configurationOptions = Configuration.Options.get();
         _enabled = _configurationOptions.enabled!;
         
-        DocumentElement.onContentLoaded( () : void => fetchAll() );
+        DocumentElement.onContentLoaded( () : void => {
+            fetchAll();
+            
+            Observation.setup( _configurationOptions, () : void => fetchAll() );
+        } );
 
         if ( !Is.defined( window.$rattribute ) ) {
             window.$rattribute = _public;

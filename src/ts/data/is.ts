@@ -1,6 +1,5 @@
 /**
  * Rattribute.js
-
  * 
  * A JavaScript library that generates responsive attribute setters for any HTML element.
  * 

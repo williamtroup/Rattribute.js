@@ -11,14 +11,14 @@ var t;
         return e(t) && typeof t === "object";
     }
     t.definedObject = n;
-    function r(t) {
+    function o(t) {
         return e(t) && typeof t === "string";
     }
-    t.definedString = r;
-    function o(t) {
+    t.definedString = o;
+    function r(t) {
         return e(t) && typeof t === "number";
     }
-    t.definedNumber = o;
+    t.definedNumber = r;
     function i(t) {
         return e(t) && typeof t === "boolean";
     }
@@ -32,14 +32,14 @@ var e;
         return t.definedString(e) ? e : n;
     }
     e.getString = n;
-    function r(e, n) {
+    function o(e, n) {
         return t.definedNumber(e) ? e : n;
     }
-    e.getNumber = r;
-    function o(e, n) {
+    e.getNumber = o;
+    function r(e, n) {
         return t.definedObject(e) ? e : n;
     }
-    e.getObject = o;
+    e.getObject = r;
     function i(e, n) {
         return t.definedBoolean(e) ? e : n;
     }
@@ -63,7 +63,7 @@ var n;
     })(n = t.Options || (t.Options = {}));
 })(n || (n = {}));
 
-var r;
+var o;
 
 (t => {
     function e(t) {
@@ -74,9 +74,9 @@ var r;
         }
     }
     t.onContentLoaded = e;
-})(r || (r = {}));
+})(o || (o = {}));
 
-var o;
+var r;
 
 (t => {
     let e;
@@ -92,154 +92,184 @@ var o;
     (t => {
         t.RESIZE = "resize";
     })(n = t.Event || (t.Event = {}));
-})(o || (o = {}));
+})(r || (r = {}));
+
+var i;
+
+(e => {
+    let n = null;
+    function o(e, o) {
+        if (e.observationMode) {
+            if (!t.defined(n)) {
+                n = new MutationObserver(() => o());
+                const t = {
+                    attributes: false,
+                    childList: true,
+                    subtree: true
+                };
+                n.observe(document.body, t);
+            }
+        } else {
+            n.disconnect();
+            n = null;
+        }
+    }
+    e.setup = o;
+    function r(e) {
+        if (e.observationMode && t.defined(n)) {
+            n.disconnect();
+            n = null;
+        }
+    }
+    e.destroy = r;
+})(i || (i = {}));
 
 (() => {
-    let i = {};
     let s = {};
-    let u = 0;
-    let c = true;
-    let f = false;
+    let u = {};
+    let c = 0;
+    let f = true;
+    let l = false;
     function a() {
         let t = false;
         const e = document.getElementsByTagName("*");
         const n = [].slice.call(e);
-        const r = n.length;
-        for (let e = 0; e < r; e++) {
-            if (l(n[e])) {
+        const o = n.length;
+        for (let e = 0; e < o; e++) {
+            if (d(n[e])) {
                 t = true;
             }
         }
         if (t) {
-            if (!f) {
-                window.addEventListener(o.Event.RESIZE, A);
-                f = true;
+            if (!l) {
+                window.addEventListener(r.Event.RESIZE, S);
+                l = true;
             }
-            if (c) {
-                S();
+            if (f) {
+                p();
             }
         }
     }
-    function l(e) {
+    function d(e) {
         let n = false;
-        const r = e.getAttribute(o.CustomAttribute.RATTRIBUTE_JS_SM);
-        const i = e.getAttribute(o.CustomAttribute.RATTRIBUTE_JS_MD);
-        const s = e.getAttribute(o.CustomAttribute.RATTRIBUTE_JS_LG);
-        const u = e.getAttribute(o.CustomAttribute.RATTRIBUTE_JS_XL);
-        const c = e.getAttribute(o.CustomAttribute.RATTRIBUTE_JS_XXL);
-        if (t.definedString(r)) {
-            b(576, e, r, o.CustomAttribute.RATTRIBUTE_JS_SM);
+        const o = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_SM);
+        const i = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_MD);
+        const s = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_LG);
+        const u = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XL);
+        const c = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XXL);
+        if (t.definedString(o)) {
+            T(576, e, o, r.CustomAttribute.RATTRIBUTE_JS_SM);
             n = true;
         }
         if (t.definedString(i)) {
-            b(768, e, i, o.CustomAttribute.RATTRIBUTE_JS_MD);
+            T(768, e, i, r.CustomAttribute.RATTRIBUTE_JS_MD);
             n = true;
         }
         if (t.definedString(s)) {
-            b(992, e, s, o.CustomAttribute.RATTRIBUTE_JS_LG);
+            T(992, e, s, r.CustomAttribute.RATTRIBUTE_JS_LG);
             n = true;
         }
         if (t.definedString(u)) {
-            b(1200, e, u, o.CustomAttribute.RATTRIBUTE_JS_XL);
+            T(1200, e, u, r.CustomAttribute.RATTRIBUTE_JS_XL);
             n = true;
         }
         if (t.definedString(c)) {
-            b(1400, e, c, o.CustomAttribute.RATTRIBUTE_JS_XXL);
+            T(1400, e, c, r.CustomAttribute.RATTRIBUTE_JS_XXL);
             n = true;
         }
-        d(e);
+        b(e);
         return n;
     }
-    function d(n) {
-        const r = n.attributes;
-        const i = r.length;
+    function b(n) {
+        const o = n.attributes;
+        const i = o.length;
         for (let s = 0; s < i; s++) {
-            const i = r[s];
+            const i = o[s];
             const u = i.name;
-            if (u.startsWith(o.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
-                const r = u.split("-");
-                const o = e.getNumber(parseInt(r[r.length - 1]), 0);
+            if (u.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
+                const o = u.split("-");
+                const r = e.getNumber(parseInt(o[o.length - 1]), 0);
                 const s = i.value;
-                if (o > 0 && t.definedString(s)) {
-                    b(o, n, s, u);
+                if (r > 0 && t.definedString(s)) {
+                    T(r, n, s, u);
                 } else {
-                    T(n, u);
+                    g(n, u);
                 }
             }
         }
     }
-    function b(t, e, n, r) {
-        if (!Object.prototype.hasOwnProperty.call(s, t.toString())) {
-            s[t.toString()] = [];
+    function T(t, e, n, o) {
+        if (!Object.prototype.hasOwnProperty.call(u, t.toString())) {
+            u[t.toString()] = [];
         }
-        s[t.toString()].push({
+        u[t.toString()].push({
             element: e,
-            attributes: g(n),
-            originalAttributes: m(e)
+            attributes: m(n),
+            originalAttributes: A(e)
         });
-        T(e, r);
+        g(e, o);
     }
-    function T(t, e) {
-        if (i.removeAttributes) {
+    function g(t, e) {
+        if (s.removeAttributes) {
             t.removeAttribute(e);
         }
     }
-    function g(t) {
+    function m(t) {
         const e = {};
         const n = t.split(";");
         for (const t of n) {
-            const [n, r] = t.split("=");
-            e[n] = r;
+            const [n, o] = t.split("=");
+            e[n] = o;
         }
         return e;
     }
-    function m(t) {
+    function A(t) {
         const e = {};
         const n = t.attributes;
-        const r = n.length;
-        for (let t = 0; t < r; t++) {
-            const r = n[t];
-            const i = r.name;
-            const s = r.value;
-            if (!i.startsWith(o.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
+        const o = n.length;
+        for (let t = 0; t < o; t++) {
+            const o = n[t];
+            const i = o.name;
+            const s = o.value;
+            if (!i.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
                 e[i] = s;
             }
         }
         return e;
     }
-    function A() {
-        if (c) {
-            if (u !== 0) {
-                clearTimeout(u);
+    function S() {
+        if (f) {
+            if (c !== 0) {
+                clearTimeout(c);
             }
-            u = setTimeout(() => S(), i.responsiveDelay);
+            c = setTimeout(() => p(), s.responsiveDelay);
         }
     }
-    function S() {
-        p(R());
+    function p() {
+        _(R());
     }
     function R() {
         const t = {
             screenWidths: [],
             elements: []
         };
-        const e = _();
+        const e = v();
         const n = e.length;
-        for (let r = 0; r < n; r++) {
-            const n = e[r];
-            if (Object.prototype.hasOwnProperty.call(s, n)) {
+        for (let o = 0; o < n; o++) {
+            const n = e[o];
+            if (Object.prototype.hasOwnProperty.call(u, n)) {
                 const e = window.innerWidth;
-                const r = parseInt(n);
-                if (e >= r) {
-                    const e = s[n];
-                    const r = e.length;
+                const o = parseInt(n);
+                if (e >= o) {
+                    const e = u[n];
+                    const o = e.length;
                     t.screenWidths.push(n);
-                    for (let n = 0; n < r; n++) {
-                        const r = e[n];
-                        if (t.elements.indexOf(r.element) === -1) {
-                            t.elements.push(r.element);
-                            for (const t in r.attributes) {
-                                r.element.setAttribute(t, r.attributes[t]);
+                    for (let n = 0; n < o; n++) {
+                        const o = e[n];
+                        if (t.elements.indexOf(o.element) === -1) {
+                            t.elements.push(o.element);
+                            for (const t in o.attributes) {
+                                o.element.setAttribute(t, o.attributes[t]);
                             }
                         }
                     }
@@ -248,20 +278,20 @@ var o;
         }
         return t;
     }
-    function p(t) {
-        const e = _();
+    function _(t) {
+        const e = v();
         const n = e.length;
-        for (let r = 0; r < n; r++) {
-            const n = e[r];
-            if (Object.prototype.hasOwnProperty.call(s, n)) {
+        for (let o = 0; o < n; o++) {
+            const n = e[o];
+            if (Object.prototype.hasOwnProperty.call(u, n)) {
                 if (t.screenWidths.indexOf(n) === -1) {
-                    const e = s[n];
-                    const r = e.length;
-                    for (let n = 0; n < r; n++) {
-                        const r = e[n];
-                        if (t.elements.indexOf(r.element) === -1) {
-                            for (const t in r.originalAttributes) {
-                                r.element.setAttribute(t, r.originalAttributes[t]);
+                    const e = u[n];
+                    const o = e.length;
+                    for (let n = 0; n < o; n++) {
+                        const o = e[n];
+                        if (t.elements.indexOf(o.element) === -1) {
+                            for (const t in o.originalAttributes) {
+                                o.element.setAttribute(t, o.originalAttributes[t]);
                             }
                         }
                     }
@@ -269,47 +299,48 @@ var o;
             }
         }
     }
-    function _() {
-        return Object.keys(s).sort((t, e) => e.toLowerCase().localeCompare(t.toLowerCase()));
+    function v() {
+        return Object.keys(u).sort((t, e) => e.toLowerCase().localeCompare(t.toLowerCase()));
     }
     const E = {
         start: function() {
-            if (!c) {
-                c = true;
-                S();
+            if (!f) {
+                f = true;
+                p();
             }
             return E;
         },
         stop: function() {
-            c = false;
+            f = false;
             return E;
         },
         fetch: function() {
-            if (!i.removeAttributes) {
-                s = {};
+            if (!s.removeAttributes) {
+                u = {};
             }
             a();
             return E;
         },
         refresh: function() {
-            if (c) {
-                S();
+            if (f) {
+                p();
             }
             return E;
         },
         setConfiguration: e => {
             if (t.definedObject(e)) {
-                const t = i;
-                let r = false;
+                const t = s;
+                let o = false;
                 for (const n in e) {
                     if (Object.prototype.hasOwnProperty.call(e, n) && Object.prototype.hasOwnProperty.call(t, n) && t[n] !== e[n]) {
                         t[n] = e[n];
-                        r = true;
+                        o = true;
                     }
                 }
-                if (r) {
-                    i = n.Options.get(t);
-                    c = i.enabled;
+                if (o) {
+                    s = n.Options.get(t);
+                    f = s.enabled;
+                    i.setup(s, () => a());
                 }
             }
             return E;
@@ -317,9 +348,12 @@ var o;
         getVersion: () => "1.0.0"
     };
     (() => {
-        i = n.Options.get();
-        c = i.enabled;
-        r.onContentLoaded(() => a());
+        s = n.Options.get();
+        f = s.enabled;
+        o.onContentLoaded(() => {
+            a();
+            i.setup(s, () => a());
+        });
         if (!t.defined(window.$rattribute)) {
             window.$rattribute = E;
         }

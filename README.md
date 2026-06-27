@@ -9,7 +9,7 @@ Rattribute.js
 [![coded by William Troup](https://img.shields.io/badge/coded_by-William_Troup-yellow)](https://william-troup.com/)
 </h1>
 
-> <p align="center">🔗 A JavaScript library that generates responsive attribute setters for any HTML element.</p>
+> <p align="center">❓ A JavaScript library that generates responsive attribute setters for any HTML element.</p>
 > <p align="center">v1.0.0</p>
 <br />
 <br />

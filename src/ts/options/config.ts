@@ -1,0 +1,31 @@
+/**
+ * Rattribute.js
+
+ * 
+ * A JavaScript library that generates responsive attribute setters for any HTML element.
+ * 
+ * @file        config.ts
+ * @version     v1.0.0
+ * @author      Bunoon
+ * @license     MIT License
+ * @copyright   Bunoon 2026
+ */
+
+
+import { type ConfigurationOptions } from "../type";
+import { Default } from "../data/default";
+
+
+export namespace Configuration {
+    export namespace Options {
+        export function get( newConfigurationOptions: unknown = null ) : ConfigurationOptions {
+            const configurationOptions: ConfigurationOptions = Default.getObject( newConfigurationOptions, {} as ConfigurationOptions );
+            configurationOptions.responsiveDelay = Default.getNumber( configurationOptions.responsiveDelay, 250 );
+            configurationOptions.removeAttributes = Default.getBoolean( configurationOptions.removeAttributes, true );
+            configurationOptions.enabled = Default.getBoolean( configurationOptions.enabled, true );
+            configurationOptions.observationMode = Default.getBoolean( configurationOptions.observationMode, true );
+
+            return configurationOptions;
+        }
+    }
+}

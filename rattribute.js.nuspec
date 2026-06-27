@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Rattribute.js
+</id>
+        <version>1.0.0</version>
+        <title>Rattribute.js
+</title>
+        <description>A JavaScript library that generates responsive attribute setters for any HTML element.</description>
+        <authors>William Troup</authors>
+        <projectUrl>https://github.com/williamtroup/Rattribute.js
+</projectUrl>
+        <repository type="git" url="https://github.com/williamtroup/Rattribute.js
+" branch="main" />
+        <readme>README_NUGET.md</readme>
+        <license type="expression">MIT</license>
+        <tags>typescript, javascript, html5, rattribute.js
+, anchor, html, responsive, link, target, render</tags>
+        <icon>docs\images\icon.png</icon>
+        <copyright>William Troup</copyright>
+    </metadata>
+    <files>
+        <file src="**" target="/" exclude=".git\**;.github\**;.vscode\**;.github\**;node_modules\**;build\**;*.nuspec**;.npmignore**;.gitignore**;*.sh**;*.json**\**;CODE_OF_CONDUCT.md**;CONTRIBUTING.md**;SECURITY.md**;tsup.build.config.ts**;tsup.build.esm.config.ts**;tsup.build.min.config.ts**;BUILD_INSTRUCTIONS.md**;*.nupkg**;**.DS_Store**" />
+    </files>
+</package>

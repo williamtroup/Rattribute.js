@@ -1,2 +1,1 @@
-nuget pack rattribute.js
-.nuspec
+nuget pack rattribute.js.nuspec

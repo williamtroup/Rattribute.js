@@ -115,17 +115,20 @@ import { Observation } from "./ts/data/observation";
 
         for ( let elementAttributeIndex = 0; elementAttributeIndex < elementAttributesLength; elementAttributeIndex++ ) {
             const attribute: Attr = elementAttributes[ elementAttributeIndex ];
-            const attributeName: string = attribute.name;
 
-            if ( attributeName.startsWith( Constant.CustomAttribute.RATTRIBUTE_JS_CUSTOM ) ) {
-                const attributeNameParts: string[] = attributeName.split( Char.dash );
-                const attributeWidth: number = Default.getNumber( parseInt( attributeNameParts[ attributeNameParts.length - 1 ] ), 0 );
-                const attributeValue: string = attribute.value;
+            if ( Is.defined( attribute ) ) {
+                const attributeName: string = attribute.name;
 
-                if ( attributeWidth > 0 && Is.definedString( attributeValue ) ) {
-                    addElementToScreenWidthElements( attributeWidth, element, attributeValue, attributeName );
-                } else {
-                    removeAttributesFromElement( element, attributeName );
+                if ( attributeName.startsWith( Constant.CustomAttribute.RATTRIBUTE_JS_CUSTOM ) ) {
+                    const attributeNameParts: string[] = attributeName.split( Char.dash );
+                    const attributeWidth: number = Default.getNumber( parseInt( attributeNameParts[ attributeNameParts.length - 1 ] ), 0 );
+                    const attributeValue: string = attribute.value;
+
+                    if ( attributeWidth > 0 && Is.definedString( attributeValue ) ) {
+                        addElementToScreenWidthElements( attributeWidth, element, attributeValue, attributeName );
+                    } else {
+                        removeAttributesFromElement( element, attributeName );
+                    }
                 }
             }
         }
@@ -136,10 +139,13 @@ import { Observation } from "./ts/data/observation";
             _screenWidthElements[ screenSize.toString() ] = [];
         }
 
+        const newAttributes: Record<string, string> = getNewAttributes( attributeValue );
+        const originalAttributes: Record<string, string> = getOriginalAttributes( element, newAttributes );
+
         _screenWidthElements[ screenSize.toString() ].push( {
             element: element,
-            attributes: getNewAttributes( attributeValue ),
-            originalAttributes: getOriginalAttributes( element ),
+            attributes: newAttributes,
+            originalAttributes: originalAttributes,
         } as ElementOptions );
 
         removeAttributesFromElement( element, attributeName );
@@ -164,19 +170,28 @@ import { Observation } from "./ts/data/observation";
         return result;
     }
 
-    function getOriginalAttributes( element: HTMLElement ) : Record<string, string> {
+    function getOriginalAttributes( element: HTMLElement, newAttributes: Record<string, string> ) : Record<string, string> {
         const result: Record<string, string> = {};
         const attributes: NamedNodeMap = element.attributes;
         const attributesLength: number = attributes.length;
 
         for ( let attributeIndex = 0; attributeIndex < attributesLength; attributeIndex++ ) {
             const attribute: Attr = attributes[ attributeIndex ];
-            const attributeName: string = attribute.name;
-            const attributeValue: string = attribute.value;
 
-            if ( !attributeName.startsWith( Constant.CustomAttribute.RATTRIBUTE_JS_CUSTOM ) ) {
-                result[ attributeName ] = attributeValue;
+            if ( Is.defined( attribute ) ) {
+                const attributeName: string = attribute.name;
+                const attributeValue: string = attribute.value;
+
+                if ( !attributeName.startsWith( Constant.CustomAttribute.RATTRIBUTE_JS_CUSTOM ) ) {
+                    result[ attributeName ] = attributeValue;
+                }
             }    
+        }
+
+        for ( const newAttributeName in newAttributes ) {
+            if ( Object.prototype.hasOwnProperty.call( newAttributes, newAttributeName ) && !Object.prototype.hasOwnProperty.call( result, newAttributeName ) ) {
+                result[ newAttributeName ] = Char.empty;
+            }
         }
 
         return result;

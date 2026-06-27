@@ -142,11 +142,11 @@ var i;
         }
         if (t) {
             if (!l) {
-                window.addEventListener(r.Event.RESIZE, S);
+                window.addEventListener(r.Event.RESIZE, p);
                 l = true;
             }
             if (f) {
-                p();
+                S();
             }
         }
     }
@@ -185,15 +185,17 @@ var i;
         const i = o.length;
         for (let s = 0; s < i; s++) {
             const i = o[s];
-            const u = i.name;
-            if (u.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
-                const o = u.split("-");
-                const r = e.getNumber(parseInt(o[o.length - 1]), 0);
-                const s = i.value;
-                if (r > 0 && t.definedString(s)) {
-                    T(r, n, s, u);
-                } else {
-                    g(n, u);
+            if (t.defined(i)) {
+                const o = i.name;
+                if (o.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
+                    const r = o.split("-");
+                    const s = e.getNumber(parseInt(r[r.length - 1]), 0);
+                    const u = i.value;
+                    if (s > 0 && t.definedString(u)) {
+                        T(s, n, u, o);
+                    } else {
+                        g(n, o);
+                    }
                 }
             }
         }
@@ -202,10 +204,12 @@ var i;
         if (!Object.prototype.hasOwnProperty.call(u, t.toString())) {
             u[t.toString()] = [];
         }
+        const r = m(n);
+        const i = A(e, r);
         u[t.toString()].push({
             element: e,
-            attributes: m(n),
-            originalAttributes: A(e)
+            attributes: r,
+            originalAttributes: i
         });
         g(e, o);
     }
@@ -223,29 +227,36 @@ var i;
         }
         return e;
     }
-    function A(t) {
-        const e = {};
-        const n = t.attributes;
-        const o = n.length;
-        for (let t = 0; t < o; t++) {
-            const o = n[t];
-            const i = o.name;
-            const s = o.value;
-            if (!i.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
-                e[i] = s;
+    function A(e, n) {
+        const o = {};
+        const i = e.attributes;
+        const s = i.length;
+        for (let e = 0; e < s; e++) {
+            const n = i[e];
+            if (t.defined(n)) {
+                const t = n.name;
+                const e = n.value;
+                if (!t.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
+                    o[t] = e;
+                }
             }
         }
-        return e;
+        for (const t in n) {
+            if (Object.prototype.hasOwnProperty.call(n, t) && !Object.prototype.hasOwnProperty.call(o, t)) {
+                o[t] = "";
+            }
+        }
+        return o;
     }
-    function S() {
+    function p() {
         if (f) {
             if (c !== 0) {
                 clearTimeout(c);
             }
-            c = setTimeout(() => p(), s.responsiveDelay);
+            c = setTimeout(() => S(), s.responsiveDelay);
         }
     }
-    function p() {
+    function S() {
         _(R());
     }
     function R() {
@@ -253,7 +264,7 @@ var i;
             screenWidths: [],
             elements: []
         };
-        const e = v();
+        const e = O();
         const n = e.length;
         for (let o = 0; o < n; o++) {
             const n = e[o];
@@ -279,7 +290,7 @@ var i;
         return t;
     }
     function _(t) {
-        const e = v();
+        const e = O();
         const n = e.length;
         for (let o = 0; o < n; o++) {
             const n = e[o];
@@ -299,33 +310,33 @@ var i;
             }
         }
     }
-    function v() {
+    function O() {
         return Object.keys(u).sort((t, e) => e.toLowerCase().localeCompare(t.toLowerCase()));
     }
-    const E = {
+    const v = {
         start: function() {
             if (!f) {
                 f = true;
-                p();
+                S();
             }
-            return E;
+            return v;
         },
         stop: function() {
             f = false;
-            return E;
+            return v;
         },
         fetch: function() {
             if (!s.removeAttributes) {
                 u = {};
             }
             a();
-            return E;
+            return v;
         },
         refresh: function() {
             if (f) {
-                p();
+                S();
             }
-            return E;
+            return v;
         },
         setConfiguration: e => {
             if (t.definedObject(e)) {
@@ -343,7 +354,7 @@ var i;
                     i.setup(s, () => a());
                 }
             }
-            return E;
+            return v;
         },
         getVersion: () => "1.0.0"
     };
@@ -355,7 +366,7 @@ var i;
             i.setup(s, () => a());
         });
         if (!t.defined(window.$rattribute)) {
-            window.$rattribute = E;
+            window.$rattribute = v;
         }
     })();
 })();//# sourceMappingURL=rattribute.js.map

@@ -24,7 +24,6 @@ import { Configuration } from "./ts/options/config";
 import { DocumentElement } from "./ts/dom/document-element";
 import { Constant } from "./ts/constant";
 import { Char, ScreenSize, Value } from "./ts/data/enum";
-import { Observation } from "./ts/data/observation";
 import { Default } from "./ts/data/default";
 
 
@@ -175,7 +174,9 @@ import { Default } from "./ts/data/default";
             const attributeName: string = attribute.name;
             const attributeValue: string = attribute.value;
 
-            result[ attributeName ] = attributeValue;
+            if ( !attributeName.startsWith( Constant.CustomAttribute.RATTRIBUTE_JS_CUSTOM ) ) {
+                result[ attributeName ] = attributeValue;
+            }    
         }
 
         return result;
@@ -229,7 +230,10 @@ import { Default } from "./ts/data/default";
 
                         if ( elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
                             elementsProcessed.elements.push( elementOptions.element );
-                            //elementOptions.element.setAttribute( Constant.Attribute.TARGET, elementOptions.newTarget! );
+
+                            for ( const attribute in elementOptions.attributes ) {
+                                elementOptions.element.setAttribute( attribute, elementOptions.attributes[ attribute ] );
+                            }
                         }
                     }
                 }
@@ -255,13 +259,9 @@ import { Default } from "./ts/data/default";
                         const elementOptions: ElementOptions = allElementOptions[ elementOptionIndex ];
 
                         if ( elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
-                            /*let originalTarget: string | null = elementOptions.originalTarget!;
-
-                            if ( !Is.definedString( originalTarget ) ) {
-                                originalTarget = _configurationOptions.defaultTarget!;
+                            for ( const attribute in elementOptions.originalAttributes ) {
+                                elementOptions.element.setAttribute( attribute, elementOptions.originalAttributes[ attribute ] );
                             }
-
-                            elementOptions.element.setAttribute( Constant.Attribute.TARGET, originalTarget );*/
                         }
                     }
                 }
@@ -345,8 +345,6 @@ import { Default } from "./ts/data/default";
                 if ( configurationOptionsHaveChanged ) {
                     _configurationOptions = Configuration.Options.get( existingConfigurationOptions );
                     _enabled = _configurationOptions.enabled!;
-
-                    Observation.setup( _configurationOptions, () : void => fetchAll() );
                 }
             }
 
@@ -377,11 +375,7 @@ import { Default } from "./ts/data/default";
         _configurationOptions = Configuration.Options.get();
         _enabled = _configurationOptions.enabled!;
         
-        DocumentElement.onContentLoaded( () : void => {
-            fetchAll();
-            
-            Observation.setup( _configurationOptions, () : void => fetchAll() );
-        } );
+        DocumentElement.onContentLoaded( () : void => fetchAll() );
 
         if ( !Is.defined( window.$rattribute ) ) {
             window.$rattribute = _public;

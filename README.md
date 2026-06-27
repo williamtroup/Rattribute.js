@@ -111,7 +111,7 @@ Configuration options allow you to customize how Rattribute.js will function.  Y
 ```markdown
 <script> 
     $rattribute.setConfiguration( {
-        defaultTarget: "self"
+        responsiveDelay: 500
     } );
 </script>
 ```

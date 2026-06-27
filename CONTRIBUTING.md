@@ -1,6 +1,5 @@
 # Contributing to Rattribute.js
 
-
 Everyone is welcome to contribute to the project! However, I do ask that you observe the following rules:
 
 When creating a Pull Request:

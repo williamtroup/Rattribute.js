@@ -1,8 +1,6 @@
 # Building Rattribute.js
 
-
-Before getting started with Rattribute.js
-, please read through the following instructions:
+Before getting started with Rattribute.js, please read through the following instructions:
 
 
 ## Step 1: Install Packages:

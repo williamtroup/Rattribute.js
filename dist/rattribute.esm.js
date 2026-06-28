@@ -64,19 +64,6 @@ var n;
 var o;
 
 (t => {
-    function e(t) {
-        if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", () => t());
-        } else {
-            t();
-        }
-    }
-    t.onContentLoaded = e;
-})(o || (o = {}));
-
-var r;
-
-(t => {
     let e;
     (t => {
         t.RATTRIBUTE_JS_SM = "data-rattribute-js-sm";
@@ -89,7 +76,21 @@ var r;
     let n;
     (t => {
         t.RESIZE = "resize";
+        t.DOM_CONTENT_LOADED = "DOMContentLoaded";
     })(n = t.Event || (t.Event = {}));
+})(o || (o = {}));
+
+var r;
+
+(t => {
+    function e(t) {
+        if (document.readyState === "loading") {
+            document.addEventListener(o.Event.DOM_CONTENT_LOADED, () => t());
+        } else {
+            t();
+        }
+    }
+    t.onContentLoaded = e;
 })(r || (r = {}));
 
 var i;
@@ -132,15 +133,15 @@ var i;
         let t = false;
         const e = document.getElementsByTagName("*");
         const n = [].slice.call(e);
-        const o = n.length;
-        for (let e = 0; e < o; e++) {
+        const r = n.length;
+        for (let e = 0; e < r; e++) {
             if (d(n[e])) {
                 t = true;
             }
         }
         if (t) {
             if (!l) {
-                window.addEventListener(r.Event.RESIZE, p);
+                window.addEventListener(o.Event.RESIZE, p);
                 l = true;
             }
             if (f) {
@@ -150,49 +151,49 @@ var i;
     }
     function d(e) {
         let n = false;
-        const o = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_SM);
-        const i = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_MD);
-        const s = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_LG);
-        const u = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XL);
-        const c = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XXL);
-        if (t.definedString(o)) {
-            T(576, e, o, r.CustomAttribute.RATTRIBUTE_JS_SM);
+        const r = e.getAttribute(o.CustomAttribute.RATTRIBUTE_JS_SM);
+        const i = e.getAttribute(o.CustomAttribute.RATTRIBUTE_JS_MD);
+        const s = e.getAttribute(o.CustomAttribute.RATTRIBUTE_JS_LG);
+        const u = e.getAttribute(o.CustomAttribute.RATTRIBUTE_JS_XL);
+        const c = e.getAttribute(o.CustomAttribute.RATTRIBUTE_JS_XXL);
+        if (t.definedString(r)) {
+            T(576, e, r, o.CustomAttribute.RATTRIBUTE_JS_SM);
             n = true;
         }
         if (t.definedString(i)) {
-            T(768, e, i, r.CustomAttribute.RATTRIBUTE_JS_MD);
+            T(768, e, i, o.CustomAttribute.RATTRIBUTE_JS_MD);
             n = true;
         }
         if (t.definedString(s)) {
-            T(992, e, s, r.CustomAttribute.RATTRIBUTE_JS_LG);
+            T(992, e, s, o.CustomAttribute.RATTRIBUTE_JS_LG);
             n = true;
         }
         if (t.definedString(u)) {
-            T(1200, e, u, r.CustomAttribute.RATTRIBUTE_JS_XL);
+            T(1200, e, u, o.CustomAttribute.RATTRIBUTE_JS_XL);
             n = true;
         }
         if (t.definedString(c)) {
-            T(1400, e, c, r.CustomAttribute.RATTRIBUTE_JS_XXL);
+            T(1400, e, c, o.CustomAttribute.RATTRIBUTE_JS_XXL);
             n = true;
         }
         b(e);
         return n;
     }
     function b(n) {
-        const o = n.attributes;
-        const i = o.length;
+        const r = n.attributes;
+        const i = r.length;
         for (let s = 0; s < i; s++) {
-            const i = o[s];
+            const i = r[s];
             if (t.defined(i)) {
-                const o = i.name;
-                if (o.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
-                    const r = o.split("-");
-                    const s = e.getNumber(parseInt(r[r.length - 1]), 0);
+                const r = i.name;
+                if (r.startsWith(o.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
+                    const o = r.split("-");
+                    const s = e.getNumber(parseInt(o[o.length - 1]), 0);
                     const u = i.value;
                     if (s > 0 && t.definedString(u)) {
-                        T(s, n, u, o);
+                        T(s, n, u, r);
                     } else {
-                        g(n, o);
+                        g(n, r);
                     }
                 }
             }
@@ -226,7 +227,7 @@ var i;
         return e;
     }
     function A(e, n) {
-        const o = {};
+        const r = {};
         const i = e.attributes;
         const s = i.length;
         for (let e = 0; e < s; e++) {
@@ -234,17 +235,17 @@ var i;
             if (t.defined(n)) {
                 const t = n.name;
                 const e = n.value;
-                if (!t.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
-                    o[t] = e;
+                if (!t.startsWith(o.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
+                    r[t] = e;
                 }
             }
         }
         for (const t in n) {
-            if (Object.prototype.hasOwnProperty.call(n, t) && !Object.prototype.hasOwnProperty.call(o, t)) {
-                o[t] = "";
+            if (Object.prototype.hasOwnProperty.call(n, t) && !Object.prototype.hasOwnProperty.call(r, t)) {
+                r[t] = "";
             }
         }
-        return o;
+        return r;
     }
     function p() {
         if (f) {
@@ -255,14 +256,14 @@ var i;
         }
     }
     function S() {
-        _(R());
+        O(_());
     }
-    function R() {
+    function _() {
         const t = {
             screenWidths: [],
             elements: []
         };
-        const e = O();
+        const e = R();
         const n = e.length;
         for (let o = 0; o < n; o++) {
             const n = e[o];
@@ -287,8 +288,8 @@ var i;
         }
         return t;
     }
-    function _(e) {
-        const n = O();
+    function O(e) {
+        const n = R();
         const o = n.length;
         for (let r = 0; r < o; r++) {
             const o = n[r];
@@ -313,33 +314,33 @@ var i;
             }
         }
     }
-    function O() {
+    function R() {
         return Object.keys(u).sort((t, e) => e.toLowerCase().localeCompare(t.toLowerCase()));
     }
-    const v = {
+    const E = {
         start: function() {
             if (!f) {
                 f = true;
                 S();
             }
-            return v;
+            return E;
         },
         stop: function() {
             f = false;
-            return v;
+            return E;
         },
         fetch: function() {
             if (!s.removeAttributes) {
                 u = {};
             }
             a();
-            return v;
+            return E;
         },
         refresh: function() {
             if (f) {
                 S();
             }
-            return v;
+            return E;
         },
         setConfiguration: e => {
             if (t.definedObject(e)) {
@@ -357,19 +358,19 @@ var i;
                     i.setup(s, () => a());
                 }
             }
-            return v;
+            return E;
         },
         getVersion: () => "1.1.0"
     };
     (() => {
         s = n.Options.get();
         f = s.enabled;
-        o.onContentLoaded(() => {
+        r.onContentLoaded(() => {
             a();
             i.setup(s, () => a());
         });
         if (!t.defined(window.$rattribute)) {
-            window.$rattribute = v;
+            window.$rattribute = E;
         }
     })();
 })();//# sourceMappingURL=rattribute.esm.js.map

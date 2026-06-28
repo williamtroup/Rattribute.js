@@ -23,5 +23,6 @@ export namespace Constant {
 
     export namespace Event {
         export const RESIZE: string = "resize";
+        export const DOM_CONTENT_LOADED: string = "DOMContentLoaded";
     }
 }

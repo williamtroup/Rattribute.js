@@ -287,20 +287,25 @@ var i;
         }
         return t;
     }
-    function _(t) {
-        const e = O();
-        const n = e.length;
-        for (let o = 0; o < n; o++) {
-            const n = e[o];
-            if (Object.prototype.hasOwnProperty.call(u, n)) {
-                if (t.screenWidths.indexOf(n) === -1) {
-                    const e = u[n];
-                    const o = e.length;
-                    for (let n = 0; n < o; n++) {
-                        const o = e[n];
-                        if (t.elements.indexOf(o.element) === -1) {
-                            for (const t in o.originalAttributes) {
-                                o.element.setAttribute(t, o.originalAttributes[t]);
+    function _(e) {
+        const n = O();
+        const o = n.length;
+        for (let r = 0; r < o; r++) {
+            const o = n[r];
+            if (Object.prototype.hasOwnProperty.call(u, o)) {
+                if (e.screenWidths.indexOf(o) === -1) {
+                    const n = u[o];
+                    const r = n.length;
+                    for (let o = 0; o < r; o++) {
+                        const r = n[o];
+                        if (e.elements.indexOf(r.element) === -1) {
+                            for (const e in r.originalAttributes) {
+                                const n = r.originalAttributes[e];
+                                if (t.definedString(n)) {
+                                    r.element.setAttribute(e, n);
+                                } else {
+                                    r.element.removeAttribute(e);
+                                }
                             }
                         }
                     }

@@ -275,7 +275,13 @@ import { Observation } from "./ts/data/observation";
 
                         if ( elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
                             for ( const attribute in elementOptions.originalAttributes ) {
-                                elementOptions.element.setAttribute( attribute, elementOptions.originalAttributes[ attribute ] );
+                                const originalAttributeValue: string = elementOptions.originalAttributes[ attribute ];
+
+                                if ( Is.definedString( originalAttributeValue ) ) {
+                                    elementOptions.element.setAttribute( attribute, originalAttributeValue );
+                                } else {
+                                    elementOptions.element.removeAttribute( attribute );
+                                }
                             }
                         }
                     }

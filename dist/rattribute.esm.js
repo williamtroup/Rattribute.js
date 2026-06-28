@@ -9,14 +9,14 @@ var t;
         return e(t) && typeof t === "object";
     }
     t.definedObject = n;
-    function o(t) {
+    function r(t) {
         return e(t) && typeof t === "string";
     }
-    t.definedString = o;
-    function r(t) {
+    t.definedString = r;
+    function o(t) {
         return e(t) && typeof t === "number";
     }
-    t.definedNumber = r;
+    t.definedNumber = o;
     function i(t) {
         return e(t) && typeof t === "boolean";
     }
@@ -30,14 +30,14 @@ var e;
         return t.definedString(e) ? e : n;
     }
     e.getString = n;
-    function o(e, n) {
+    function r(e, n) {
         return t.definedNumber(e) ? e : n;
     }
-    e.getNumber = o;
-    function r(e, n) {
+    e.getNumber = r;
+    function o(e, n) {
         return t.definedObject(e) ? e : n;
     }
-    e.getObject = r;
+    e.getObject = o;
     function i(e, n) {
         return t.definedBoolean(e) ? e : n;
     }
@@ -61,12 +61,34 @@ var n;
     })(n = t.Options || (t.Options = {}));
 })(n || (n = {}));
 
+var r;
+
+(t => {
+    let e;
+    (t => {
+        t.RATTRIBUTE_JS_XS = "data-rattribute-js-xs";
+        t.RATTRIBUTE_JS_SM = "data-rattribute-js-sm";
+        t.RATTRIBUTE_JS_MD = "data-rattribute-js-md";
+        t.RATTRIBUTE_JS_LG = "data-rattribute-js-lg";
+        t.RATTRIBUTE_JS_XL = "data-rattribute-js-xl";
+        t.RATTRIBUTE_JS_XXL = "data-rattribute-js-xxl";
+        t.RATTRIBUTE_JS_XXXL = "data-rattribute-js-xxxl";
+        t.RATTRIBUTE_JS_CUSTOM = "data-rattribute-js";
+        t.RATTRIBUTE_JS_IGNORE = "data-rattribute-js-ignore";
+    })(e = t.CustomAttribute || (t.CustomAttribute = {}));
+    let n;
+    (t => {
+        t.RESIZE = "resize";
+        t.DOM_CONTENT_LOADED = "DOMContentLoaded";
+    })(n = t.Event || (t.Event = {}));
+})(r || (r = {}));
+
 var o;
 
 (t => {
     function e(t) {
         if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", () => t());
+            document.addEventListener(r.Event.DOM_CONTENT_LOADED, () => t());
         } else {
             t();
         }
@@ -74,32 +96,14 @@ var o;
     t.onContentLoaded = e;
 })(o || (o = {}));
 
-var r;
-
-(t => {
-    let e;
-    (t => {
-        t.RATTRIBUTE_JS_SM = "data-rattribute-js-sm";
-        t.RATTRIBUTE_JS_MD = "data-rattribute-js-md";
-        t.RATTRIBUTE_JS_LG = "data-rattribute-js-lg";
-        t.RATTRIBUTE_JS_XL = "data-rattribute-js-xl";
-        t.RATTRIBUTE_JS_XXL = "data-rattribute-js-xxl";
-        t.RATTRIBUTE_JS_CUSTOM = "data-rattribute-js";
-    })(e = t.CustomAttribute || (t.CustomAttribute = {}));
-    let n;
-    (t => {
-        t.RESIZE = "resize";
-    })(n = t.Event || (t.Event = {}));
-})(r || (r = {}));
-
 var i;
 
 (e => {
     let n = null;
-    function o(e, o) {
+    function r(e, r) {
         if (e.observationMode) {
             if (!t.defined(n)) {
-                n = new MutationObserver(() => o());
+                n = new MutationObserver(() => r());
                 const t = {
                     attributes: false,
                     childList: true,
@@ -112,23 +116,23 @@ var i;
             n = null;
         }
     }
-    e.setup = o;
-    function r(e) {
+    e.setup = r;
+    function o(e) {
         if (e.observationMode && t.defined(n)) {
             n.disconnect();
             n = null;
         }
     }
-    e.destroy = r;
+    e.destroy = o;
 })(i || (i = {}));
 
 (() => {
     let s = {};
     let u = {};
-    let c = 0;
-    let f = true;
-    let l = false;
-    function a() {
+    let f = 0;
+    let c = true;
+    let a = false;
+    function l() {
         let t = false;
         const e = document.getElementsByTagName("*");
         const n = [].slice.call(e);
@@ -139,43 +143,57 @@ var i;
             }
         }
         if (t) {
-            if (!l) {
-                window.addEventListener(r.Event.RESIZE, p);
-                l = true;
+            if (!a) {
+                window.addEventListener(r.Event.RESIZE, _);
+                a = true;
             }
-            if (f) {
-                S();
+            if (c) {
+                m();
             }
         }
     }
     function d(e) {
         let n = false;
-        const o = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_SM);
-        const i = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_MD);
-        const s = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_LG);
-        const u = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XL);
+        const o = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XS);
+        const i = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_SM);
+        const s = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_MD);
+        const u = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_LG);
+        const f = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XL);
         const c = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XXL);
-        if (t.definedString(o)) {
-            T(576, e, o, r.CustomAttribute.RATTRIBUTE_JS_SM);
-            n = true;
+        const a = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XXXL);
+        const l = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_IGNORE);
+        const d = t.definedString(l) && l.toLowerCase() === "true";
+        if (!d) {
+            if (t.definedString(o)) {
+                T(0, e, o, r.CustomAttribute.RATTRIBUTE_JS_XS);
+                n = true;
+            }
+            if (t.definedString(i)) {
+                T(576, e, i, r.CustomAttribute.RATTRIBUTE_JS_SM);
+                n = true;
+            }
+            if (t.definedString(s)) {
+                T(768, e, s, r.CustomAttribute.RATTRIBUTE_JS_MD);
+                n = true;
+            }
+            if (t.definedString(u)) {
+                T(992, e, u, r.CustomAttribute.RATTRIBUTE_JS_LG);
+                n = true;
+            }
+            if (t.definedString(f)) {
+                T(1200, e, f, r.CustomAttribute.RATTRIBUTE_JS_XL);
+                n = true;
+            }
+            if (t.definedString(c)) {
+                T(1400, e, c, r.CustomAttribute.RATTRIBUTE_JS_XXL);
+                n = true;
+            }
+            if (t.definedString(a)) {
+                T(1600, e, a, r.CustomAttribute.RATTRIBUTE_JS_XXXL);
+                n = true;
+            }
+            b(e);
         }
-        if (t.definedString(i)) {
-            T(768, e, i, r.CustomAttribute.RATTRIBUTE_JS_MD);
-            n = true;
-        }
-        if (t.definedString(s)) {
-            T(992, e, s, r.CustomAttribute.RATTRIBUTE_JS_LG);
-            n = true;
-        }
-        if (t.definedString(u)) {
-            T(1200, e, u, r.CustomAttribute.RATTRIBUTE_JS_XL);
-            n = true;
-        }
-        if (t.definedString(c)) {
-            T(1400, e, c, r.CustomAttribute.RATTRIBUTE_JS_XXL);
-            n = true;
-        }
-        b(e);
         return n;
     }
     function b(n) {
@@ -192,40 +210,40 @@ var i;
                     if (s > 0 && t.definedString(u)) {
                         T(s, n, u, o);
                     } else {
-                        g(n, o);
+                        A(n, o);
                     }
                 }
             }
         }
     }
-    function T(t, e, n, o) {
+    function T(t, e, n, r) {
         if (!Object.prototype.hasOwnProperty.call(u, t.toString())) {
             u[t.toString()] = [];
         }
-        const r = m(n);
-        const i = A(e, r);
+        const o = g(n);
+        const i = R(e, o);
         u[t.toString()].push({
             element: e,
-            attributes: r,
+            attributes: o,
             originalAttributes: i
         });
-        g(e, o);
+        A(e, r);
     }
-    function g(t, e) {
+    function A(t, e) {
         if (s.removeAttributes) {
             t.removeAttribute(e);
         }
     }
-    function m(t) {
+    function g(t) {
         const e = {};
         const n = t.split(";");
         for (const t of n) {
-            const [n, o] = t.split("=");
-            e[n] = o;
+            const [n, r] = t.split("=");
+            e[n] = r;
         }
         return e;
     }
-    function A(e, n) {
+    function R(e, n) {
         const o = {};
         const i = e.attributes;
         const s = i.length;
@@ -246,39 +264,39 @@ var i;
         }
         return o;
     }
-    function p() {
-        if (f) {
-            if (c !== 0) {
-                clearTimeout(c);
+    function _() {
+        if (c) {
+            if (f !== 0) {
+                clearTimeout(f);
             }
-            c = setTimeout(() => S(), s.responsiveDelay);
+            f = setTimeout(() => m(), s.responsiveDelay);
         }
     }
-    function S() {
-        _(R());
+    function m() {
+        p(S());
     }
-    function R() {
+    function S() {
         const t = {
             screenWidths: [],
             elements: []
         };
-        const e = O();
+        const e = E();
         const n = e.length;
-        for (let o = 0; o < n; o++) {
-            const n = e[o];
+        for (let r = 0; r < n; r++) {
+            const n = e[r];
             if (Object.prototype.hasOwnProperty.call(u, n)) {
                 const e = window.innerWidth;
-                const o = parseInt(n);
-                if (e >= o) {
+                const r = parseInt(n);
+                if (r > 0 && e >= r || r === 0 && e < 576) {
                     const e = u[n];
-                    const o = e.length;
+                    const r = e.length;
                     t.screenWidths.push(n);
-                    for (let n = 0; n < o; n++) {
-                        const o = e[n];
-                        if (t.elements.indexOf(o.element) === -1) {
-                            t.elements.push(o.element);
-                            for (const t in o.attributes) {
-                                o.element.setAttribute(t, o.attributes[t]);
+                    for (let n = 0; n < r; n++) {
+                        const r = e[n];
+                        if (t.elements.indexOf(r.element) === -1) {
+                            t.elements.push(r.element);
+                            for (const t in r.attributes) {
+                                r.element.setAttribute(t, r.attributes[t]);
                             }
                         }
                     }
@@ -287,20 +305,25 @@ var i;
         }
         return t;
     }
-    function _(t) {
-        const e = O();
-        const n = e.length;
-        for (let o = 0; o < n; o++) {
-            const n = e[o];
-            if (Object.prototype.hasOwnProperty.call(u, n)) {
-                if (t.screenWidths.indexOf(n) === -1) {
-                    const e = u[n];
-                    const o = e.length;
-                    for (let n = 0; n < o; n++) {
-                        const o = e[n];
-                        if (t.elements.indexOf(o.element) === -1) {
-                            for (const t in o.originalAttributes) {
-                                o.element.setAttribute(t, o.originalAttributes[t]);
+    function p(e) {
+        const n = E();
+        const r = n.length;
+        for (let o = 0; o < r; o++) {
+            const r = n[o];
+            if (Object.prototype.hasOwnProperty.call(u, r)) {
+                if (e.screenWidths.indexOf(r) === -1) {
+                    const n = u[r];
+                    const o = n.length;
+                    for (let r = 0; r < o; r++) {
+                        const o = n[r];
+                        if (e.elements.indexOf(o.element) === -1) {
+                            for (const e in o.originalAttributes) {
+                                const n = o.originalAttributes[e];
+                                if (t.definedString(n)) {
+                                    o.element.setAttribute(e, n);
+                                } else {
+                                    o.element.removeAttribute(e);
+                                }
                             }
                         }
                     }
@@ -308,63 +331,63 @@ var i;
             }
         }
     }
-    function O() {
+    function E() {
         return Object.keys(u).sort((t, e) => e.toLowerCase().localeCompare(t.toLowerCase()));
     }
-    const v = {
+    const O = {
         start: function() {
-            if (!f) {
-                f = true;
-                S();
+            if (!c) {
+                c = true;
+                m();
             }
-            return v;
+            return O;
         },
         stop: function() {
-            f = false;
-            return v;
+            c = false;
+            return O;
         },
         fetch: function() {
             if (!s.removeAttributes) {
                 u = {};
             }
-            a();
-            return v;
+            l();
+            return O;
         },
         refresh: function() {
-            if (f) {
-                S();
+            if (c) {
+                m();
             }
-            return v;
+            return O;
         },
         setConfiguration: e => {
             if (t.definedObject(e)) {
                 const t = s;
-                let o = false;
+                let r = false;
                 for (const n in e) {
                     if (Object.prototype.hasOwnProperty.call(e, n) && Object.prototype.hasOwnProperty.call(t, n) && t[n] !== e[n]) {
                         t[n] = e[n];
-                        o = true;
+                        r = true;
                     }
                 }
-                if (o) {
+                if (r) {
                     s = n.Options.get(t);
-                    f = s.enabled;
-                    i.setup(s, () => a());
+                    c = s.enabled;
+                    i.setup(s, () => l());
                 }
             }
-            return v;
+            return O;
         },
-        getVersion: () => "1.0.0"
+        getVersion: () => "1.1.0"
     };
     (() => {
         s = n.Options.get();
-        f = s.enabled;
+        c = s.enabled;
         o.onContentLoaded(() => {
-            a();
-            i.setup(s, () => a());
+            l();
+            i.setup(s, () => l());
         });
         if (!t.defined(window.$rattribute)) {
-            window.$rattribute = v;
+            window.$rattribute = O;
         }
     })();
 })();//# sourceMappingURL=rattribute.esm.js.map

@@ -4,7 +4,7 @@
  * A JavaScript library that generates responsive attribute setters for any HTML element.
  * 
  * @file        rattribute.ts
- * @version     v1.0.0
+ * @version     v1.1.0
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
@@ -73,38 +73,55 @@ import { Observation } from "./ts/data/observation";
     function processElement( element: HTMLElement ) : boolean {
         let added: boolean = false;
 
+        const attributeXsData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XS )!;
         const attributeSmData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_SM )!;
         const attributeMdData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_MD )!;
         const attributeLgData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_LG )!;
         const attributeXlData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XL )!;
         const attributeXxlData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XXL )!;
+        const attributeXxxlData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XXXL )!;
+        const attributeIgnoreData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_IGNORE )!;
 
-        if ( Is.definedString( attributeSmData ) ) {
-            addElementToScreenWidthElements( ScreenSize.sm, element, attributeSmData, Constant.CustomAttribute.RATTRIBUTE_JS_SM );
-            added = true;
+        const ignore: boolean = Is.definedString( attributeIgnoreData ) && attributeIgnoreData.toLowerCase() === "true";
+
+        if ( !ignore ) {
+            if ( Is.definedString( attributeXsData ) ) {
+                addElementToScreenWidthElements( ScreenSize.xs, element, attributeXsData, Constant.CustomAttribute.RATTRIBUTE_JS_XS );
+                added = true;
+            }
+
+            if ( Is.definedString( attributeSmData ) ) {
+                addElementToScreenWidthElements( ScreenSize.sm, element, attributeSmData, Constant.CustomAttribute.RATTRIBUTE_JS_SM );
+                added = true;
+            }
+
+            if ( Is.definedString( attributeMdData ) ) {
+                addElementToScreenWidthElements( ScreenSize.md, element, attributeMdData, Constant.CustomAttribute.RATTRIBUTE_JS_MD );
+                added = true;
+            }
+
+            if ( Is.definedString( attributeLgData ) ) {
+                addElementToScreenWidthElements( ScreenSize.lg, element, attributeLgData, Constant.CustomAttribute.RATTRIBUTE_JS_LG );
+                added = true;
+            }
+
+            if ( Is.definedString( attributeXlData ) ) {
+                addElementToScreenWidthElements( ScreenSize.xl, element, attributeXlData, Constant.CustomAttribute.RATTRIBUTE_JS_XL );
+                added = true;
+            }
+
+            if ( Is.definedString( attributeXxlData ) ) {
+                addElementToScreenWidthElements( ScreenSize.xxl, element, attributeXxlData, Constant.CustomAttribute.RATTRIBUTE_JS_XXL );
+                added = true;
+            }
+
+            if ( Is.definedString( attributeXxxlData ) ) {
+                addElementToScreenWidthElements( ScreenSize.xxxl, element, attributeXxxlData, Constant.CustomAttribute.RATTRIBUTE_JS_XXXL );
+                added = true;
+            }
+
+            findCustomSizeAttributes( element );
         }
-
-        if ( Is.definedString( attributeMdData ) ) {
-            addElementToScreenWidthElements( ScreenSize.md, element, attributeMdData, Constant.CustomAttribute.RATTRIBUTE_JS_MD );
-            added = true;
-        }
-
-        if ( Is.definedString( attributeLgData ) ) {
-            addElementToScreenWidthElements( ScreenSize.lg, element, attributeLgData, Constant.CustomAttribute.RATTRIBUTE_JS_LG );
-            added = true;
-        }
-
-        if ( Is.definedString( attributeXlData ) ) {
-            addElementToScreenWidthElements( ScreenSize.xl, element, attributeXlData, Constant.CustomAttribute.RATTRIBUTE_JS_XL );
-            added = true;
-        }
-
-        if ( Is.definedString( attributeXxlData ) ) {
-            addElementToScreenWidthElements( ScreenSize.xxl, element, attributeXxlData, Constant.CustomAttribute.RATTRIBUTE_JS_XXL );
-            added = true;
-        }
-
-        findCustomSizeAttributes( element );
 
         return added;
     }
@@ -113,7 +130,7 @@ import { Observation } from "./ts/data/observation";
         const elementAttributes: NamedNodeMap = element.attributes;
         const elementAttributesLength: number = elementAttributes.length;
 
-        for ( let elementAttributeIndex = 0; elementAttributeIndex < elementAttributesLength; elementAttributeIndex++ ) {
+        for ( let elementAttributeIndex: number = 0; elementAttributeIndex < elementAttributesLength; elementAttributeIndex++ ) {
             const attribute: Attr = elementAttributes[ elementAttributeIndex ];
 
             if ( Is.defined( attribute ) ) {
@@ -175,7 +192,7 @@ import { Observation } from "./ts/data/observation";
         const attributes: NamedNodeMap = element.attributes;
         const attributesLength: number = attributes.length;
 
-        for ( let attributeIndex = 0; attributeIndex < attributesLength; attributeIndex++ ) {
+        for ( let attributeIndex: number = 0; attributeIndex < attributesLength; attributeIndex++ ) {
             const attribute: Attr = attributes[ attributeIndex ];
 
             if ( Is.defined( attribute ) ) {
@@ -227,20 +244,20 @@ import { Observation } from "./ts/data/observation";
         const screenWidths: string[] = getSortedScreenWidths();
         const screenWidthsLength: number = screenWidths.length;
 
-        for ( let screenWidthIndex = 0; screenWidthIndex < screenWidthsLength; screenWidthIndex++ ) {
+        for ( let screenWidthIndex: number = 0; screenWidthIndex < screenWidthsLength; screenWidthIndex++ ) {
             const screenWidth: string = screenWidths[ screenWidthIndex ];
 
             if ( Object.prototype.hasOwnProperty.call( _screenWidthElements, screenWidth ) ) {
                 const windowWidth: number = window.innerWidth;
                 const windowCheckWidth: number = parseInt( screenWidth );
 
-                if ( windowWidth >= windowCheckWidth ) {
+                if ( ( windowCheckWidth > 0 && windowWidth >= windowCheckWidth ) || ( windowCheckWidth === 0 && windowWidth < ScreenSize.sm ) ) {
                     const allElementOptions: ElementOptions[] = _screenWidthElements[ screenWidth ];
                     const allElementOptionsLength: number = allElementOptions.length;
 
                     elementsProcessed.screenWidths.push( screenWidth );
 
-                    for ( let elementOptionIndex = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
+                    for ( let elementOptionIndex: number = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
                         const elementOptions: ElementOptions = allElementOptions[ elementOptionIndex ];
 
                         if ( elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
@@ -262,7 +279,7 @@ import { Observation } from "./ts/data/observation";
         const screenWidths: string[] = getSortedScreenWidths();
         const screenWidthsLength: number = screenWidths.length;
 
-        for ( let screenWidthIndex = 0; screenWidthIndex < screenWidthsLength; screenWidthIndex++ ) {
+        for ( let screenWidthIndex: number = 0; screenWidthIndex < screenWidthsLength; screenWidthIndex++ ) {
             const screenWidth: string = screenWidths[ screenWidthIndex ];
 
             if ( Object.prototype.hasOwnProperty.call( _screenWidthElements, screenWidth ) ) {
@@ -270,12 +287,18 @@ import { Observation } from "./ts/data/observation";
                     const allElementOptions: ElementOptions[] = _screenWidthElements[ screenWidth ];
                     const allElementOptionsLength: number = allElementOptions.length;
 
-                    for ( let elementOptionIndex = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
+                    for ( let elementOptionIndex: number = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
                         const elementOptions: ElementOptions = allElementOptions[ elementOptionIndex ];
 
                         if ( elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
                             for ( const attribute in elementOptions.originalAttributes ) {
-                                elementOptions.element.setAttribute( attribute, elementOptions.originalAttributes[ attribute ] );
+                                const originalAttributeValue: string = elementOptions.originalAttributes[ attribute ];
+
+                                if ( Is.definedString( originalAttributeValue ) ) {
+                                    elementOptions.element.setAttribute( attribute, originalAttributeValue );
+                                } else {
+                                    elementOptions.element.removeAttribute( attribute );
+                                }
                             }
                         }
                     }
@@ -300,7 +323,7 @@ import { Observation } from "./ts/data/observation";
     const _public: PublicApi = {
         /*
         * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        * Public API Functions:  Control
+        * Public API Functions:  Automation
         * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         */
 
@@ -376,7 +399,7 @@ import { Observation } from "./ts/data/observation";
          */
 
         getVersion: () : string => {
-            return "1.0.0";
+            return "1.1.0";
         }
     };
 

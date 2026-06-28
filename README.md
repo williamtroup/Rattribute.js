@@ -2,15 +2,15 @@
 Rattribute.js
 
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Rattribute.js%2C%20a%20free%20JavaScript%json%20converter&url=https://github.com/williamtroup/Rattribute.js&hashtags=javascript,json,html,converter)
-[![npm](https://img.shields.io/badge/npmjs-v1.0.0-blue)](https://www.npmjs.com/package/rattribute.js)
-[![nuget](https://img.shields.io/badge/nuget-v1.0.0-purple)](https://www.nuget.org/packages/Rattribute.js/)
+[![npm](https://img.shields.io/badge/npmjs-v1.1.0-blue)](https://www.npmjs.com/package/rattribute.js)
+[![nuget](https://img.shields.io/badge/nuget-v1.1.0-purple)](https://www.nuget.org/packages/Rattribute.js/)
 [![license](https://img.shields.io/badge/license-MIT-green)](https://github.com/williamtroup/Rattribute.js/blob/main/LICENSE.txt)
 [![discussions Welcome](https://img.shields.io/badge/discussions-Welcome-red)](https://github.com/williamtroup/Rattribute.js/discussions)
 [![coded by William Troup](https://img.shields.io/badge/coded_by-William_Troup-yellow)](https://william-troup.com/)
 </h1>
 
 > <p align="center">❓ A JavaScript library that generates responsive attribute setters for any HTML element.</p>
-> <p align="center">v1.0.0</p>
+> <p align="center">v1.1.0</p>
 <br />
 <br />
 
@@ -20,10 +20,11 @@ Rattribute.js
 - 😏 Zero-dependencies and extremely lightweight!
 - 🦾 Written in TypeScript, allowing greater support for React, Angular, and other libraries!
 - 💻 Full API available via public functions.
-- ⭐ Default sizes consistent with Bootstrap: sm, md, lg, xl, xxl.
+- ⭐ Default sizes consistent with Bootstrap: xs, sm, md, lg, xl, xxl, along with extra xxxl.
 - 🌈 Set your own custom size attributes!
 - 🎥 Toggling responsiveness on/off support.
 - 📃 Auto fetch support (when HTML is added via 3rd party libraries).
+- ☑️ Set up which elements to ignore.
 <br />
 <br />
 
@@ -35,8 +36,7 @@ All modern browsers (such as Google Chrome, FireFox, and Opera) are fully suppor
 <br>
 
 
-<h1>How do I install Rattribute.js
-?</h1>
+<h1>How do I install Rattribute.js?</h1>
 
 You can install the library with npm into your local modules directory using the following command:
 
@@ -47,7 +47,7 @@ npm install rattribute.js
 Or, you can also use the following CDN links:
 
 ```markdown
-https://cdn.jsdelivr.net/gh/williamtroup/Rattribute.js@1.0.0/dist/rattribute.min.js
+https://cdn.jsdelivr.net/gh/williamtroup/Rattribute.js@1.1.0/dist/rattribute.min.js
 ```
 <br>
 <br>
@@ -80,12 +80,15 @@ Make sure you include the "DOCTYPE html" tag at the top of your HTML, as follows
 ### 3. Setup Elements:
 
 ```markdown
+<p><a href="https://www.william-troup.com/" data-rattribute-js-xs="target=_blank;class=xs-class" target="_self">Test Link XS</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-sm="target=_blank;class=sm-class" target="_self">Test Link SM</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-md="target=_blank;class=md-class" target="_self">Test Link MD</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-lg="target=_blank;class=lg-class" target="_self">Test Link LG</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-xl="target=_blank;class=xl-class" target="_self">Test Link XL</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-xxl="target=_blank;class=xxl-class" target="_self">Test Link XXL</a></p>
+<p><a href="https://www.william-troup.com/" data-rattribute-js-xxxl="target=_blank;class=xxxl-class" target="_self">Test Link XXXL</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-800="target=_blank;class=800-class" data-rattribute-js-lg="target=_parent;class=lg-class" target="_self">Test Link (800, MD)</a></p>
+<p><a href="https://www.william-troup.com/" data-rattribute-js-600="target=_blank;class=600-class" data-rattribute-js-ignore="true" target="_self">Test Link (600, Ignore)</a></p>
 ```
 
 <br>

@@ -2,7 +2,7 @@
   "name": "rattribute.js",
   "title": "Rattribute.js",
   "description": "A JavaScript library that generates responsive attribute setters for any HTML element.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "homepage": "https://github.com/williamtroup/Rattribute.js",
   "author": {
     "name": "Bunoon"

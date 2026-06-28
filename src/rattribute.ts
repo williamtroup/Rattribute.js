@@ -82,7 +82,7 @@ import { Observation } from "./ts/data/observation";
 
         const ignore: boolean = Is.definedString( attributeIgnoreData ) && attributeIgnoreData.toLowerCase() === "true";
 
-        if ( ! ignore ) {
+        if ( !ignore ) {
             if ( Is.definedString( attributeSmData ) ) {
                 addElementToScreenWidthElements( ScreenSize.sm, element, attributeSmData, Constant.CustomAttribute.RATTRIBUTE_JS_SM );
                 added = true;

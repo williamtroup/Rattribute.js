@@ -15,7 +15,7 @@
 - 😏 Zero-dependencies and extremely lightweight!
 - 🦾 Written in TypeScript, allowing greater support for React, Angular, and other libraries!
 - 💻 Full API available via public functions.
-- ⭐ Default sizes consistent with Bootstrap: sm, md, lg, xl, xxl.
+- ⭐ Default sizes consistent with Bootstrap: xs, sm, md, lg, xl, xxl.
 - 🌈 Set your own custom size attributes!
 - 🎥 Toggling responsiveness on/off support.
 - 📃 Auto fetch support (when HTML is added via 3rd party libraries).
@@ -64,6 +64,7 @@ Make sure you include the "DOCTYPE html" tag at the top of your HTML, as follows
 ### 3. Setup Elements
 
 ```markdown
+<p><a href="https://www.william-troup.com/" data-rattribute-js-xs="target=_blank;class=xs-class" target="_self">Test Link XS</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-sm="target=_blank;class=sm-class" target="_self">Test Link SM</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-md="target=_blank;class=md-class" target="_self">Test Link MD</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-lg="target=_blank;class=lg-class" target="_self">Test Link LG</a></p>

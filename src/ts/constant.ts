@@ -13,6 +13,7 @@
 
 export namespace Constant {
     export namespace CustomAttribute {
+        export const RATTRIBUTE_JS_XS: string = "data-rattribute-js-xs";
         export const RATTRIBUTE_JS_SM: string = "data-rattribute-js-sm";
         export const RATTRIBUTE_JS_MD: string = "data-rattribute-js-md";
         export const RATTRIBUTE_JS_LG: string = "data-rattribute-js-lg";

@@ -73,6 +73,7 @@ import { Observation } from "./ts/data/observation";
     function processElement( element: HTMLElement ) : boolean {
         let added: boolean = false;
 
+        const attributeXsData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XS )!;
         const attributeSmData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_SM )!;
         const attributeMdData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_MD )!;
         const attributeLgData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_LG )!;
@@ -83,6 +84,11 @@ import { Observation } from "./ts/data/observation";
         const ignore: boolean = Is.definedString( attributeIgnoreData ) && attributeIgnoreData.toLowerCase() === "true";
 
         if ( !ignore ) {
+            if ( Is.definedString( attributeXsData ) ) {
+                addElementToScreenWidthElements( ScreenSize.xs, element, attributeXsData, Constant.CustomAttribute.RATTRIBUTE_JS_XS );
+                added = true;
+            }
+
             if ( Is.definedString( attributeSmData ) ) {
                 addElementToScreenWidthElements( ScreenSize.sm, element, attributeSmData, Constant.CustomAttribute.RATTRIBUTE_JS_SM );
                 added = true;
@@ -239,7 +245,7 @@ import { Observation } from "./ts/data/observation";
                 const windowWidth: number = window.innerWidth;
                 const windowCheckWidth: number = parseInt( screenWidth );
 
-                if ( windowWidth >= windowCheckWidth ) {
+                if ( ( windowCheckWidth > 0 && windowWidth >= windowCheckWidth ) || ( windowCheckWidth === 0 && windowWidth < ScreenSize.sm ) ) {
                     const allElementOptions: ElementOptions[] = _screenWidthElements[ screenWidth ];
                     const allElementOptionsLength: number = allElementOptions.length;
 

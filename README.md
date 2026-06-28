@@ -24,6 +24,7 @@ Rattribute.js
 - 🌈 Set your own custom size attributes!
 - 🎥 Toggling responsiveness on/off support.
 - 📃 Auto fetch support (when HTML is added via 3rd party libraries).
+- ☑️ Set up which elements to ignore.
 <br />
 <br />
 

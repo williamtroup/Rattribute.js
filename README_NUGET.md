@@ -27,8 +27,7 @@
 All modern browsers (such as Google Chrome, FireFox, and Opera) are fully supported.
 
 
-## How do I install Rattribute.js
-?
+## How do I install Rattribute.js?
 
 You can install the library with npm into your local modules directory using the following command:
 

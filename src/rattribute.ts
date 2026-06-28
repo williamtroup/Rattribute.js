@@ -113,7 +113,7 @@ import { Observation } from "./ts/data/observation";
         const elementAttributes: NamedNodeMap = element.attributes;
         const elementAttributesLength: number = elementAttributes.length;
 
-        for ( let elementAttributeIndex = 0; elementAttributeIndex < elementAttributesLength; elementAttributeIndex++ ) {
+        for ( let elementAttributeIndex: number = 0; elementAttributeIndex < elementAttributesLength; elementAttributeIndex++ ) {
             const attribute: Attr = elementAttributes[ elementAttributeIndex ];
 
             if ( Is.defined( attribute ) ) {
@@ -175,7 +175,7 @@ import { Observation } from "./ts/data/observation";
         const attributes: NamedNodeMap = element.attributes;
         const attributesLength: number = attributes.length;
 
-        for ( let attributeIndex = 0; attributeIndex < attributesLength; attributeIndex++ ) {
+        for ( let attributeIndex: number = 0; attributeIndex < attributesLength; attributeIndex++ ) {
             const attribute: Attr = attributes[ attributeIndex ];
 
             if ( Is.defined( attribute ) ) {
@@ -227,7 +227,7 @@ import { Observation } from "./ts/data/observation";
         const screenWidths: string[] = getSortedScreenWidths();
         const screenWidthsLength: number = screenWidths.length;
 
-        for ( let screenWidthIndex = 0; screenWidthIndex < screenWidthsLength; screenWidthIndex++ ) {
+        for ( let screenWidthIndex: number = 0; screenWidthIndex < screenWidthsLength; screenWidthIndex++ ) {
             const screenWidth: string = screenWidths[ screenWidthIndex ];
 
             if ( Object.prototype.hasOwnProperty.call( _screenWidthElements, screenWidth ) ) {
@@ -240,7 +240,7 @@ import { Observation } from "./ts/data/observation";
 
                     elementsProcessed.screenWidths.push( screenWidth );
 
-                    for ( let elementOptionIndex = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
+                    for ( let elementOptionIndex: number = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
                         const elementOptions: ElementOptions = allElementOptions[ elementOptionIndex ];
 
                         if ( elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
@@ -262,7 +262,7 @@ import { Observation } from "./ts/data/observation";
         const screenWidths: string[] = getSortedScreenWidths();
         const screenWidthsLength: number = screenWidths.length;
 
-        for ( let screenWidthIndex = 0; screenWidthIndex < screenWidthsLength; screenWidthIndex++ ) {
+        for ( let screenWidthIndex: number = 0; screenWidthIndex < screenWidthsLength; screenWidthIndex++ ) {
             const screenWidth: string = screenWidths[ screenWidthIndex ];
 
             if ( Object.prototype.hasOwnProperty.call( _screenWidthElements, screenWidth ) ) {
@@ -270,7 +270,7 @@ import { Observation } from "./ts/data/observation";
                     const allElementOptions: ElementOptions[] = _screenWidthElements[ screenWidth ];
                     const allElementOptionsLength: number = allElementOptions.length;
 
-                    for ( let elementOptionIndex = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
+                    for ( let elementOptionIndex: number = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
                         const elementOptions: ElementOptions = allElementOptions[ elementOptionIndex ];
 
                         if ( elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {

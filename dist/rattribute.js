@@ -74,6 +74,7 @@ var r;
         t.RATTRIBUTE_JS_LG = "data-rattribute-js-lg";
         t.RATTRIBUTE_JS_XL = "data-rattribute-js-xl";
         t.RATTRIBUTE_JS_XXL = "data-rattribute-js-xxl";
+        t.RATTRIBUTE_JS_XXXL = "data-rattribute-js-xxxl";
         t.RATTRIBUTE_JS_CUSTOM = "data-rattribute-js";
         t.RATTRIBUTE_JS_IGNORE = "data-rattribute-js-ignore";
     })(e = t.CustomAttribute || (t.CustomAttribute = {}));
@@ -145,11 +146,11 @@ var i;
         }
         if (t) {
             if (!a) {
-                window.addEventListener(r.Event.RESIZE, S);
+                window.addEventListener(r.Event.RESIZE, _);
                 a = true;
             }
             if (f) {
-                R();
+                m();
             }
         }
     }
@@ -161,9 +162,10 @@ var i;
         const u = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_LG);
         const c = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XL);
         const f = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XXL);
-        const a = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_IGNORE);
-        const l = t.definedString(a) && a.toLowerCase() === "true";
-        if (!l) {
+        const a = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XXXL);
+        const l = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_IGNORE);
+        const d = t.definedString(l) && l.toLowerCase() === "true";
+        if (!d) {
             if (t.definedString(o)) {
                 T(0, e, o, r.CustomAttribute.RATTRIBUTE_JS_XS);
                 n = true;
@@ -186,6 +188,10 @@ var i;
             }
             if (t.definedString(f)) {
                 T(1400, e, f, r.CustomAttribute.RATTRIBUTE_JS_XXL);
+                n = true;
+            }
+            if (t.definedString(a)) {
+                T(1600, e, a, r.CustomAttribute.RATTRIBUTE_JS_XXXL);
                 n = true;
             }
             b(e);
@@ -217,7 +223,7 @@ var i;
             u[t.toString()] = [];
         }
         const o = g(n);
-        const i = m(e, o);
+        const i = R(e, o);
         u[t.toString()].push({
             element: e,
             attributes: o,
@@ -239,7 +245,7 @@ var i;
         }
         return e;
     }
-    function m(e, n) {
+    function R(e, n) {
         const o = {};
         const i = e.attributes;
         const s = i.length;
@@ -260,18 +266,18 @@ var i;
         }
         return o;
     }
-    function S() {
+    function _() {
         if (f) {
             if (c !== 0) {
                 clearTimeout(c);
             }
-            c = setTimeout(() => R(), s.responsiveDelay);
+            c = setTimeout(() => m(), s.responsiveDelay);
         }
     }
-    function R() {
-        p(_());
+    function m() {
+        p(S());
     }
-    function _() {
+    function S() {
         const t = {
             screenWidths: [],
             elements: []
@@ -334,7 +340,7 @@ var i;
         start: function() {
             if (!f) {
                 f = true;
-                R();
+                m();
             }
             return O;
         },
@@ -351,7 +357,7 @@ var i;
         },
         refresh: function() {
             if (f) {
-                R();
+                m();
             }
             return O;
         },

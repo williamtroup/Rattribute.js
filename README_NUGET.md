@@ -15,7 +15,7 @@
 - 😏 Zero-dependencies and extremely lightweight!
 - 🦾 Written in TypeScript, allowing greater support for React, Angular, and other libraries!
 - 💻 Full API available via public functions.
-- ⭐ Default sizes consistent with Bootstrap: xs, sm, md, lg, xl, xxl.
+- ⭐ Default sizes consistent with Bootstrap: xs, sm, md, lg, xl, xxl, along with extra xxxl.
 - 🌈 Set your own custom size attributes!
 - 🎥 Toggling responsiveness on/off support.
 - 📃 Auto fetch support (when HTML is added via 3rd party libraries).
@@ -70,6 +70,7 @@ Make sure you include the "DOCTYPE html" tag at the top of your HTML, as follows
 <p><a href="https://www.william-troup.com/" data-rattribute-js-lg="target=_blank;class=lg-class" target="_self">Test Link LG</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-xl="target=_blank;class=xl-class" target="_self">Test Link XL</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-xxl="target=_blank;class=xxl-class" target="_self">Test Link XXL</a></p>
+<p><a href="https://www.william-troup.com/" data-rattribute-js-xxxl="target=_blank;class=xxxl-class" target="_self">Test Link XXXL</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-800="target=_blank;class=800-class" data-rattribute-js-lg="target=_parent;class=lg-class" target="_self">Test Link (800, MD)</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-600="target=_blank;class=600-class" data-rattribute-js-ignore="true" target="_self">Test Link (600, Ignore)</a></p>
 ```

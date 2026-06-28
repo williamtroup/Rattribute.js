@@ -19,6 +19,7 @@ export namespace Constant {
         export const RATTRIBUTE_JS_LG: string = "data-rattribute-js-lg";
         export const RATTRIBUTE_JS_XL: string = "data-rattribute-js-xl";
         export const RATTRIBUTE_JS_XXL: string = "data-rattribute-js-xxl";
+        export const RATTRIBUTE_JS_XXXL: string = "data-rattribute-js-xxxl";
         export const RATTRIBUTE_JS_CUSTOM: string = "data-rattribute-js";
         export const RATTRIBUTE_JS_IGNORE: string = "data-rattribute-js-ignore";
     }

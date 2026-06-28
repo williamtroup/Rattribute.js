@@ -79,6 +79,7 @@ import { Observation } from "./ts/data/observation";
         const attributeLgData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_LG )!;
         const attributeXlData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XL )!;
         const attributeXxlData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XXL )!;
+        const attributeXxxlData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XXXL )!;
         const attributeIgnoreData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_IGNORE )!;
 
         const ignore: boolean = Is.definedString( attributeIgnoreData ) && attributeIgnoreData.toLowerCase() === "true";
@@ -111,6 +112,11 @@ import { Observation } from "./ts/data/observation";
 
             if ( Is.definedString( attributeXxlData ) ) {
                 addElementToScreenWidthElements( ScreenSize.xxl, element, attributeXxlData, Constant.CustomAttribute.RATTRIBUTE_JS_XXL );
+                added = true;
+            }
+
+            if ( Is.definedString( attributeXxxlData ) ) {
+                addElementToScreenWidthElements( ScreenSize.xxxl, element, attributeXxxlData, Constant.CustomAttribute.RATTRIBUTE_JS_XXXL );
                 added = true;
             }
 

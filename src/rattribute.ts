@@ -78,33 +78,38 @@ import { Observation } from "./ts/data/observation";
         const attributeLgData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_LG )!;
         const attributeXlData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XL )!;
         const attributeXxlData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XXL )!;
+        const attributeIgnoreData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_IGNORE )!;
 
-        if ( Is.definedString( attributeSmData ) ) {
-            addElementToScreenWidthElements( ScreenSize.sm, element, attributeSmData, Constant.CustomAttribute.RATTRIBUTE_JS_SM );
-            added = true;
+        const ignore: boolean = Is.definedString( attributeIgnoreData ) && attributeIgnoreData.toLowerCase() === "true";
+
+        if ( ! ignore ) {
+            if ( Is.definedString( attributeSmData ) ) {
+                addElementToScreenWidthElements( ScreenSize.sm, element, attributeSmData, Constant.CustomAttribute.RATTRIBUTE_JS_SM );
+                added = true;
+            }
+
+            if ( Is.definedString( attributeMdData ) ) {
+                addElementToScreenWidthElements( ScreenSize.md, element, attributeMdData, Constant.CustomAttribute.RATTRIBUTE_JS_MD );
+                added = true;
+            }
+
+            if ( Is.definedString( attributeLgData ) ) {
+                addElementToScreenWidthElements( ScreenSize.lg, element, attributeLgData, Constant.CustomAttribute.RATTRIBUTE_JS_LG );
+                added = true;
+            }
+
+            if ( Is.definedString( attributeXlData ) ) {
+                addElementToScreenWidthElements( ScreenSize.xl, element, attributeXlData, Constant.CustomAttribute.RATTRIBUTE_JS_XL );
+                added = true;
+            }
+
+            if ( Is.definedString( attributeXxlData ) ) {
+                addElementToScreenWidthElements( ScreenSize.xxl, element, attributeXxlData, Constant.CustomAttribute.RATTRIBUTE_JS_XXL );
+                added = true;
+            }
+
+            findCustomSizeAttributes( element );
         }
-
-        if ( Is.definedString( attributeMdData ) ) {
-            addElementToScreenWidthElements( ScreenSize.md, element, attributeMdData, Constant.CustomAttribute.RATTRIBUTE_JS_MD );
-            added = true;
-        }
-
-        if ( Is.definedString( attributeLgData ) ) {
-            addElementToScreenWidthElements( ScreenSize.lg, element, attributeLgData, Constant.CustomAttribute.RATTRIBUTE_JS_LG );
-            added = true;
-        }
-
-        if ( Is.definedString( attributeXlData ) ) {
-            addElementToScreenWidthElements( ScreenSize.xl, element, attributeXlData, Constant.CustomAttribute.RATTRIBUTE_JS_XL );
-            added = true;
-        }
-
-        if ( Is.definedString( attributeXxlData ) ) {
-            addElementToScreenWidthElements( ScreenSize.xxl, element, attributeXxlData, Constant.CustomAttribute.RATTRIBUTE_JS_XXL );
-            added = true;
-        }
-
-        findCustomSizeAttributes( element );
 
         return added;
     }

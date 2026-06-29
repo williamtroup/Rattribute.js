@@ -192,29 +192,35 @@ var i;
                 T(1600, e, a, r.CustomAttribute.RATTRIBUTE_JS_XXXL);
                 n = true;
             }
-            b(e);
+            const l = b(e);
+            if (l && !n) {
+                n = true;
+            }
         }
         return n;
     }
     function b(n) {
-        const o = n.attributes;
-        const i = o.length;
-        for (let s = 0; s < i; s++) {
-            const i = o[s];
-            if (t.defined(i)) {
-                const o = i.name;
-                if (o.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
-                    const r = o.split("-");
-                    const s = e.getNumber(parseInt(r[r.length - 1]), 0);
-                    const u = i.value;
-                    if (s > 0 && t.definedString(u)) {
-                        T(s, n, u, o);
+        let o = false;
+        const i = n.attributes;
+        const s = i.length;
+        for (let u = 0; u < s; u++) {
+            const s = i[u];
+            if (t.defined(s)) {
+                const i = s.name;
+                if (i.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
+                    const r = i.split("-");
+                    const u = e.getNumber(parseInt(r[r.length - 1]), 0);
+                    const f = s.value;
+                    if (u > 0 && t.definedString(f)) {
+                        T(u, n, f, i);
+                        o = true;
                     } else {
-                        A(n, o);
+                        A(n, i);
                     }
                 }
             }
         }
+        return o;
     }
     function T(t, e, n, r) {
         if (!Object.prototype.hasOwnProperty.call(u, t.toString())) {
@@ -377,7 +383,7 @@ var i;
             }
             return O;
         },
-        getVersion: () => "1.1.0"
+        getVersion: () => "1.1.1"
     };
     (() => {
         s = n.Options.get();

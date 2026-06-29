@@ -4,7 +4,7 @@
  * A JavaScript library that generates responsive attribute setters for any HTML element.
  * 
  * @file        rattribute.ts
- * @version     v1.1.0
+ * @version     v1.1.1
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
@@ -120,13 +120,18 @@ import { Observation } from "./ts/data/observation";
                 added = true;
             }
 
-            findCustomSizeAttributes( element );
+            const hasCustomSizeAttributesBeenFound: boolean = findCustomSizeAttributes( element );
+
+            if ( hasCustomSizeAttributesBeenFound && !added ) {
+                added = true;
+            }
         }
 
         return added;
     }
 
-    function findCustomSizeAttributes( element: HTMLElement ) : void {
+    function findCustomSizeAttributes( element: HTMLElement ) : boolean {
+        let added: boolean = false;
         const elementAttributes: NamedNodeMap = element.attributes;
         const elementAttributesLength: number = elementAttributes.length;
 
@@ -143,12 +148,16 @@ import { Observation } from "./ts/data/observation";
 
                     if ( attributeWidth > 0 && Is.definedString( attributeValue ) ) {
                         addElementToScreenWidthElements( attributeWidth, element, attributeValue, attributeName );
+                        added = true;
+
                     } else {
                         removeAttributesFromElement( element, attributeName );
                     }
                 }
             }
         }
+
+        return added;
     }
 
     function addElementToScreenWidthElements( screenSize: number, element: HTMLElement, attributeValue: string, attributeName: string ) : void {
@@ -399,7 +408,7 @@ import { Observation } from "./ts/data/observation";
          */
 
         getVersion: () : string => {
-            return "1.1.0";
+            return "1.1.1";
         }
     };
 

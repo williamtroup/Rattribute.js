@@ -120,13 +120,18 @@ import { Observation } from "./ts/data/observation";
                 added = true;
             }
 
-            findCustomSizeAttributes( element );
+            const hasCustomSizeAttributesBeenFound: boolean = findCustomSizeAttributes( element );
+
+            if ( hasCustomSizeAttributesBeenFound && !added ) {
+                added = true;
+            }
         }
 
         return added;
     }
 
-    function findCustomSizeAttributes( element: HTMLElement ) : void {
+    function findCustomSizeAttributes( element: HTMLElement ) : boolean {
+        let added: boolean = false;
         const elementAttributes: NamedNodeMap = element.attributes;
         const elementAttributesLength: number = elementAttributes.length;
 
@@ -143,12 +148,16 @@ import { Observation } from "./ts/data/observation";
 
                     if ( attributeWidth > 0 && Is.definedString( attributeValue ) ) {
                         addElementToScreenWidthElements( attributeWidth, element, attributeValue, attributeName );
+                        added = true;
+
                     } else {
                         removeAttributesFromElement( element, attributeName );
                     }
                 }
             }
         }
+
+        return added;
     }
 
     function addElementToScreenWidthElements( screenSize: number, element: HTMLElement, attributeValue: string, attributeName: string ) : void {

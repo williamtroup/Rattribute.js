@@ -131,8 +131,8 @@ var i;
 (() => {
     let s = {};
     let u = {};
-    let c = 0;
-    let f = true;
+    let f = 0;
+    let c = true;
     let a = false;
     function l() {
         let t = false;
@@ -149,7 +149,7 @@ var i;
                 window.addEventListener(r.Event.RESIZE, _);
                 a = true;
             }
-            if (f) {
+            if (c) {
                 m();
             }
         }
@@ -160,8 +160,8 @@ var i;
         const i = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_SM);
         const s = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_MD);
         const u = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_LG);
-        const c = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XL);
-        const f = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XXL);
+        const f = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XL);
+        const c = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XXL);
         const a = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XXXL);
         const l = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_IGNORE);
         const d = t.definedString(l) && l.toLowerCase() === "true";
@@ -182,41 +182,47 @@ var i;
                 T(992, e, u, r.CustomAttribute.RATTRIBUTE_JS_LG);
                 n = true;
             }
-            if (t.definedString(c)) {
-                T(1200, e, c, r.CustomAttribute.RATTRIBUTE_JS_XL);
+            if (t.definedString(f)) {
+                T(1200, e, f, r.CustomAttribute.RATTRIBUTE_JS_XL);
                 n = true;
             }
-            if (t.definedString(f)) {
-                T(1400, e, f, r.CustomAttribute.RATTRIBUTE_JS_XXL);
+            if (t.definedString(c)) {
+                T(1400, e, c, r.CustomAttribute.RATTRIBUTE_JS_XXL);
                 n = true;
             }
             if (t.definedString(a)) {
                 T(1600, e, a, r.CustomAttribute.RATTRIBUTE_JS_XXXL);
                 n = true;
             }
-            b(e);
+            const l = b(e);
+            if (l && !n) {
+                n = true;
+            }
         }
         return n;
     }
     function b(n) {
-        const o = n.attributes;
-        const i = o.length;
-        for (let s = 0; s < i; s++) {
-            const i = o[s];
-            if (t.defined(i)) {
-                const o = i.name;
-                if (o.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
-                    const r = o.split("-");
-                    const s = e.getNumber(parseInt(r[r.length - 1]), 0);
-                    const u = i.value;
-                    if (s > 0 && t.definedString(u)) {
-                        T(s, n, u, o);
+        let o = false;
+        const i = n.attributes;
+        const s = i.length;
+        for (let u = 0; u < s; u++) {
+            const s = i[u];
+            if (t.defined(s)) {
+                const i = s.name;
+                if (i.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
+                    const r = i.split("-");
+                    const u = e.getNumber(parseInt(r[r.length - 1]), 0);
+                    const f = s.value;
+                    if (u > 0 && t.definedString(f)) {
+                        T(u, n, f, i);
+                        o = true;
                     } else {
-                        A(n, o);
+                        A(n, i);
                     }
                 }
             }
         }
+        return o;
     }
     function T(t, e, n, r) {
         if (!Object.prototype.hasOwnProperty.call(u, t.toString())) {
@@ -267,11 +273,11 @@ var i;
         return o;
     }
     function _() {
-        if (f) {
-            if (c !== 0) {
-                clearTimeout(c);
+        if (c) {
+            if (f !== 0) {
+                clearTimeout(f);
             }
-            c = setTimeout(() => m(), s.responsiveDelay);
+            f = setTimeout(() => m(), s.responsiveDelay);
         }
     }
     function m() {
@@ -338,14 +344,14 @@ var i;
     }
     const O = {
         start: function() {
-            if (!f) {
-                f = true;
+            if (!c) {
+                c = true;
                 m();
             }
             return O;
         },
         stop: function() {
-            f = false;
+            c = false;
             return O;
         },
         fetch: function() {
@@ -356,7 +362,7 @@ var i;
             return O;
         },
         refresh: function() {
-            if (f) {
+            if (c) {
                 m();
             }
             return O;
@@ -373,7 +379,7 @@ var i;
                 }
                 if (r) {
                     s = n.Options.get(t);
-                    f = s.enabled;
+                    c = s.enabled;
                     i.setup(s, () => l());
                 }
             }
@@ -383,7 +389,7 @@ var i;
     };
     (() => {
         s = n.Options.get();
-        f = s.enabled;
+        c = s.enabled;
         o.onContentLoaded(() => {
             l();
             i.setup(s, () => l());

@@ -385,7 +385,7 @@ var i;
             }
             return O;
         },
-        getVersion: () => "1.1.1"
+        getVersion: () => "1.2.0"
     };
     (() => {
         s = n.Options.get();

@@ -16,6 +16,7 @@ export type ConfigurationOptions = {
     removeAttributes?: boolean;
     enabled?: boolean;
     observationMode?: boolean;
+    assignMissingIds?: boolean;
 };
 
 export type ElementOptions = {

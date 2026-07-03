@@ -23,6 +23,7 @@ export namespace Configuration {
             configurationOptions.removeAttributes = Default.getBoolean( configurationOptions.removeAttributes, true );
             configurationOptions.enabled = Default.getBoolean( configurationOptions.enabled, true );
             configurationOptions.observationMode = Default.getBoolean( configurationOptions.observationMode, true );
+            configurationOptions.assignMissingIds = Default.getBoolean( configurationOptions.assignMissingIds, false );
 
             return configurationOptions;
         }

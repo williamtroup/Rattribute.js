@@ -13,14 +13,14 @@ var t;
         return e(t) && typeof t === "string";
     }
     t.definedString = r;
-    function o(t) {
+    function i(t) {
         return e(t) && typeof t === "number";
     }
-    t.definedNumber = o;
-    function i(t) {
+    t.definedNumber = i;
+    function o(t) {
         return e(t) && typeof t === "boolean";
     }
-    t.definedBoolean = i;
+    t.definedBoolean = o;
 })(t || (t = {}));
 
 var e;
@@ -34,14 +34,14 @@ var e;
         return t.definedNumber(e) ? e : n;
     }
     e.getNumber = r;
-    function o(e, n) {
+    function i(e, n) {
         return t.definedObject(e) ? e : n;
     }
-    e.getObject = o;
-    function i(e, n) {
+    e.getObject = i;
+    function o(e, n) {
         return t.definedBoolean(e) ? e : n;
     }
-    e.getBoolean = i;
+    e.getBoolean = o;
 })(e || (e = {}));
 
 var n;
@@ -55,6 +55,7 @@ var n;
             n.removeAttributes = e.getBoolean(n.removeAttributes, true);
             n.enabled = e.getBoolean(n.enabled, true);
             n.observationMode = e.getBoolean(n.observationMode, true);
+            n.assignMissingIds = e.getBoolean(n.assignMissingIds, false);
             return n;
         }
         t.get = n;
@@ -83,7 +84,7 @@ var r;
     })(n = t.Event || (t.Event = {}));
 })(r || (r = {}));
 
-var o;
+var i;
 
 (t => {
     function e(t) {
@@ -94,9 +95,9 @@ var o;
         }
     }
     t.onContentLoaded = e;
-})(o || (o = {}));
+})(i || (i = {}));
 
-var i;
+var o;
 
 (e => {
     let n = null;
@@ -117,14 +118,14 @@ var i;
         }
     }
     e.setup = r;
-    function o(e) {
+    function i(e) {
         if (e.observationMode && t.defined(n)) {
             n.disconnect();
             n = null;
         }
     }
-    e.destroy = o;
-})(i || (i = {}));
+    e.destroy = i;
+})(o || (o = {}));
 
 (() => {
     let s = {};
@@ -136,26 +137,26 @@ var i;
         let t = false;
         const e = document.getElementsByTagName("*");
         const n = [].slice.call(e);
-        const o = n.length;
-        for (let e = 0; e < o; e++) {
+        const i = n.length;
+        for (let e = 0; e < i; e++) {
             if (d(n[e])) {
                 t = true;
             }
         }
         if (t) {
             if (!a) {
-                window.addEventListener(r.Event.RESIZE, R);
+                window.addEventListener(r.Event.RESIZE, S);
                 a = true;
             }
             if (c) {
-                S();
+                R();
             }
         }
     }
     function d(e) {
         let n = false;
-        const o = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XS);
-        const i = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_SM);
+        const i = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XS);
+        const o = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_SM);
         const s = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_MD);
         const u = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_LG);
         const f = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XL);
@@ -164,12 +165,12 @@ var i;
         const l = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_IGNORE);
         const d = t.definedString(l) && l.toLowerCase() === true.toString().toLowerCase();
         if (!d) {
-            if (t.definedString(o)) {
-                T(0, e, o, r.CustomAttribute.RATTRIBUTE_JS_XS);
+            if (t.definedString(i)) {
+                T(0, e, i, r.CustomAttribute.RATTRIBUTE_JS_XS);
                 n = true;
             }
-            if (t.definedString(i)) {
-                T(576, e, i, r.CustomAttribute.RATTRIBUTE_JS_SM);
+            if (t.definedString(o)) {
+                T(576, e, o, r.CustomAttribute.RATTRIBUTE_JS_SM);
                 n = true;
             }
             if (t.definedString(s)) {
@@ -200,40 +201,43 @@ var i;
         return n;
     }
     function b(n) {
-        let o = false;
-        const i = n.attributes;
-        const s = i.length;
+        let i = false;
+        const o = n.attributes;
+        const s = o.length;
         for (let u = 0; u < s; u++) {
-            const s = i[u];
+            const s = o[u];
             if (t.defined(s)) {
-                const i = s.name;
-                if (i.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
-                    const r = i.split("-");
+                const o = s.name;
+                if (o.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
+                    const r = o.split("-");
                     const u = e.getNumber(parseInt(r[r.length - 1]), 0);
                     const f = s.value;
                     if (u > 0 && t.definedString(f)) {
-                        T(u, n, f, i);
-                        o = true;
+                        T(u, n, f, o);
+                        i = true;
                     } else {
-                        A(n, i);
+                        A(n, o);
                     }
                 }
             }
         }
-        return o;
+        return i;
     }
-    function T(t, e, n, r) {
-        if (!Object.prototype.hasOwnProperty.call(u, t.toString())) {
-            u[t.toString()] = [];
+    function T(e, n, r, i) {
+        if (!Object.prototype.hasOwnProperty.call(u, e.toString())) {
+            u[e.toString()] = [];
         }
-        const o = g(n);
-        const i = m(e, o);
-        u[t.toString()].push({
-            element: e,
+        const o = g(r);
+        const f = m(n, o);
+        if (s.assignMissingIds && !t.definedString(n.id)) {
+            n.id = `reattribute-${crypto.randomUUID().replaceAll("-", "")}`;
+        }
+        u[e.toString()].push({
+            element: n,
             attributes: o,
-            originalAttributes: i
+            originalAttributes: f
         });
-        A(e, r);
+        A(n, i);
     }
     function A(t, e) {
         if (s.removeAttributes) {
@@ -250,35 +254,35 @@ var i;
         return e;
     }
     function m(e, n) {
-        const o = {};
-        const i = e.attributes;
-        const s = i.length;
+        const i = {};
+        const o = e.attributes;
+        const s = o.length;
         for (let e = 0; e < s; e++) {
-            const n = i[e];
+            const n = o[e];
             if (t.defined(n)) {
                 const t = n.name;
                 const e = n.value;
                 if (!t.startsWith(r.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
-                    o[t] = e;
+                    i[t] = e;
                 }
             }
         }
         for (const t in n) {
-            if (Object.prototype.hasOwnProperty.call(n, t) && !Object.prototype.hasOwnProperty.call(o, t)) {
-                o[t] = "";
+            if (Object.prototype.hasOwnProperty.call(n, t) && !Object.prototype.hasOwnProperty.call(i, t)) {
+                i[t] = "";
             }
         }
-        return o;
+        return i;
     }
-    function R() {
+    function S() {
         if (c) {
             if (f !== 0) {
                 clearTimeout(f);
             }
-            f = setTimeout(() => S(), s.responsiveDelay);
+            f = setTimeout(() => R(), s.responsiveDelay);
         }
     }
-    function S() {
+    function R() {
         p(_());
     }
     function _() {
@@ -288,21 +292,21 @@ var i;
         };
         const n = E();
         const r = n.length;
-        for (let o = 0; o < r; o++) {
-            const r = n[o];
+        for (let i = 0; i < r; i++) {
+            const r = n[i];
             if (Object.prototype.hasOwnProperty.call(u, r)) {
                 const n = window.innerWidth;
-                const o = parseInt(r);
-                if (o > 0 && n >= o || o === 0 && n < 576) {
+                const i = parseInt(r);
+                if (i > 0 && n >= i || i === 0 && n < 576) {
                     const n = u[r];
-                    const o = n.length;
+                    const i = n.length;
                     e.screenWidths.push(r);
-                    for (let r = 0; r < o; r++) {
-                        const o = n[r];
-                        if (t.defined(o.element) && e.elements.indexOf(o.element) === -1) {
-                            e.elements.push(o.element);
-                            for (const t in o.attributes) {
-                                o.element.setAttribute(t, o.attributes[t]);
+                    for (let r = 0; r < i; r++) {
+                        const i = n[r];
+                        if (t.defined(i.element) && e.elements.indexOf(i.element) === -1) {
+                            e.elements.push(i.element);
+                            for (const t in i.attributes) {
+                                i.element.setAttribute(t, i.attributes[t]);
                             }
                         }
                     }
@@ -314,21 +318,21 @@ var i;
     function p(e) {
         const n = E();
         const r = n.length;
-        for (let o = 0; o < r; o++) {
-            const r = n[o];
+        for (let i = 0; i < r; i++) {
+            const r = n[i];
             if (Object.prototype.hasOwnProperty.call(u, r)) {
                 if (e.screenWidths.indexOf(r) === -1) {
                     const n = u[r];
-                    const o = n.length;
-                    for (let r = 0; r < o; r++) {
-                        const o = n[r];
-                        if (t.defined(o.element) && e.elements.indexOf(o.element) === -1) {
-                            for (const e in o.originalAttributes) {
-                                const n = o.originalAttributes[e];
+                    const i = n.length;
+                    for (let r = 0; r < i; r++) {
+                        const i = n[r];
+                        if (t.defined(i.element) && e.elements.indexOf(i.element) === -1) {
+                            for (const e in i.originalAttributes) {
+                                const n = i.originalAttributes[e];
                                 if (t.definedString(n)) {
-                                    o.element.setAttribute(e, n);
+                                    i.element.setAttribute(e, n);
                                 } else {
-                                    o.element.removeAttribute(e);
+                                    i.element.removeAttribute(e);
                                 }
                             }
                         }
@@ -344,7 +348,7 @@ var i;
         start: function() {
             if (!c) {
                 c = true;
-                S();
+                R();
             }
             return O;
         },
@@ -361,7 +365,7 @@ var i;
         },
         refresh: function() {
             if (c) {
-                S();
+                R();
             }
             return O;
         },
@@ -378,7 +382,7 @@ var i;
                 if (r) {
                     s = n.Options.get(t);
                     c = s.enabled;
-                    i.setup(s, () => l());
+                    o.setup(s, () => l());
                 }
             }
             return O;
@@ -388,9 +392,9 @@ var i;
     (() => {
         s = n.Options.get();
         c = s.enabled;
-        o.onContentLoaded(() => {
+        i.onContentLoaded(() => {
             l();
-            i.setup(s, () => l());
+            o.setup(s, () => l());
         });
         if (!t.defined(window.$rattribute)) {
             window.$rattribute = O;

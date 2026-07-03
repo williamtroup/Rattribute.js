@@ -168,6 +168,10 @@ import { Observation } from "./ts/data/observation";
         const newAttributes: Record<string, string> = getNewAttributes( attributeValue );
         const originalAttributes: Record<string, string> = getOriginalAttributes( element, newAttributes );
 
+        if ( _configurationOptions.assignMissingIds && !Is.definedString( element.id ) ) {
+            element.id = `reattribute-${crypto.randomUUID().replaceAll( Char.dash, Char.empty )}`;
+        }
+
         _screenWidthElements[ screenSize.toString() ].push( {
             element: element,
             attributes: newAttributes,

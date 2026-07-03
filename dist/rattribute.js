@@ -146,11 +146,11 @@ var i;
         }
         if (t) {
             if (!a) {
-                window.addEventListener(r.Event.RESIZE, _);
+                window.addEventListener(r.Event.RESIZE, S);
                 a = true;
             }
             if (c) {
-                m();
+                _();
             }
         }
     }
@@ -164,7 +164,7 @@ var i;
         const c = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XXL);
         const a = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_XXXL);
         const l = e.getAttribute(r.CustomAttribute.RATTRIBUTE_JS_IGNORE);
-        const d = t.definedString(l) && l.toLowerCase() === "true";
+        const d = t.definedString(l) && l.toLowerCase() === true.toString().toLowerCase();
         if (!d) {
             if (t.definedString(o)) {
                 T(0, e, o, r.CustomAttribute.RATTRIBUTE_JS_XS);
@@ -272,18 +272,18 @@ var i;
         }
         return o;
     }
-    function _() {
+    function S() {
         if (c) {
             if (f !== 0) {
                 clearTimeout(f);
             }
-            f = setTimeout(() => m(), s.responsiveDelay);
+            f = setTimeout(() => _(), s.responsiveDelay);
         }
     }
-    function m() {
-        p(S());
+    function _() {
+        p(m());
     }
-    function S() {
+    function m() {
         const t = {
             screenWidths: [],
             elements: []
@@ -346,7 +346,7 @@ var i;
         start: function() {
             if (!c) {
                 c = true;
-                m();
+                _();
             }
             return O;
         },
@@ -363,7 +363,7 @@ var i;
         },
         refresh: function() {
             if (c) {
-                m();
+                _();
             }
             return O;
         },

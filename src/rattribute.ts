@@ -82,7 +82,7 @@ import { Observation } from "./ts/data/observation";
         const attributeXxxlData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XXXL )!;
         const attributeIgnoreData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_IGNORE )!;
 
-        const ignore: boolean = Is.definedString( attributeIgnoreData ) && attributeIgnoreData.toLowerCase() === "true";
+        const ignore: boolean = Is.definedString( attributeIgnoreData ) && attributeIgnoreData.toLowerCase() === true.toString().toLowerCase();
 
         if ( !ignore ) {
             if ( Is.definedString( attributeXsData ) ) {

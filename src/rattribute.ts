@@ -269,7 +269,7 @@ import { Observation } from "./ts/data/observation";
                     for ( let elementOptionIndex: number = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
                         const elementOptions: ElementOptions = allElementOptions[ elementOptionIndex ];
 
-                        if ( elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
+                        if ( Is.defined( elementOptions.element ) && elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
                             elementsProcessed.elements.push( elementOptions.element );
 
                             for ( const attribute in elementOptions.attributes ) {
@@ -299,7 +299,7 @@ import { Observation } from "./ts/data/observation";
                     for ( let elementOptionIndex: number = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
                         const elementOptions: ElementOptions = allElementOptions[ elementOptionIndex ];
 
-                        if ( elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
+                        if ( Is.defined( elementOptions.element ) && elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
                             for ( const attribute in elementOptions.originalAttributes ) {
                                 const originalAttributeValue: string = elementOptions.originalAttributes[ attribute ];
 

@@ -146,11 +146,11 @@ var i;
         }
         if (t) {
             if (!a) {
-                window.addEventListener(r.Event.RESIZE, S);
+                window.addEventListener(r.Event.RESIZE, R);
                 a = true;
             }
             if (c) {
-                _();
+                S();
             }
         }
     }
@@ -229,7 +229,7 @@ var i;
             u[t.toString()] = [];
         }
         const o = g(n);
-        const i = R(e, o);
+        const i = m(e, o);
         u[t.toString()].push({
             element: e,
             attributes: o,
@@ -251,7 +251,7 @@ var i;
         }
         return e;
     }
-    function R(e, n) {
+    function m(e, n) {
         const o = {};
         const i = e.attributes;
         const s = i.length;
@@ -272,46 +272,46 @@ var i;
         }
         return o;
     }
-    function S() {
+    function R() {
         if (c) {
             if (f !== 0) {
                 clearTimeout(f);
             }
-            f = setTimeout(() => _(), s.responsiveDelay);
+            f = setTimeout(() => S(), s.responsiveDelay);
         }
     }
-    function _() {
-        p(m());
+    function S() {
+        p(_());
     }
-    function m() {
-        const t = {
+    function _() {
+        const e = {
             screenWidths: [],
             elements: []
         };
-        const e = E();
-        const n = e.length;
-        for (let r = 0; r < n; r++) {
-            const n = e[r];
-            if (Object.prototype.hasOwnProperty.call(u, n)) {
-                const e = window.innerWidth;
-                const r = parseInt(n);
-                if (r > 0 && e >= r || r === 0 && e < 576) {
-                    const e = u[n];
-                    const r = e.length;
-                    t.screenWidths.push(n);
-                    for (let n = 0; n < r; n++) {
-                        const r = e[n];
-                        if (t.elements.indexOf(r.element) === -1) {
-                            t.elements.push(r.element);
-                            for (const t in r.attributes) {
-                                r.element.setAttribute(t, r.attributes[t]);
+        const n = E();
+        const r = n.length;
+        for (let o = 0; o < r; o++) {
+            const r = n[o];
+            if (Object.prototype.hasOwnProperty.call(u, r)) {
+                const n = window.innerWidth;
+                const o = parseInt(r);
+                if (o > 0 && n >= o || o === 0 && n < 576) {
+                    const n = u[r];
+                    const o = n.length;
+                    e.screenWidths.push(r);
+                    for (let r = 0; r < o; r++) {
+                        const o = n[r];
+                        if (t.defined(o.element) && e.elements.indexOf(o.element) === -1) {
+                            e.elements.push(o.element);
+                            for (const t in o.attributes) {
+                                o.element.setAttribute(t, o.attributes[t]);
                             }
                         }
                     }
                 }
             }
         }
-        return t;
+        return e;
     }
     function p(e) {
         const n = E();
@@ -324,7 +324,7 @@ var i;
                     const o = n.length;
                     for (let r = 0; r < o; r++) {
                         const o = n[r];
-                        if (e.elements.indexOf(o.element) === -1) {
+                        if (t.defined(o.element) && e.elements.indexOf(o.element) === -1) {
                             for (const e in o.originalAttributes) {
                                 const n = o.originalAttributes[e];
                                 if (t.definedString(n)) {
@@ -346,7 +346,7 @@ var i;
         start: function() {
             if (!c) {
                 c = true;
-                _();
+                S();
             }
             return O;
         },
@@ -363,7 +363,7 @@ var i;
         },
         refresh: function() {
             if (c) {
-                _();
+                S();
             }
             return O;
         },

@@ -11,6 +11,7 @@
  */
 
 
+import { Char } from "./enum";
 import { Is } from "./is";
 
 
@@ -29,5 +30,44 @@ export namespace Default {
 
     export function getBoolean( value: any, defaultValue: boolean ) : boolean {
         return Is.definedBoolean( value ) ? value : defaultValue;
+    }
+
+    export function getObjectFromFunction( functionName: string ) : any {
+        let result: any = null;
+
+        const functionNameParts: string[] = functionName.split( "(" );
+        let functionNameArguments: string[] = [];
+
+        if ( functionNameParts.length > 1 ) {
+            functionNameArguments = functionNameParts[ 1 ]
+                .replace( ")", Char.empty )
+                .replace( ";", Char.empty )
+                .trim()
+                .split( Char.comma );
+
+            if ( functionNameArguments.length === 1 && functionNameArguments[ 0 ] === Char.empty ) {
+                functionNameArguments = [];
+            }
+        }
+
+        const namespaces: string[] = functionNameParts[ 0 ].split( Char.dot );
+        const onlyFunctionName: string = namespaces.pop()!;
+        let context: any = globalThis;
+        let contextFound: boolean = true;
+
+        for ( const namespace of namespaces ) {
+            context = context[ namespace ];
+            
+            if ( !Is.defined( context ) ) {
+                contextFound = false;
+                break;
+            }
+        }
+
+        if ( contextFound && Is.definedFunction( context[ onlyFunctionName ] ) ) {
+            result = context[ onlyFunctionName ].apply( context, functionNameArguments );
+        }
+
+        return result;
     }
 }

@@ -30,3 +30,7 @@ function fetch() {
 function refresh() {
     $rattribute.refresh();
 }
+
+function targetFunc() {
+    return "_blank";
+}

@@ -277,7 +277,13 @@ import { Observation } from "./ts/data/observation";
                             elementsProcessed.elements.push( elementOptions.element );
 
                             for ( const attribute in elementOptions.attributes ) {
-                                elementOptions.element.setAttribute( attribute, elementOptions.attributes[ attribute ] );
+                                let attributeValue: string = elementOptions.attributes[ attribute ];
+
+                                if ( attributeValue.indexOf( Char.openParenthesis ) > Value.notFound && attributeValue.endsWith( Char.closeParenthesis ) ) {
+                                    attributeValue = Default.getObjectFromFunction( attributeValue );
+                                }
+
+                                elementOptions.element.setAttribute( attribute, attributeValue );
                             }
                         }
                     }
@@ -305,7 +311,11 @@ import { Observation } from "./ts/data/observation";
 
                         if ( Is.defined( elementOptions.element ) && elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
                             for ( const attribute in elementOptions.originalAttributes ) {
-                                const originalAttributeValue: string = elementOptions.originalAttributes[ attribute ];
+                                let originalAttributeValue: string = elementOptions.originalAttributes[ attribute ];
+
+                                if ( originalAttributeValue.indexOf( Char.openParenthesis ) > Value.notFound && originalAttributeValue.endsWith( Char.closeParenthesis ) ) {
+                                    originalAttributeValue = Default.getObjectFromFunction( originalAttributeValue );
+                                }
 
                                 if ( Is.definedString( originalAttributeValue ) ) {
                                     elementOptions.element.setAttribute( attribute, originalAttributeValue );

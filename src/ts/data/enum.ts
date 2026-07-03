@@ -16,6 +16,10 @@ export enum Char {
     dash = "-",
     semiColon = ";",
     equals = "=",
+    dot = ".",
+    comma = ",",
+    openParenthesis = "(",
+    closeParenthesis = ")",
 }
 
 export enum Value {

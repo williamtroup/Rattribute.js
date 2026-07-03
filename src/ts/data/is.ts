@@ -34,4 +34,8 @@ export namespace Is {
     export function definedBoolean( object: unknown ) : boolean {
         return defined( object ) && typeof object === "boolean";
     }
+
+    export function definedFunction( object: unknown ) : boolean {
+        return defined( object ) && typeof object === "function";
+    }
 }

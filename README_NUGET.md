@@ -20,6 +20,7 @@
 - 🎥 Toggling responsiveness on/off support.
 - 📃 Auto fetch support (when HTML is added via 3rd party libraries).
 - ☑️ Set up which elements to ignore.
+- 🔨 Set attribute values from function calls!
 
 
 ## What browsers are supported?
@@ -72,6 +73,7 @@ Make sure you include the "DOCTYPE html" tag at the top of your HTML, as follows
 <p><a href="https://www.william-troup.com/" data-rattribute-js-xxxl="target=_blank;class=xxxl-class" target="_self">Test Link XXXL</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-800="target=_blank;class=800-class" data-rattribute-js-lg="target=_parent;class=lg-class" target="_self">Test Link (800, MD)</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-600="target=_blank;class=600-class" data-rattribute-js-ignore="true" target="_self">Test Link (600, Ignore)</a></p>
+<p><a href="https://www.william-troup.com/" data-rattribute-js-600="target=targetFunc()" target="_self">Test Link (600, From Function)</a></p>
 ```
 
 

@@ -35,13 +35,13 @@ export namespace Default {
     export function getObjectFromFunction( functionName: string ) : any {
         let result: any = null;
 
-        const functionNameParts: string[] = functionName.split( "(" );
+        const functionNameParts: string[] = functionName.split( Char.openParenthesis );
         let functionNameArguments: string[] = [];
 
         if ( functionNameParts.length > 1 ) {
             functionNameArguments = functionNameParts[ 1 ]
-                .replace( ")", Char.empty )
-                .replace( ";", Char.empty )
+                .replace( Char.closeParenthesis, Char.empty )
+                .replace( Char.semiColon, Char.empty )
                 .trim()
                 .split( Char.comma );
 

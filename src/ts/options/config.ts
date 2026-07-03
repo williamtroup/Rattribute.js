@@ -24,6 +24,7 @@ export namespace Configuration {
             configurationOptions.enabled = Default.getBoolean( configurationOptions.enabled, true );
             configurationOptions.observationMode = Default.getBoolean( configurationOptions.observationMode, true );
             configurationOptions.assignMissingIds = Default.getBoolean( configurationOptions.assignMissingIds, false );
+            configurationOptions.elementIdPrefix = Default.getAnyString( configurationOptions.elementIdPrefix, "rattribute" );
 
             return configurationOptions;
         }

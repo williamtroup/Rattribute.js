@@ -17,6 +17,7 @@ export type ConfigurationOptions = {
     enabled?: boolean;
     observationMode?: boolean;
     assignMissingIds?: boolean;
+    elementIdPrefix?: string;
 };
 
 export type ElementOptions = {

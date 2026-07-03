@@ -169,7 +169,13 @@ import { Observation } from "./ts/data/observation";
         const originalAttributes: Record<string, string> = getOriginalAttributes( element, newAttributes );
 
         if ( _configurationOptions.assignMissingIds && !Is.definedString( element.id ) ) {
-            element.id = `reattribute-${crypto.randomUUID().replaceAll( Char.dash, Char.empty )}`;
+            let prefix: string = _configurationOptions.elementIdPrefix!;
+
+            if ( Is.definedString( prefix ) ) {
+                prefix = `${prefix.trim()}${Char.dash}`;
+            }
+
+            element.id = `${prefix}${crypto.randomUUID().replaceAll( Char.dash, Char.empty )}`;
         }
 
         _screenWidthElements[ screenSize.toString() ].push( {

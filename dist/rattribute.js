@@ -32,23 +32,27 @@ var t;
 var e;
 
 (e => {
-    function n(e, n) {
+    function n(t, e) {
+        return typeof t === "string" ? t : e;
+    }
+    e.getAnyString = n;
+    function i(e, n) {
         return t.definedString(e) ? e : n;
     }
-    e.getString = n;
-    function i(e, n) {
+    e.getString = i;
+    function r(e, n) {
         return t.definedNumber(e) ? e : n;
     }
-    e.getNumber = i;
-    function r(e, n) {
+    e.getNumber = r;
+    function o(e, n) {
         return t.definedObject(e) ? e : n;
     }
-    e.getObject = r;
-    function o(e, n) {
+    e.getObject = o;
+    function s(e, n) {
         return t.definedBoolean(e) ? e : n;
     }
-    e.getBoolean = o;
-    function s(e) {
+    e.getBoolean = s;
+    function u(e) {
         let n = null;
         const i = e.split("(");
         let r = [];
@@ -74,7 +78,7 @@ var e;
         }
         return n;
     }
-    e.getObjectFromFunction = s;
+    e.getObjectFromFunction = u;
 })(e || (e = {}));
 
 var n;
@@ -89,6 +93,7 @@ var n;
             n.enabled = e.getBoolean(n.enabled, true);
             n.observationMode = e.getBoolean(n.observationMode, true);
             n.assignMissingIds = e.getBoolean(n.assignMissingIds, false);
+            n.elementIdPrefix = e.getAnyString(n.elementIdPrefix, "rattribute");
             return n;
         }
         t.get = n;
@@ -166,27 +171,27 @@ var o;
     let f = 0;
     let c = true;
     let l = false;
-    function a() {
+    function d() {
         let t = false;
         const e = document.getElementsByTagName("*");
         const n = [].slice.call(e);
         const r = n.length;
         for (let e = 0; e < r; e++) {
-            if (d(n[e])) {
+            if (a(n[e])) {
                 t = true;
             }
         }
         if (t) {
             if (!l) {
-                window.addEventListener(i.Event.RESIZE, p);
+                window.addEventListener(i.Event.RESIZE, S);
                 l = true;
             }
             if (c) {
-                S();
+                p();
             }
         }
     }
-    function d(e) {
+    function a(e) {
         let n = false;
         const r = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_XS);
         const o = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_SM);
@@ -195,9 +200,9 @@ var o;
         const f = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_XL);
         const c = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_XXL);
         const l = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_XXXL);
-        const a = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_IGNORE);
-        const d = t.definedString(a) && a.toLowerCase() === true.toString().toLowerCase();
-        if (!d) {
+        const d = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_IGNORE);
+        const a = t.definedString(d) && d.toLowerCase() === true.toString().toLowerCase();
+        if (!a) {
             if (t.definedString(r)) {
                 T(0, e, r, i.CustomAttribute.RATTRIBUTE_JS_XS);
                 n = true;
@@ -226,8 +231,8 @@ var o;
                 T(1600, e, l, i.CustomAttribute.RATTRIBUTE_JS_XXXL);
                 n = true;
             }
-            const a = b(e);
-            if (a && !n) {
+            const d = b(e);
+            if (d && !n) {
                 n = true;
             }
         }
@@ -263,7 +268,11 @@ var o;
         const o = A(i);
         const f = m(n, o);
         if (s.assignMissingIds && !t.definedString(n.id)) {
-            n.id = `reattribute-${crypto.randomUUID().replaceAll("-", "")}`;
+            let e = s.elementIdPrefix;
+            if (t.definedString(e)) {
+                e = `${e.trim()}${"-"}`;
+            }
+            n.id = `${e}${crypto.randomUUID().replaceAll("-", "")}`;
         }
         u[e.toString()].push({
             element: n,
@@ -307,15 +316,15 @@ var o;
         }
         return r;
     }
-    function p() {
+    function S() {
         if (c) {
             if (f !== 0) {
                 clearTimeout(f);
             }
-            f = setTimeout(() => S(), s.responsiveDelay);
+            f = setTimeout(() => p(), s.responsiveDelay);
         }
     }
-    function S() {
+    function p() {
         _(R());
     }
     function R() {
@@ -388,7 +397,7 @@ var o;
         start: function() {
             if (!c) {
                 c = true;
-                S();
+                p();
             }
             return E;
         },
@@ -400,12 +409,12 @@ var o;
             if (!s.removeAttributes) {
                 u = {};
             }
-            a();
+            d();
             return E;
         },
         refresh: function() {
             if (c) {
-                S();
+                p();
             }
             return E;
         },
@@ -422,7 +431,7 @@ var o;
                 if (i) {
                     s = n.Options.get(t);
                     c = s.enabled;
-                    o.setup(s, () => a());
+                    o.setup(s, () => d());
                 }
             }
             return E;
@@ -433,8 +442,8 @@ var o;
         s = n.Options.get();
         c = s.enabled;
         r.onContentLoaded(() => {
-            a();
-            o.setup(s, () => a());
+            d();
+            o.setup(s, () => d());
         });
         if (!t.defined(window.$rattribute)) {
             window.$rattribute = E;

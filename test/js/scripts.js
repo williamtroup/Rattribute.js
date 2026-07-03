@@ -34,3 +34,7 @@ function refresh() {
 function targetFunc() {
     return "_blank";
 }
+
+function targetFuncWithArgs( parent ) {
+    return parent === true.toString().toLowerCase() ? "_parent" : "_self";
+}

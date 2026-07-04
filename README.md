@@ -37,6 +37,13 @@ All modern browsers (such as Google Chrome, FireFox, and Opera) are fully suppor
 <br>
 
 
+<h1>What are the most recent changes?</h1>
+
+To see a list of all the most recent changes, click [here](docs/CHANGE_LOG.md).
+<br>
+<br>
+
+
 <h1>How do I install Rattribute.js?</h1>
 
 You can install the library with npm into your local modules directory using the following command:

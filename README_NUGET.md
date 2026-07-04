@@ -28,6 +28,11 @@
 All modern browsers (such as Google Chrome, FireFox, and Opera) are fully supported.
 
 
+## What are the most recent changes?
+
+To see a list of all the most recent changes, click [here](docs/CHANGE_LOG.md).
+
+
 ## How do I install Rattribute.js?
 
 You can install the library with npm into your local modules directory using the following command:

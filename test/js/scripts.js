@@ -38,3 +38,7 @@ function targetFunc() {
 function targetFuncWithArgs( parent ) {
     return parent ? "_parent" : "_self";
 }
+
+function getElements() {
+    console.log( $rattribute.getElements() );
+}

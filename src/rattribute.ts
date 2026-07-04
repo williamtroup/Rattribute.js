@@ -121,7 +121,7 @@ import { Observation } from "./ts/data/observation";
                 addElementToScreenWidthElements( ScreenSize.xxxl, element, attributeXxxlData, Constant.CustomAttribute.RATTRIBUTE_JS_XXXL );
                 added = true;
             }
-            
+
             if ( findCustomSizeAttributes( element ) && !added ) {
                 added = true;
             }
@@ -388,6 +388,31 @@ import { Observation } from "./ts/data/observation";
             }
 
             return _public;
+        },
+
+        getElements: function () : HTMLElement[] {
+            const elements: HTMLElement[] = [];
+            const screenWidths: string[] = getSortedScreenWidths();
+            const screenWidthsLength: number = screenWidths.length;
+
+            for ( let screenWidthIndex: number = 0; screenWidthIndex < screenWidthsLength; screenWidthIndex++ ) {
+                const screenWidth: string = screenWidths[ screenWidthIndex ];
+
+                if ( Object.prototype.hasOwnProperty.call( _screenWidthElements, screenWidth ) ) {
+                    const allElementOptions: ElementOptions[] = _screenWidthElements[ screenWidth ];
+                    const allElementOptionsLength: number = allElementOptions.length;
+
+                    for ( let elementOptionIndex: number = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
+                        const elementOptions: ElementOptions = allElementOptions[ elementOptionIndex ];
+
+                        if ( Is.defined( elementOptions.element ) && elements.indexOf( elementOptions.element ) === Value.notFound ) {
+                            elements.push( elementOptions.element );
+                        }
+                    }
+                }
+            }
+
+            return elements;
         },
 
 

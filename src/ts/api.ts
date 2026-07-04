@@ -24,7 +24,7 @@ export type PublicApi = {
     /**
      * start().
      * 
-     * Starts the responsive link automation.
+     * Starts the automation.
      * 
      * @public
      * 
@@ -35,7 +35,7 @@ export type PublicApi = {
     /**
      * stop().
      * 
-     * Stops the responsive link automation.
+     * Stops the automation.
      * 
      * @public
      * 
@@ -46,7 +46,7 @@ export type PublicApi = {
     /**
      * fetch().
      * 
-     * Fetches all the responsive link elements.
+     * Fetches all new elements added to the DOM and sets them up.
      * 
      * @public
      * 
@@ -57,13 +57,24 @@ export type PublicApi = {
     /**
      * refresh().
      * 
-     * Refreshes all the responsive link elements.
+     * Refreshes all the elements.
      * 
      * @public
      * 
      * @returns     {Object}                                                The Rattribute.js class instance.
      */
     refresh: () => PublicApi;
+
+    /**
+     * getElements().
+     * 
+     * Gets all the elements setup.
+     * 
+     * @public
+     * 
+     * @returns     {Object[]}                                              The array of elements.
+     */
+    getElements: () => HTMLElement[];
 
 
     /*

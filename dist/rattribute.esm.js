@@ -187,11 +187,11 @@ var o;
         }
         if (t) {
             if (!l) {
-                window.addEventListener(i.Event.RESIZE, S);
+                window.addEventListener(i.Event.RESIZE, p);
                 l = true;
             }
             if (c) {
-                p();
+                S();
             }
         }
     }
@@ -269,8 +269,8 @@ var o;
         if (!Object.prototype.hasOwnProperty.call(u, e.toString())) {
             u[e.toString()] = [];
         }
-        const o = A(i);
-        const f = m(n, o);
+        const o = m(i);
+        const f = A(n, o);
         if (s.assignMissingIds && !t.definedString(n.id)) {
             let e = s.elementIdPrefix;
             if (t.definedString(e)) {
@@ -290,7 +290,7 @@ var o;
             t.removeAttribute(e);
         }
     }
-    function A(t) {
+    function m(t) {
         const e = {};
         const n = t.split(";");
         for (const t of n) {
@@ -299,7 +299,7 @@ var o;
         }
         return e;
     }
-    function m(e, n) {
+    function A(e, n) {
         const r = {};
         const o = e.attributes;
         const s = o.length;
@@ -320,15 +320,15 @@ var o;
         }
         return r;
     }
-    function S() {
+    function p() {
         if (c) {
             if (f !== 0) {
                 clearTimeout(f);
             }
-            f = setTimeout(() => p(), s.responsiveDelay);
+            f = setTimeout(() => S(), s.responsiveDelay);
         }
     }
-    function p() {
+    function S() {
         _(R());
     }
     function R() {
@@ -401,7 +401,7 @@ var o;
         start: function() {
             if (!c) {
                 c = true;
-                p();
+                S();
             }
             return E;
         },
@@ -418,9 +418,28 @@ var o;
         },
         refresh: function() {
             if (c) {
-                p();
+                S();
             }
             return E;
+        },
+        getElements: function() {
+            const e = [];
+            const n = O();
+            const i = n.length;
+            for (let r = 0; r < i; r++) {
+                const i = n[r];
+                if (Object.prototype.hasOwnProperty.call(u, i)) {
+                    const n = u[i];
+                    const r = n.length;
+                    for (let i = 0; i < r; i++) {
+                        const r = n[i];
+                        if (t.defined(r.element) && e.indexOf(r.element) === -1) {
+                            e.push(r.element);
+                        }
+                    }
+                }
+            }
+            return e;
         },
         setConfiguration: e => {
             if (t.definedObject(e)) {

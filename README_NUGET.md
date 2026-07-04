@@ -1,8 +1,8 @@
-# Rattribute.js v1.1.1
+# Rattribute.js v1.2.0
 
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Rattribute.js%2C%20a%20free%20JavaScript%json%20converter&url=https://github.com/williamtroup/Rattribute.js&hashtags=javascript,json,html,converter)
-[![npm](https://img.shields.io/badge/npmjs-v1.1.1-blue)](https://www.npmjs.com/package/rattribute.js)
-[![nuget](https://img.shields.io/badge/nuget-v1.1.1-purple)](https://www.nuget.org/packages/Rattribute.js/)
+[![npm](https://img.shields.io/badge/npmjs-v1.2.0-blue)](https://www.npmjs.com/package/rattribute.js)
+[![nuget](https://img.shields.io/badge/nuget-v1.2.0-purple)](https://www.nuget.org/packages/Rattribute.js/)
 [![license](https://img.shields.io/badge/license-MIT-green)](https://github.com/williamtroup/Rattribute.js/blob/main/LICENSE.txt)
 [![discussions Welcome](https://img.shields.io/badge/discussions-Welcome-red)](https://github.com/williamtroup/Rattribute.js/discussions)
 [![coded by William Troup](https://img.shields.io/badge/coded_by-William_Troup-yellow)](https://william-troup.com/)
@@ -20,11 +20,17 @@
 - 🎥 Toggling responsiveness on/off support.
 - 📃 Auto fetch support (when HTML is added via 3rd party libraries).
 - ☑️ Set up which elements to ignore.
+- 🔨 Set attribute values from function calls!
 
 
 ## What browsers are supported?
 
 All modern browsers (such as Google Chrome, FireFox, and Opera) are fully supported.
+
+
+## What are the most recent changes?
+
+To see a list of all the most recent changes, click [here](docs/CHANGE_LOG.md).
 
 
 ## How do I install Rattribute.js?
@@ -38,7 +44,7 @@ npm install rattribute.js
 Or, you can also use the following CDN links:
 
 ```markdown
-https://cdn.jsdelivr.net/gh/williamtroup/Rattribute.js@1.1.1/dist/rattribute.min.js
+https://cdn.jsdelivr.net/gh/williamtroup/Rattribute.js@1.2.0/dist/rattribute.min.js
 ```
 
 
@@ -72,6 +78,7 @@ Make sure you include the "DOCTYPE html" tag at the top of your HTML, as follows
 <p><a href="https://www.william-troup.com/" data-rattribute-js-xxxl="target=_blank;class=xxxl-class" target="_self">Test Link XXXL</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-800="target=_blank;class=800-class" data-rattribute-js-lg="target=_parent;class=lg-class" target="_self">Test Link (800, MD)</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-600="target=_blank;class=600-class" data-rattribute-js-ignore="true" target="_self">Test Link (600, Ignore)</a></p>
+<p><a href="https://www.william-troup.com/" data-rattribute-js-600="target=targetFunc()" data-rattribute-js-md="target=targetFuncWithArgs(true)" target="targetFuncWithArgs(false)">Test Link (600, From Functions)</a></p>
 ```
 
 

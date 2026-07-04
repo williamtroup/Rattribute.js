@@ -4,7 +4,7 @@
  * A JavaScript library that generates responsive attribute setters for any HTML element.
  * 
  * @file        is.ts
- * @version     v1.1.1
+ * @version     v1.2.0
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
@@ -33,5 +33,9 @@ export namespace Is {
 
     export function definedBoolean( object: unknown ) : boolean {
         return defined( object ) && typeof object === "boolean";
+    }
+
+    export function definedFunction( object: unknown ) : boolean {
+        return defined( object ) && typeof object === "function";
     }
 }

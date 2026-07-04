@@ -4,7 +4,7 @@
  * A JavaScript library that generates responsive attribute setters for any HTML element.
  * 
  * @file        rattribute.ts
- * @version     v1.1.1
+ * @version     v1.2.0
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
@@ -82,7 +82,7 @@ import { Observation } from "./ts/data/observation";
         const attributeXxxlData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_XXXL )!;
         const attributeIgnoreData: string = element.getAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_IGNORE )!;
 
-        const ignore: boolean = Is.definedString( attributeIgnoreData ) && attributeIgnoreData.toLowerCase() === "true";
+        const ignore: boolean = Is.definedString( attributeIgnoreData ) && attributeIgnoreData.toLowerCase() === true.toString().toLowerCase();
 
         if ( !ignore ) {
             if ( Is.definedString( attributeXsData ) ) {
@@ -167,6 +167,16 @@ import { Observation } from "./ts/data/observation";
 
         const newAttributes: Record<string, string> = getNewAttributes( attributeValue );
         const originalAttributes: Record<string, string> = getOriginalAttributes( element, newAttributes );
+
+        if ( _configurationOptions.assignMissingIds && !Is.definedString( element.id ) ) {
+            let prefix: string = _configurationOptions.elementIdPrefix!;
+
+            if ( Is.definedString( prefix ) ) {
+                prefix = `${prefix.trim()}${Char.dash}`;
+            }
+
+            element.id = `${prefix}${crypto.randomUUID().replaceAll( Char.dash, Char.empty )}`;
+        }
 
         _screenWidthElements[ screenSize.toString() ].push( {
             element: element,
@@ -269,11 +279,17 @@ import { Observation } from "./ts/data/observation";
                     for ( let elementOptionIndex: number = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
                         const elementOptions: ElementOptions = allElementOptions[ elementOptionIndex ];
 
-                        if ( elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
+                        if ( Is.defined( elementOptions.element ) && elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
                             elementsProcessed.elements.push( elementOptions.element );
 
                             for ( const attribute in elementOptions.attributes ) {
-                                elementOptions.element.setAttribute( attribute, elementOptions.attributes[ attribute ] );
+                                let attributeValue: string = elementOptions.attributes[ attribute ];
+
+                                if ( attributeValue.indexOf( Char.openParenthesis ) > Value.notFound && attributeValue.endsWith( Char.closeParenthesis ) ) {
+                                    attributeValue = Default.getObjectFromFunction( attributeValue );
+                                }
+
+                                elementOptions.element.setAttribute( attribute, attributeValue );
                             }
                         }
                     }
@@ -299,9 +315,13 @@ import { Observation } from "./ts/data/observation";
                     for ( let elementOptionIndex: number = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
                         const elementOptions: ElementOptions = allElementOptions[ elementOptionIndex ];
 
-                        if ( elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
+                        if ( Is.defined( elementOptions.element ) && elementsProcessed.elements.indexOf( elementOptions.element ) === Value.notFound ) {
                             for ( const attribute in elementOptions.originalAttributes ) {
-                                const originalAttributeValue: string = elementOptions.originalAttributes[ attribute ];
+                                let originalAttributeValue: string = elementOptions.originalAttributes[ attribute ];
+
+                                if ( originalAttributeValue.indexOf( Char.openParenthesis ) > Value.notFound && originalAttributeValue.endsWith( Char.closeParenthesis ) ) {
+                                    originalAttributeValue = Default.getObjectFromFunction( originalAttributeValue );
+                                }
 
                                 if ( Is.definedString( originalAttributeValue ) ) {
                                     elementOptions.element.setAttribute( attribute, originalAttributeValue );
@@ -331,10 +351,10 @@ import { Observation } from "./ts/data/observation";
 
     const _public: PublicApi = {
         /*
-        * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        * Public API Functions:  Automation
-        * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        */
+         * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+         * Public API Functions:  Automation
+         * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+         */
 
         start: function () : PublicApi {
             if ( !_enabled ) {
@@ -408,7 +428,7 @@ import { Observation } from "./ts/data/observation";
          */
 
         getVersion: () : string => {
-            return "1.1.1";
+            return "1.2.0";
         }
     };
 
@@ -416,7 +436,6 @@ import { Observation } from "./ts/data/observation";
     /*
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
      * Initialize Rattribute.js
-
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
 

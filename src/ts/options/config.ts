@@ -4,7 +4,7 @@
  * A JavaScript library that generates responsive attribute setters for any HTML element.
  * 
  * @file        config.ts
- * @version     v1.1.1
+ * @version     v1.2.0
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
@@ -23,6 +23,8 @@ export namespace Configuration {
             configurationOptions.removeAttributes = Default.getBoolean( configurationOptions.removeAttributes, true );
             configurationOptions.enabled = Default.getBoolean( configurationOptions.enabled, true );
             configurationOptions.observationMode = Default.getBoolean( configurationOptions.observationMode, true );
+            configurationOptions.assignMissingIds = Default.getBoolean( configurationOptions.assignMissingIds, false );
+            configurationOptions.elementIdPrefix = Default.getAnyString( configurationOptions.elementIdPrefix, "rattribute" );
 
             return configurationOptions;
         }

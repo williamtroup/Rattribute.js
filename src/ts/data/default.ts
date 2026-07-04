@@ -4,17 +4,22 @@
  * A JavaScript library that generates responsive attribute setters for any HTML element.
  * 
  * @file        default.ts
- * @version     v1.1.1
+ * @version     v1.2.0
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
  */
 
 
+import { Char } from "./enum";
 import { Is } from "./is";
 
 
 export namespace Default {
+    export function getAnyString( value: any, defaultValue: string ) : string {
+        return typeof value === "string" ? value : defaultValue;
+    }
+    
     export function getString( value: any, defaultValue: string ) : string {
         return Is.definedString( value ) ? value : defaultValue;
     }
@@ -29,5 +34,44 @@ export namespace Default {
 
     export function getBoolean( value: any, defaultValue: boolean ) : boolean {
         return Is.definedBoolean( value ) ? value : defaultValue;
+    }
+
+    export function getObjectFromFunction( functionName: string ) : any {
+        let result: any = null;
+
+        const functionNameParts: string[] = functionName.split( Char.openParenthesis );
+        let functionNameArguments: string[] = [];
+
+        if ( functionNameParts.length > 1 ) {
+            functionNameArguments = functionNameParts[ 1 ]
+                .replace( Char.closeParenthesis, Char.empty )
+                .replace( Char.semiColon, Char.empty )
+                .trim()
+                .split( Char.comma );
+
+            if ( functionNameArguments.length === 1 && functionNameArguments[ 0 ] === Char.empty ) {
+                functionNameArguments = [];
+            }
+        }
+
+        const namespaces: string[] = functionNameParts[ 0 ].split( Char.dot );
+        const onlyFunctionName: string = namespaces.pop()!;
+        let context: any = globalThis;
+        let contextFound: boolean = true;
+
+        for ( const namespace of namespaces ) {
+            context = context[ namespace ];
+            
+            if ( !Is.defined( context ) ) {
+                contextFound = false;
+                break;
+            }
+        }
+
+        if ( contextFound && Is.definedFunction( context[ onlyFunctionName ] ) ) {
+            result = context[ onlyFunctionName ].apply( context, functionNameArguments );
+        }
+
+        return result;
     }
 }

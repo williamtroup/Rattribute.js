@@ -4,7 +4,7 @@
  * A JavaScript library that generates responsive attribute setters for any HTML element.
  * 
  * @file        enum.ts
- * @version     v1.1.1
+ * @version     v1.2.0
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
@@ -16,6 +16,10 @@ export enum Char {
     dash = "-",
     semiColon = ";",
     equals = "=",
+    dot = ".",
+    comma = ",",
+    openParenthesis = "(",
+    closeParenthesis = ")",
 }
 
 export enum Value {

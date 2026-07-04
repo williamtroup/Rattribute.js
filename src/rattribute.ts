@@ -85,6 +85,8 @@ import { Observation } from "./ts/data/observation";
         const ignore: boolean = Is.definedString( attributeIgnoreData ) && attributeIgnoreData.toLowerCase() === true.toString().toLowerCase();
 
         if ( !ignore ) {
+            removeAttributesFromElement( element, Constant.CustomAttribute.RATTRIBUTE_JS_IGNORE );
+            
             if ( Is.definedString( attributeXsData ) ) {
                 addElementToScreenWidthElements( ScreenSize.xs, element, attributeXsData, Constant.CustomAttribute.RATTRIBUTE_JS_XS );
                 added = true;

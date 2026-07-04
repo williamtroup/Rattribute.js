@@ -207,6 +207,7 @@ var o;
         const d = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_IGNORE);
         const a = t.definedString(d) && d.toLowerCase() === true.toString().toLowerCase();
         if (!a) {
+            g(e, i.CustomAttribute.RATTRIBUTE_JS_IGNORE);
             if (t.definedString(r)) {
                 T(0, e, r, i.CustomAttribute.RATTRIBUTE_JS_XS);
                 n = true;

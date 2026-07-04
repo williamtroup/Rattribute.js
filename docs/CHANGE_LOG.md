@@ -2,7 +2,9 @@
 
 ## Version 1.3.0:
 - Arguments passed to functions in the attribute setters can now be any type of value (instead of only strings being supported).
+- The "data-rattribute-js-ignore" attribute is now removed when set to false (if removeAttributes is enabled).
 - 
+
 
 ## Version 1.2.0:
 - Added support to set attribute values directly from function call results!

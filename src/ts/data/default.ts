@@ -56,8 +56,8 @@ export namespace Default {
             if ( functionNameArguments.length > 0 ) {
                 const functionNameArgumentsLength: number = functionNameArguments.length;
 
-                for ( let functionNameArgumentsIndex = 0; functionNameArgumentsIndex < functionNameArgumentsLength; functionNameArgumentsIndex++ ) {
-                    functionNameArguments[ functionNameArgumentsIndex ] = JSON.parse( functionNameArguments[ functionNameArgumentsIndex ].trim() );
+                for ( let functionNameArgumentIndex = 0; functionNameArgumentIndex < functionNameArgumentsLength; functionNameArgumentIndex++ ) {
+                    functionNameArguments[ functionNameArgumentIndex ] = JSON.parse( functionNameArguments[ functionNameArgumentIndex ].trim() );
                 }
             }
         }

@@ -46,3 +46,7 @@ function getElements() {
 function getIgnoredElements() {
     console.log( $rattribute.getIgnoredElements() );
 }
+
+function enableIgnoredElements() {
+    $rattribute.enableIgnoredElements();
+}

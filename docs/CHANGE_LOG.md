@@ -5,6 +5,7 @@
 - The "data-rattribute-js-ignore" attribute is now removed when set to false straight away (if removeAttributes is enabled).
 - Added a new public function called "getElements()", which will return all the elements currently setup.
 - Added a new public function called "getIgnoredElements()", which will return all the elements that have been configured to be ignored.
+- Added a new public function called "enableIgnoredElements()", which will enable all the elements set to ignore.
 - Fixed documentation faults in the api.ts file.
 - 
 

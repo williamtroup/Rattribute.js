@@ -425,6 +425,28 @@ import { Observation } from "./ts/data/observation";
             return _elementsIgnored;
         },
 
+        enableIgnoredElements: function () : PublicApi {
+            const ignoredElementsLength: number = _elementsIgnored.length;
+
+            for ( let ignoredElementIndex: number = 0; ignoredElementIndex < ignoredElementsLength; ignoredElementIndex++ ) {
+                const ignoredElement: HTMLElement = _elementsIgnored[ ignoredElementIndex ];
+
+                if ( Is.defined( ignoredElement ) ) {
+                    ignoredElement.removeAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_IGNORE );
+
+                    processElement( ignoredElement );
+                }
+            }
+
+            if ( _elementsIgnored.length > 0 && _enabled ) {
+                updateElements();
+            }
+            
+            _elementsIgnored = [];
+
+            return _public;
+        },
+
 
         /*
          * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------

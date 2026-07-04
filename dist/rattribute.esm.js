@@ -449,6 +449,21 @@ var o;
         getIgnoredElements: function() {
             return d;
         },
+        enableIgnoredElements: function() {
+            const e = d.length;
+            for (let n = 0; n < e; n++) {
+                const e = d[n];
+                if (t.defined(e)) {
+                    e.removeAttribute(i.CustomAttribute.RATTRIBUTE_JS_IGNORE);
+                    b(e);
+                }
+            }
+            if (d.length > 0 && l) {
+                R();
+            }
+            d = [];
+            return I;
+        },
         setConfiguration: e => {
             if (t.definedObject(e)) {
                 const t = s;

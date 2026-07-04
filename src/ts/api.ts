@@ -87,6 +87,17 @@ export type PublicApi = {
      */
     getIgnoredElements: () => HTMLElement[];
 
+    /**
+     * enableIgnoredElements().
+     * 
+     * Enables all the ignored elements.
+     * 
+     * @public
+     * 
+     * @returns     {Object}                                                The Rattribute.js class instance.
+     */
+    enableIgnoredElements: () => PublicApi;
+
 
     /*
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------

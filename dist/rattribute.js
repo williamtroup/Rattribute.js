@@ -238,8 +238,7 @@ var o;
                 T(1600, e, l, i.CustomAttribute.RATTRIBUTE_JS_XXXL);
                 n = true;
             }
-            const d = b(e);
-            if (d && !n) {
+            if (b(e) && !n) {
                 n = true;
             }
         }

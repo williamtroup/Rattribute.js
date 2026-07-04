@@ -121,10 +121,8 @@ import { Observation } from "./ts/data/observation";
                 addElementToScreenWidthElements( ScreenSize.xxxl, element, attributeXxxlData, Constant.CustomAttribute.RATTRIBUTE_JS_XXXL );
                 added = true;
             }
-
-            const hasCustomSizeAttributesBeenFound: boolean = findCustomSizeAttributes( element );
-
-            if ( hasCustomSizeAttributesBeenFound && !added ) {
+            
+            if ( findCustomSizeAttributes( element ) && !added ) {
                 added = true;
             }
         }

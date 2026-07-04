@@ -4,7 +4,7 @@
  * A JavaScript library that generates responsive attribute setters for any HTML element.
  * 
  * @file        observation.ts
- * @version     v1.2.0
+ * @version     v1.3.0
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026

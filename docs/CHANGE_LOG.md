@@ -1,5 +1,8 @@
 # Reattribute.js - Change Log:
 
+## Version 1.3.0:
+- 
+
 ## Version 1.2.0:
 - Added support to set attribute values directly from function call results!
 - Improved the ignore check to use actual boolean value.

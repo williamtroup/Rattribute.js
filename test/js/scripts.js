@@ -42,3 +42,7 @@ function targetFuncWithArgs( parent ) {
 function getElements() {
     console.log( $rattribute.getElements() );
 }
+
+function getIgnoredElements() {
+    console.log( $rattribute.getIgnoredElements() );
+}

@@ -36,6 +36,7 @@ import { Observation } from "./ts/data/observation";
     let _screenWidthChangeTimer: number = 0;
     let _enabled: boolean = true;
     let _windowEventListenerAdded: boolean = false;
+    let _elementsIgnored: HTMLElement[] = [];
     
 
     /*
@@ -124,6 +125,11 @@ import { Observation } from "./ts/data/observation";
 
             if ( findCustomSizeAttributes( element ) && !added ) {
                 added = true;
+            }
+            
+        } else {
+            if ( _elementsIgnored.indexOf( element ) === Value.notFound ) {
+                _elementsIgnored.push( element );
             }
         }
 
@@ -413,6 +419,10 @@ import { Observation } from "./ts/data/observation";
             }
 
             return elements;
+        },
+
+        getIgnoredElements: function () : HTMLElement[] {
+            return _elementsIgnored;
         },
 
 

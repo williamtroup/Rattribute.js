@@ -175,76 +175,81 @@ var o;
     let s = {};
     let u = {};
     let f = 0;
-    let c = true;
-    let l = false;
-    function d() {
+    let l = true;
+    let c = false;
+    let d = [];
+    function a() {
         let t = false;
         const e = document.getElementsByTagName("*");
         const n = [].slice.call(e);
         const r = n.length;
         for (let e = 0; e < r; e++) {
-            if (a(n[e])) {
+            if (b(n[e])) {
                 t = true;
             }
         }
         if (t) {
-            if (!l) {
-                window.addEventListener(i.Event.RESIZE, p);
-                l = true;
+            if (!c) {
+                window.addEventListener(i.Event.RESIZE, S);
+                c = true;
             }
-            if (c) {
-                S();
+            if (l) {
+                R();
             }
         }
     }
-    function a(e) {
+    function b(e) {
         let n = false;
         const r = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_XS);
         const o = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_SM);
         const s = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_MD);
         const u = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_LG);
         const f = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_XL);
-        const c = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_XXL);
-        const l = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_XXXL);
-        const d = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_IGNORE);
-        const a = t.definedString(d) && d.toLowerCase() === true.toString().toLowerCase();
-        if (!a) {
-            g(e, i.CustomAttribute.RATTRIBUTE_JS_IGNORE);
+        const l = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_XXL);
+        const c = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_XXXL);
+        const a = e.getAttribute(i.CustomAttribute.RATTRIBUTE_JS_IGNORE);
+        const b = t.definedString(a) && a.toLowerCase() === true.toString().toLowerCase();
+        if (!b) {
+            m(e, i.CustomAttribute.RATTRIBUTE_JS_IGNORE);
             if (t.definedString(r)) {
-                T(0, e, r, i.CustomAttribute.RATTRIBUTE_JS_XS);
+                g(0, e, r, i.CustomAttribute.RATTRIBUTE_JS_XS);
                 n = true;
             }
             if (t.definedString(o)) {
-                T(576, e, o, i.CustomAttribute.RATTRIBUTE_JS_SM);
+                g(576, e, o, i.CustomAttribute.RATTRIBUTE_JS_SM);
                 n = true;
             }
             if (t.definedString(s)) {
-                T(768, e, s, i.CustomAttribute.RATTRIBUTE_JS_MD);
+                g(768, e, s, i.CustomAttribute.RATTRIBUTE_JS_MD);
                 n = true;
             }
             if (t.definedString(u)) {
-                T(992, e, u, i.CustomAttribute.RATTRIBUTE_JS_LG);
+                g(992, e, u, i.CustomAttribute.RATTRIBUTE_JS_LG);
                 n = true;
             }
             if (t.definedString(f)) {
-                T(1200, e, f, i.CustomAttribute.RATTRIBUTE_JS_XL);
-                n = true;
-            }
-            if (t.definedString(c)) {
-                T(1400, e, c, i.CustomAttribute.RATTRIBUTE_JS_XXL);
+                g(1200, e, f, i.CustomAttribute.RATTRIBUTE_JS_XL);
                 n = true;
             }
             if (t.definedString(l)) {
-                T(1600, e, l, i.CustomAttribute.RATTRIBUTE_JS_XXXL);
+                g(1400, e, l, i.CustomAttribute.RATTRIBUTE_JS_XXL);
                 n = true;
             }
-            if (b(e) && !n) {
+            if (t.definedString(c)) {
+                g(1600, e, c, i.CustomAttribute.RATTRIBUTE_JS_XXXL);
                 n = true;
+            }
+            if (T(e) && !n) {
+                n = true;
+            }
+        } else {
+            if (d.indexOf(e) === -1) {
+                d.push(e);
             }
         }
         return n;
     }
-    function b(n) {
+    function T(n) {
         let r = false;
         const o = n.attributes;
         const s = o.length;
@@ -257,22 +262,22 @@ var o;
                     const u = e.getNumber(parseInt(i[i.length - 1]), 0);
                     const f = s.value;
                     if (u > 0 && t.definedString(f)) {
-                        T(u, n, f, o);
+                        g(u, n, f, o);
                         r = true;
                     } else {
-                        g(n, o);
+                        m(n, o);
                     }
                 }
             }
         }
         return r;
     }
-    function T(e, n, i, r) {
+    function g(e, n, i, r) {
         if (!Object.prototype.hasOwnProperty.call(u, e.toString())) {
             u[e.toString()] = [];
         }
-        const o = m(i);
-        const f = A(n, o);
+        const o = A(i);
+        const f = p(n, o);
         if (s.assignMissingIds && !t.definedString(n.id)) {
             let e = s.elementIdPrefix;
             if (t.definedString(e)) {
@@ -285,14 +290,14 @@ var o;
             attributes: o,
             originalAttributes: f
         });
-        g(n, r);
+        m(n, r);
     }
-    function g(t, e) {
+    function m(t, e) {
         if (s.removeAttributes) {
             t.removeAttribute(e);
         }
     }
-    function m(t) {
+    function A(t) {
         const e = {};
         const n = t.split(";");
         for (const t of n) {
@@ -301,7 +306,7 @@ var o;
         }
         return e;
     }
-    function A(e, n) {
+    function p(e, n) {
         const r = {};
         const o = e.attributes;
         const s = o.length;
@@ -322,23 +327,23 @@ var o;
         }
         return r;
     }
-    function p() {
-        if (c) {
+    function S() {
+        if (l) {
             if (f !== 0) {
                 clearTimeout(f);
             }
-            f = setTimeout(() => S(), s.responsiveDelay);
+            f = setTimeout(() => R(), s.responsiveDelay);
         }
     }
-    function S() {
-        _(R());
-    }
     function R() {
+        O(_());
+    }
+    function _() {
         const n = {
             screenWidths: [],
             elements: []
         };
-        const i = O();
+        const i = E();
         const r = i.length;
         for (let o = 0; o < r; o++) {
             const r = i[o];
@@ -367,8 +372,8 @@ var o;
         }
         return n;
     }
-    function _(n) {
-        const i = O();
+    function O(n) {
+        const i = E();
         const r = i.length;
         for (let o = 0; o < r; o++) {
             const r = i[o];
@@ -396,37 +401,37 @@ var o;
             }
         }
     }
-    function O() {
+    function E() {
         return Object.keys(u).sort((t, e) => e.toLowerCase().localeCompare(t.toLowerCase()));
     }
-    const E = {
+    const I = {
         start: function() {
-            if (!c) {
-                c = true;
-                S();
+            if (!l) {
+                l = true;
+                R();
             }
-            return E;
+            return I;
         },
         stop: function() {
-            c = false;
-            return E;
+            l = false;
+            return I;
         },
         fetch: function() {
             if (!s.removeAttributes) {
                 u = {};
             }
-            d();
-            return E;
+            a();
+            return I;
         },
         refresh: function() {
-            if (c) {
-                S();
+            if (l) {
+                R();
             }
-            return E;
+            return I;
         },
         getElements: function() {
             const e = [];
-            const n = O();
+            const n = E();
             const i = n.length;
             for (let r = 0; r < i; r++) {
                 const i = n[r];
@@ -443,6 +448,9 @@ var o;
             }
             return e;
         },
+        getIgnoredElements: function() {
+            return d;
+        },
         setConfiguration: e => {
             if (t.definedObject(e)) {
                 const t = s;
@@ -455,23 +463,23 @@ var o;
                 }
                 if (i) {
                     s = n.Options.get(t);
-                    c = s.enabled;
-                    o.setup(s, () => d());
+                    l = s.enabled;
+                    o.setup(s, () => a());
                 }
             }
-            return E;
+            return I;
         },
         getVersion: () => "1.3.0"
     };
     (() => {
         s = n.Options.get();
-        c = s.enabled;
+        l = s.enabled;
         r.onContentLoaded(() => {
-            d();
-            o.setup(s, () => d());
+            a();
+            o.setup(s, () => a());
         });
         if (!t.defined(window.$rattribute)) {
-            window.$rattribute = E;
+            window.$rattribute = I;
         }
     })();
 })();//# sourceMappingURL=rattribute.js.map

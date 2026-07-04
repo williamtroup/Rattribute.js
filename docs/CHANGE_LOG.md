@@ -4,6 +4,7 @@
 - Arguments passed to functions in the attribute setters can now be any type of value (instead of only strings being supported).
 - The "data-rattribute-js-ignore" attribute is now removed when set to false straight away (if removeAttributes is enabled).
 - Added a new public function called "getElements()", which will return all the elements currently setup.
+- Added a new public function called "getIgnoredElements()", which will return all the elements that have been configured to be ignored.
 - Fixed documentation faults in the api.ts file.
 - 
 

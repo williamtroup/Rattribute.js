@@ -76,6 +76,17 @@ export type PublicApi = {
      */
     getElements: () => HTMLElement[];
 
+    /**
+     * getIgnoredElements().
+     * 
+     * Gets all the ignored elements.
+     * 
+     * @public
+     * 
+     * @returns     {Object[]}                                              The array of ignored elements.
+     */
+    getIgnoredElements: () => HTMLElement[];
+
 
     /*
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -61,6 +61,12 @@ var e;
             if (r.length === 1 && r[0] === "") {
                 r = [];
             }
+            if (r.length > 0) {
+                const t = r.length;
+                for (let e = 0; e < t; e++) {
+                    r[e] = JSON.parse(r[e].trim());
+                }
+            }
         }
         const o = i[0].split(".");
         const s = o.pop();

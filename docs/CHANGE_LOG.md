@@ -1,6 +1,7 @@
 # Reattribute.js - Change Log:
 
 ## Version 1.3.0:
+- Arguments passed to functions in the attribute setters can now be any type of value (instead of only strings being supported).
 - 
 
 ## Version 1.2.0:

@@ -36,5 +36,5 @@ function targetFunc() {
 }
 
 function targetFuncWithArgs( parent ) {
-    return parent === true.toString().toLowerCase() ? "_parent" : "_self";
+    return parent ? "_parent" : "_self";
 }

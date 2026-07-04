@@ -52,6 +52,14 @@ export namespace Default {
             if ( functionNameArguments.length === 1 && functionNameArguments[ 0 ] === Char.empty ) {
                 functionNameArguments = [];
             }
+
+            if ( functionNameArguments.length > 0 ) {
+                const functionNameArgumentsLength: number = functionNameArguments.length;
+
+                for ( let functionNameArgumentsIndex = 0; functionNameArgumentsIndex < functionNameArgumentsLength; functionNameArgumentsIndex++ ) {
+                    functionNameArguments[ functionNameArgumentsIndex ] = JSON.parse( functionNameArguments[ functionNameArgumentsIndex ].trim() );
+                }
+            }
         }
 
         const namespaces: string[] = functionNameParts[ 0 ].split( Char.dot );

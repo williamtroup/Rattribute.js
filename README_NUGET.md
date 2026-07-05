@@ -7,7 +7,7 @@
 [![discussions Welcome](https://img.shields.io/badge/discussions-Welcome-red)](https://github.com/williamtroup/Rattribute.js/discussions)
 [![coded by William Troup](https://img.shields.io/badge/coded_by-William_Troup-yellow)](https://william-troup.com/)
 
-> ❓ A JavaScript library that generates responsive attribute setters for any HTML element.
+> ❓ A lightweight JavaScript library for automatically changing HTML element attributes based on responsive screen sizes.
 
 
 ## What features does Rattribute.js have?

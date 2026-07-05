@@ -9,7 +9,7 @@ Rattribute.js
 [![coded by William Troup](https://img.shields.io/badge/coded_by-William_Troup-yellow)](https://william-troup.com/)
 </h1>
 
-> <p align="center">❓ A lightweight JavaScript library for automatically changing HTML element attributes based on responsive screen sizes.</p>
+> <p align="center">❓ Rattribute.js allows you to define different HTML attributes for different viewport widths using simple data-* attributes. Whether you need to change classes, targets, ARIA attributes, or any other HTML attribute, Rattribute.js updates your elements automatically as the browser size changes — without writing responsive JavaScript.</p>
 > <p align="center">v1.3.0</p>
 <br />
 <br />
@@ -17,15 +17,13 @@ Rattribute.js
 
 <h1>What features does Rattribute.js have?</h1>
 
-- 😏 Zero-dependencies and extremely lightweight!
-- 🦾 Written in TypeScript, allowing greater support for React, Angular, and other libraries!
-- 💻 Full API available via public functions.
-- ⭐ Default sizes consistent with Bootstrap: xs, sm, md, lg, xl, xxl, along with extra xxxl.
-- 🌈 Set your own custom size attributes!
-- 🎥 Toggling responsiveness on/off support.
-- 📃 Auto fetch support (when HTML is added via 3rd party libraries).
-- ☑️ Set up which elements to ignore.
-- 🔨 Set attribute values from function calls!
+- 🚀 Zero dependencies and lightweight.
+- 📝 Written in TypeScript with excellent editor support.
+- 📱 Responsive breakpoints matching Bootstrap (`xs`–`xxl`), plus custom sizes.
+- 🔄 Automatically detects new DOM elements.
+- ⚙️ Public API for manual control.
+- 🎯 Ignore specific elements when needed.
+- 🧩 Set attribute values directly or from function calls.
 <br />
 <br />
 
@@ -48,7 +46,7 @@ To see a list of all the most recent changes, click [here](docs/CHANGE_LOG.md).
 
 You can install the library with npm into your local modules directory using the following command:
 
-```markdown
+```bash
 npm install rattribute.js
 ```
 
@@ -99,6 +97,8 @@ Make sure you include the "DOCTYPE html" tag at the top of your HTML, as follows
 <p><a href="https://www.william-troup.com/" data-rattribute-js-ignore="true" data-rattribute-js-600="target=_blank;class=600-class" target="_self">Test Link (600, Ignore)</a></p>
 <p><a href="https://www.william-troup.com/" data-rattribute-js-ignore="false" data-rattribute-js-600="target=targetFunc()" data-rattribute-js-md="target=targetFuncWithArgs(true)" target="targetFuncWithArgs(false)">Test Link (600, From Functions)</a></p>
 ```
+
+Rattribute.js automatically updates the element when the viewport crosses the configured width.
 
 <br>
 

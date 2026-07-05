@@ -9,6 +9,7 @@
 - Fixed documentation faults in the api.ts file.
 - Fixed some missing types in the observation.ts file.
 - Added documentation for the public API functions.
+- Added documentation for the configuration settings.
 
 
 ## Version 1.2.0:

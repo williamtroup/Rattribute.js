@@ -130,3 +130,5 @@ Configuration options allow you to customize how Rattribute.js will function.  Y
     } );
 </script>
 ```
+
+To see a list of all the available configuration options you can use, click [here](docs/CONFIGURATION.md).

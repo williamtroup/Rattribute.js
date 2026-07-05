@@ -359,7 +359,7 @@ import { Observation } from "./ts/data/observation";
 	 * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	 */
 
-    const _public: PublicApi = {
+    const _publicApi: PublicApi = {
         /*
          * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
          * Public API Functions:  Automation
@@ -373,19 +373,19 @@ import { Observation } from "./ts/data/observation";
                 updateElements();
             }
 
-            return _public;
+            return _publicApi;
         },
         
         stop: function () : PublicApi {
             _enabled = false;
 
-            return _public;
+            return _publicApi;
         },
 
         fetch: function () : PublicApi {
             fetchAll();
 
-            return _public;
+            return _publicApi;
         },
 
         refresh: function () : PublicApi {
@@ -393,7 +393,7 @@ import { Observation } from "./ts/data/observation";
                 updateElements();
             }
 
-            return _public;
+            return _publicApi;
         },
 
         getElements: function () : HTMLElement[] {
@@ -444,7 +444,7 @@ import { Observation } from "./ts/data/observation";
 
             _elementsIgnored = [];
 
-            return _public;
+            return _publicApi;
         },
 
 
@@ -474,7 +474,7 @@ import { Observation } from "./ts/data/observation";
                 }
             }
 
-            return _public;
+            return _publicApi;
         },
 
 
@@ -507,7 +507,7 @@ import { Observation } from "./ts/data/observation";
         } );
 
         if ( !Is.defined( window.$rattribute ) ) {
-            window.$rattribute = _public;
+            window.$rattribute = _publicApi;
         }
     } )();
 } )();

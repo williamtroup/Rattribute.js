@@ -8,7 +8,7 @@
 - Added a new public function called "enableIgnoredElements()", which will enable all the elements set to ignore.
 - Fixed documentation faults in the api.ts file.
 - Fixed some missing types in the observation.ts file.
-- 
+- Added documentation for the public API functions.
 
 
 ## Version 1.2.0:

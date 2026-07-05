@@ -112,11 +112,14 @@ That's it! Nice and simple. Please refer to the code if you need more help (full
 <h1>How do I go about customizing Rattribute.js?</h1>
 
 To customize, and get more out of Rattribute.js, please read through the following documentation.
-<br>
-<br>
 
 
-### 5. Configuration:
+### 1. Public Functions:
+
+To see a list of all the public functions available, click [here](docs/PUBLIC_FUNCTIONS.md).
+
+
+### 2. Configuration:
 
 Configuration options allow you to customize how Rattribute.js will function.  You can set them as follows:
 

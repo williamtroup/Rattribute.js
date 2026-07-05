@@ -91,8 +91,11 @@ That's it! Nice and simple. Please refer to the code if you need more help (full
 
 To customize, and get more out of Rattribute.js, please read through the following documentation.
 
+### 1. Public Functions:
 
-### 5. Configuration:
+To see a list of all the public functions available, click [here](docs/PUBLIC_FUNCTIONS.md).
+
+### 2. Configuration:
 
 Configuration options allow you to customize how Rattribute.js will function.  You can set them as follows:
 

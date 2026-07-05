@@ -52,6 +52,10 @@ import { Observation } from "./ts/data/observation";
         const elements: HTMLElement[] = [].slice.call( domElements );
         const elementsLength: number = elements.length;
 
+        if ( !_configurationOptions.removeAttributes ) {
+            _screenWidthElements = {} as Record<string, ElementOptions[]>;
+        }
+
         for ( let elementIndex: number = 0; elementIndex < elementsLength; elementIndex++ ) {
             if ( processElement( elements[ elementIndex ] as HTMLElement ) ) {
                 elementsFound = true;
@@ -379,10 +383,6 @@ import { Observation } from "./ts/data/observation";
         },
 
         fetch: function () : PublicApi {
-            if ( !_configurationOptions.removeAttributes ) {
-                _screenWidthElements = {} as Record<string, ElementOptions[]>;
-            }
-
             fetchAll();
 
             return _public;

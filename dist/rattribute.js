@@ -185,6 +185,9 @@ var o;
         const e = document.getElementsByTagName("*");
         const n = [].slice.call(e);
         const r = n.length;
+        if (!s.removeAttributes) {
+            u = {};
+        }
         for (let e = 0; e < r; e++) {
             if (b(n[e])) {
                 t = true;
@@ -419,9 +422,6 @@ var o;
             return I;
         },
         fetch: function() {
-            if (!s.removeAttributes) {
-                u = {};
-            }
             a();
             return I;
         },

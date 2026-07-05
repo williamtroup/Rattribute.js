@@ -4,7 +4,7 @@
  * A lightweight JavaScript library for automatically changing HTML element attributes based on responsive screen sizes.
  * 
  * @file        type.ts
- * @version     v1.3.0
+ * @version     v1.3.1
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026

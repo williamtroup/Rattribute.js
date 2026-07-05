@@ -1,8 +1,8 @@
-# Rattribute.js v1.3.0
+# Rattribute.js v1.3.1
 
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Rattribute.js%2C%20a%20free%20JavaScript%json%20converter&url=https://github.com/williamtroup/Rattribute.js&hashtags=javascript,json,html,converter)
-[![npm](https://img.shields.io/badge/npmjs-v1.3.0-blue)](https://www.npmjs.com/package/rattribute.js)
-[![nuget](https://img.shields.io/badge/nuget-v1.3.0-purple)](https://www.nuget.org/packages/Rattribute.js/)
+[![npm](https://img.shields.io/badge/npmjs-v1.3.1-blue)](https://www.npmjs.com/package/rattribute.js)
+[![nuget](https://img.shields.io/badge/nuget-v1.3.1-purple)](https://www.nuget.org/packages/Rattribute.js/)
 [![license](https://img.shields.io/badge/license-MIT-green)](https://github.com/williamtroup/Rattribute.js/blob/main/LICENSE.txt)
 [![discussions Welcome](https://img.shields.io/badge/discussions-Welcome-red)](https://github.com/williamtroup/Rattribute.js/discussions)
 [![coded by William Troup](https://img.shields.io/badge/coded_by-William_Troup-yellow)](https://william-troup.com/)
@@ -47,7 +47,7 @@ npm install rattribute.js
 Or, you can also use the following CDN links:
 
 ```markdown
-https://cdn.jsdelivr.net/gh/williamtroup/Rattribute.js@1.3.0/dist/rattribute.min.js
+https://cdn.jsdelivr.net/gh/williamtroup/Rattribute.js@1.3.1/dist/rattribute.min.js
 ```
 
 

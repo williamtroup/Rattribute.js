@@ -252,7 +252,7 @@ import { Observation } from "./ts/data/observation";
                 clearTimeout( _screenWidthChangeTimer );
             }
 
-            _screenWidthChangeTimer = setTimeout( () => updateElements(), _configurationOptions.responsiveDelay! );
+            _screenWidthChangeTimer = setTimeout( () : void => updateElements(), _configurationOptions.responsiveDelay! );
         }
     }
 
@@ -441,7 +441,7 @@ import { Observation } from "./ts/data/observation";
             if ( _elementsIgnored.length > 0 && _enabled ) {
                 updateElements();
             }
-            
+
             _elementsIgnored = [];
 
             return _public;

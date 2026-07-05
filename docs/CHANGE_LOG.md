@@ -10,6 +10,7 @@
 - Fixed some missing types in the observation.ts file.
 - Added documentation for the public API functions.
 - Added documentation for the configuration settings.
+- Added missing project settings, topics, and documentation files.
 
 
 ## Version 1.2.0:

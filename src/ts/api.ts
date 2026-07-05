@@ -1,10 +1,10 @@
 /**
  * Rattribute.js
  * 
- * A JavaScript library that generates responsive attribute setters for any HTML element.
+ * A lightweight JavaScript library for automatically changing HTML element attributes based on responsive screen sizes.
  * 
  * @file        api.ts
- * @version     v1.2.0
+ * @version     v1.3.0
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
@@ -24,7 +24,7 @@ export type PublicApi = {
     /**
      * start().
      * 
-     * Starts the responsive link automation.
+     * Starts the automation.
      * 
      * @public
      * 
@@ -35,7 +35,7 @@ export type PublicApi = {
     /**
      * stop().
      * 
-     * Stops the responsive link automation.
+     * Stops the automation.
      * 
      * @public
      * 
@@ -46,7 +46,7 @@ export type PublicApi = {
     /**
      * fetch().
      * 
-     * Fetches all the responsive link elements.
+     * Fetches all new elements added to the DOM and sets them up.
      * 
      * @public
      * 
@@ -57,13 +57,46 @@ export type PublicApi = {
     /**
      * refresh().
      * 
-     * Refreshes all the responsive link elements.
+     * Refreshes all the elements.
      * 
      * @public
      * 
      * @returns     {Object}                                                The Rattribute.js class instance.
      */
     refresh: () => PublicApi;
+
+    /**
+     * getElements().
+     * 
+     * Gets all the elements setup.
+     * 
+     * @public
+     * 
+     * @returns     {Object[]}                                              The array of elements.
+     */
+    getElements: () => HTMLElement[];
+
+    /**
+     * getIgnoredElements().
+     * 
+     * Gets all the ignored elements.
+     * 
+     * @public
+     * 
+     * @returns     {Object[]}                                              The array of ignored elements.
+     */
+    getIgnoredElements: () => HTMLElement[];
+
+    /**
+     * enableIgnoredElements().
+     * 
+     * Enables all the ignored elements.
+     * 
+     * @public
+     * 
+     * @returns     {Object}                                                The Rattribute.js class instance.
+     */
+    enableIgnoredElements: () => PublicApi;
 
 
     /*

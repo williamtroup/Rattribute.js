@@ -1,10 +1,10 @@
 /**
  * Rattribute.js
  * 
- * A JavaScript library that generates responsive attribute setters for any HTML element.
+ * A lightweight JavaScript library for automatically changing HTML element attributes based on responsive screen sizes.
  * 
  * @file        default.ts
- * @version     v1.2.0
+ * @version     v1.3.0
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
@@ -51,6 +51,14 @@ export namespace Default {
 
             if ( functionNameArguments.length === 1 && functionNameArguments[ 0 ] === Char.empty ) {
                 functionNameArguments = [];
+            }
+
+            if ( functionNameArguments.length > 0 ) {
+                const functionNameArgumentsLength: number = functionNameArguments.length;
+
+                for ( let functionNameArgumentIndex = 0; functionNameArgumentIndex < functionNameArgumentsLength; functionNameArgumentIndex++ ) {
+                    functionNameArguments[ functionNameArgumentIndex ] = JSON.parse( functionNameArguments[ functionNameArgumentIndex ].trim() );
+                }
             }
         }
 

@@ -1,10 +1,10 @@
 /**
  * Rattribute.js
  * 
- * A JavaScript library that generates responsive attribute setters for any HTML element.
+ * A lightweight JavaScript library for automatically changing HTML element attributes based on responsive screen sizes.
  * 
  * @file        rattribute.ts
- * @version     v1.2.0
+ * @version     v1.3.0
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
@@ -36,6 +36,7 @@ import { Observation } from "./ts/data/observation";
     let _screenWidthChangeTimer: number = 0;
     let _enabled: boolean = true;
     let _windowEventListenerAdded: boolean = false;
+    let _elementsIgnored: HTMLElement[] = [];
     
 
     /*
@@ -85,6 +86,8 @@ import { Observation } from "./ts/data/observation";
         const ignore: boolean = Is.definedString( attributeIgnoreData ) && attributeIgnoreData.toLowerCase() === true.toString().toLowerCase();
 
         if ( !ignore ) {
+            removeAttributesFromElement( element, Constant.CustomAttribute.RATTRIBUTE_JS_IGNORE );
+            
             if ( Is.definedString( attributeXsData ) ) {
                 addElementToScreenWidthElements( ScreenSize.xs, element, attributeXsData, Constant.CustomAttribute.RATTRIBUTE_JS_XS );
                 added = true;
@@ -120,10 +123,13 @@ import { Observation } from "./ts/data/observation";
                 added = true;
             }
 
-            const hasCustomSizeAttributesBeenFound: boolean = findCustomSizeAttributes( element );
-
-            if ( hasCustomSizeAttributesBeenFound && !added ) {
+            if ( findCustomSizeAttributes( element ) && !added ) {
                 added = true;
+            }
+            
+        } else {
+            if ( _elementsIgnored.indexOf( element ) === Value.notFound ) {
+                _elementsIgnored.push( element );
             }
         }
 
@@ -246,7 +252,7 @@ import { Observation } from "./ts/data/observation";
                 clearTimeout( _screenWidthChangeTimer );
             }
 
-            _screenWidthChangeTimer = setTimeout( () => updateElements(), _configurationOptions.responsiveDelay! );
+            _screenWidthChangeTimer = setTimeout( () : void => updateElements(), _configurationOptions.responsiveDelay! );
         }
     }
 
@@ -390,6 +396,57 @@ import { Observation } from "./ts/data/observation";
             return _public;
         },
 
+        getElements: function () : HTMLElement[] {
+            const elements: HTMLElement[] = [];
+            const screenWidths: string[] = getSortedScreenWidths();
+            const screenWidthsLength: number = screenWidths.length;
+
+            for ( let screenWidthIndex: number = 0; screenWidthIndex < screenWidthsLength; screenWidthIndex++ ) {
+                const screenWidth: string = screenWidths[ screenWidthIndex ];
+
+                if ( Object.prototype.hasOwnProperty.call( _screenWidthElements, screenWidth ) ) {
+                    const allElementOptions: ElementOptions[] = _screenWidthElements[ screenWidth ];
+                    const allElementOptionsLength: number = allElementOptions.length;
+
+                    for ( let elementOptionIndex: number = 0; elementOptionIndex < allElementOptionsLength; elementOptionIndex++ ) {
+                        const elementOptions: ElementOptions = allElementOptions[ elementOptionIndex ];
+
+                        if ( Is.defined( elementOptions.element ) && elements.indexOf( elementOptions.element ) === Value.notFound ) {
+                            elements.push( elementOptions.element );
+                        }
+                    }
+                }
+            }
+
+            return elements;
+        },
+
+        getIgnoredElements: function () : HTMLElement[] {
+            return _elementsIgnored;
+        },
+
+        enableIgnoredElements: function () : PublicApi {
+            const ignoredElementsLength: number = _elementsIgnored.length;
+
+            for ( let ignoredElementIndex: number = 0; ignoredElementIndex < ignoredElementsLength; ignoredElementIndex++ ) {
+                const ignoredElement: HTMLElement = _elementsIgnored[ ignoredElementIndex ];
+
+                if ( Is.defined( ignoredElement ) ) {
+                    ignoredElement.removeAttribute( Constant.CustomAttribute.RATTRIBUTE_JS_IGNORE );
+
+                    processElement( ignoredElement );
+                }
+            }
+
+            if ( _elementsIgnored.length > 0 && _enabled ) {
+                updateElements();
+            }
+
+            _elementsIgnored = [];
+
+            return _public;
+        },
+
 
         /*
          * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -428,7 +485,7 @@ import { Observation } from "./ts/data/observation";
          */
 
         getVersion: () : string => {
-            return "1.2.0";
+            return "1.3.0";
         }
     };
 

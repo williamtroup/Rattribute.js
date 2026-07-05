@@ -36,5 +36,17 @@ function targetFunc() {
 }
 
 function targetFuncWithArgs( parent ) {
-    return parent === true.toString().toLowerCase() ? "_parent" : "_self";
+    return parent ? "_parent" : "_self";
+}
+
+function getElements() {
+    console.log( $rattribute.getElements() );
+}
+
+function getIgnoredElements() {
+    console.log( $rattribute.getIgnoredElements() );
+}
+
+function enableIgnoredElements() {
+    $rattribute.enableIgnoredElements();
 }

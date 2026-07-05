@@ -157,18 +157,20 @@ var o;
                 n.observe(document.body, t);
             }
         } else {
-            n.disconnect();
-            n = null;
+            o();
         }
     }
     e.setup = i;
     function r(e) {
         if (e.observationMode && t.defined(n)) {
-            n.disconnect();
-            n = null;
+            o();
         }
     }
     e.destroy = r;
+    function o() {
+        n.disconnect();
+        n = null;
+    }
 })(o || (o = {}));
 
 (() => {

@@ -18,7 +18,7 @@ import { Is } from "../data/is";
 export namespace Observation {
     let _mutationObserver: MutationObserver = null! as MutationObserver;
 
-    export function setup( configurationOptions: ConfigurationOptions, mutationFunc: Function ) {
+    export function setup( configurationOptions: ConfigurationOptions, mutationFunc: Function ) : void {
         if ( configurationOptions.observationMode ) {
             if ( !Is.defined( _mutationObserver ) ) {
                 _mutationObserver = new MutationObserver( () : void => mutationFunc() );
@@ -33,15 +33,18 @@ export namespace Observation {
             }
             
         } else {
-            _mutationObserver.disconnect();
-            _mutationObserver = null!;
+            disconnect()
         }
     }
 
-    export function destroy( configurationOptions: ConfigurationOptions ) {
+    export function destroy( configurationOptions: ConfigurationOptions ) : void {
         if ( configurationOptions.observationMode && Is.defined( _mutationObserver ) ) {
-            _mutationObserver.disconnect();
-            _mutationObserver = null!;
+            disconnect();
         }
+    }
+
+    function disconnect() : void {
+        _mutationObserver.disconnect();
+        _mutationObserver = null!;
     }
 }

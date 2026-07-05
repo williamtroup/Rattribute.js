@@ -7,6 +7,7 @@
 - Added a new public function called "getIgnoredElements()", which will return all the elements that have been configured to be ignored.
 - Added a new public function called "enableIgnoredElements()", which will enable all the elements set to ignore.
 - Fixed documentation faults in the api.ts file.
+- Fixed some missing types in the observation.ts file.
 - 
 
 

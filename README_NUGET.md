@@ -23,7 +23,12 @@
 
 ## What browsers are supported?
 
-All modern browsers (such as Google Chrome, FireFox, and Opera) are fully supported.
+Rattribute.js works in all modern browsers, including:
+- Google Chrome
+- Microsoft Edge
+- Mozilla Firefox
+- Safari
+- Opera
 
 
 ## What are the most recent changes?

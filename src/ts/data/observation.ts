@@ -18,10 +18,10 @@ import { Is } from "../data/is";
 export namespace Observation {
     let _mutationObserver: MutationObserver = null! as MutationObserver;
 
-    export function setup( configurationOptions: ConfigurationOptions, mutationFunc: Function ) : void {
+    export function setup( configurationOptions: ConfigurationOptions, callback: Function ) : void {
         if ( configurationOptions.observationMode ) {
             if ( !Is.defined( _mutationObserver ) ) {
-                _mutationObserver = new MutationObserver( () : void => mutationFunc() );
+                _mutationObserver = new MutationObserver( () : void => callback() );
 
                 const observeConfig: MutationObserverInit = {
                     attributes: false,

@@ -193,11 +193,11 @@ var o;
         }
         if (t) {
             if (!c) {
-                window.addEventListener(i.Event.RESIZE, S);
+                window.addEventListener(i.Event.RESIZE, R);
                 c = true;
             }
             if (l) {
-                R();
+                S();
             }
         }
     }
@@ -284,11 +284,12 @@ var o;
         return r;
     }
     function g(e, n, i, r) {
-        if (!Object.prototype.hasOwnProperty.call(u, e.toString())) {
-            u[e.toString()] = [];
+        const o = e.toString();
+        if (!Object.prototype.hasOwnProperty.call(u, o)) {
+            u[o] = [];
         }
-        const o = A(i);
-        const f = p(n, o);
+        const f = A(i);
+        const l = p(n, f);
         if (s.assignMissingIds && !t.definedString(n.id)) {
             let e = s.elementIdPrefix;
             if (t.definedString(e)) {
@@ -296,10 +297,10 @@ var o;
             }
             n.id = `${e}${crypto.randomUUID().replaceAll("-", "")}`;
         }
-        u[e.toString()].push({
+        u[o].push({
             element: n,
-            attributes: o,
-            originalAttributes: f
+            attributes: f,
+            originalAttributes: l
         });
         m(n, r);
     }
@@ -338,15 +339,15 @@ var o;
         }
         return r;
     }
-    function S() {
+    function R() {
         if (l) {
             if (f !== 0) {
                 clearTimeout(f);
             }
-            f = setTimeout(() => R(), s.responsiveDelay);
+            f = setTimeout(() => S(), s.responsiveDelay);
         }
     }
-    function R() {
+    function S() {
         O(_());
     }
     function _() {
@@ -419,7 +420,7 @@ var o;
         start: function() {
             if (!l) {
                 l = true;
-                R();
+                S();
             }
             return I;
         },
@@ -433,7 +434,7 @@ var o;
         },
         refresh: function() {
             if (l) {
-                R();
+                S();
             }
             return I;
         },
@@ -469,7 +470,7 @@ var o;
                 }
             }
             if (d.length > 0 && l) {
-                R();
+                S();
             }
             d = [];
             return I;

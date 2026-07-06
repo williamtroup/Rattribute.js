@@ -183,8 +183,10 @@ import { Observation } from "./ts/data/observation";
     }
 
     function addElementToScreenWidthElements( screenSize: number, element: HTMLElement, attributeValue: string, attributeName: string ) : void {
-        if ( !Object.prototype.hasOwnProperty.call( _screenWidthElements, screenSize.toString() ) ) {
-            _screenWidthElements[ screenSize.toString() ] = [];
+        const storageScreenSize: string = screenSize.toString();
+        
+        if ( !Object.prototype.hasOwnProperty.call( _screenWidthElements, storageScreenSize ) ) {
+            _screenWidthElements[ storageScreenSize ] = [];
         }
 
         const newAttributes: Record<string, string> = getNewAttributes( attributeValue );
@@ -200,7 +202,7 @@ import { Observation } from "./ts/data/observation";
             element.id = `${prefix}${crypto.randomUUID().replaceAll( Char.dash, Char.empty )}`;
         }
 
-        _screenWidthElements[ screenSize.toString() ].push( {
+        _screenWidthElements[ storageScreenSize ].push( {
             element: element,
             attributes: newAttributes,
             originalAttributes: originalAttributes,

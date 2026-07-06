@@ -96,9 +96,9 @@ That's it! Nice and simple. Please refer to the code if you need more help (full
 
 To customize, and get more out of Rattribute.js, please read through the following documentation.
 
-### 1. Public Functions:
+### 1. Public API:
 
-To see a list of all the public functions available, click [here](docs/PUBLIC_FUNCTIONS.md).
+To see a list of all the API functions available, click [here](docs/PUBLIC_API.md).
 
 ### 2. Configuration:
 

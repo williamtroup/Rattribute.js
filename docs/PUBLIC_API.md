@@ -1,4 +1,4 @@
-# Reattribute.js - Public Functions:
+# Reattribute.js - Public API:
 
 ## `start()`
 

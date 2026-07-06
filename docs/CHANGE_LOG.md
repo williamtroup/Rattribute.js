@@ -5,6 +5,7 @@
 - Minor internal renames to variables.
 - Massively improved the number fetching for custom sizing attributes.
 - Minor documentation changes to reflect more accepted names.
+- Renamed config.ts to configuration.ts.
 - 
 
 

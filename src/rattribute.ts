@@ -19,7 +19,7 @@ import {
 import { type PublicApi } from "./ts/api";
 
 import { Is } from "./ts/data/is";
-import { Configuration } from "./ts/options/config";
+import { Configuration } from "./ts/options/configuration";
 import { DocumentElement } from "./ts/dom/document-element";
 import { Constant } from "./ts/constant";
 import { Char, ScreenSize, Value } from "./ts/data/enum";

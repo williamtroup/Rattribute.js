@@ -29,4 +29,4 @@ export type ElementOptions = {
 export type ElementsProcessed = {
     screenWidths: string[];
     elements: HTMLElement[];
-}
+};

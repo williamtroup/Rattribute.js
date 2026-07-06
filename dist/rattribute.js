@@ -195,11 +195,11 @@ var o;
         }
         if (t) {
             if (!c) {
-                window.addEventListener(i.Event.RESIZE, R);
+                window.addEventListener(i.Event.RESIZE, S);
                 c = true;
             }
             if (l) {
-                S();
+                R();
             }
         }
     }
@@ -299,11 +299,13 @@ var o;
             }
             n.id = `${e}${crypto.randomUUID().replaceAll("-", "")}`;
         }
-        u[o].push({
-            element: n,
-            attributes: f,
-            originalAttributes: l
-        });
+        if (Object.keys(f).length > 0) {
+            u[o].push({
+                element: n,
+                attributes: f,
+                originalAttributes: l
+            });
+        }
         m(n, r);
     }
     function m(t, e) {
@@ -311,14 +313,16 @@ var o;
             t.removeAttribute(e);
         }
     }
-    function A(t) {
-        const e = {};
-        const n = t.split(";");
-        for (const t of n) {
-            const [n, i] = t.split("=");
-            e[n] = i;
+    function A(e) {
+        const n = {};
+        const i = e.split(";");
+        for (const e of i) {
+            const [i, r] = e.split("=");
+            if (t.definedString(i) && t.definedString(r)) {
+                n[i] = r;
+            }
         }
-        return e;
+        return n;
     }
     function p(e, n) {
         const r = {};
@@ -341,15 +345,15 @@ var o;
         }
         return r;
     }
-    function R() {
+    function S() {
         if (l) {
             if (f !== 0) {
                 clearTimeout(f);
             }
-            f = setTimeout(() => S(), s.responsiveDelay);
+            f = setTimeout(() => R(), s.responsiveDelay);
         }
     }
-    function S() {
+    function R() {
         O(_());
     }
     function _() {
@@ -422,7 +426,7 @@ var o;
         start: function() {
             if (!l) {
                 l = true;
-                S();
+                R();
             }
             return I;
         },
@@ -436,7 +440,7 @@ var o;
         },
         refresh: function() {
             if (l) {
-                S();
+                R();
             }
             return I;
         },
@@ -472,7 +476,7 @@ var o;
                 }
             }
             if (d.length > 0 && l) {
-                S();
+                R();
             }
             d = [];
             return I;

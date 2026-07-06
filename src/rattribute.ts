@@ -202,11 +202,13 @@ import { Observation } from "./ts/data/observation";
             element.id = `${prefix}${crypto.randomUUID().replaceAll( Char.dash, Char.empty )}`;
         }
 
-        _screenWidthElements[ storageScreenSize ].push( {
-            element: element,
-            attributes: newAttributes,
-            originalAttributes: originalAttributes,
-        } as ElementOptions );
+        if ( Object.keys( newAttributes ).length > 0 ) {
+            _screenWidthElements[ storageScreenSize ].push( {
+                element: element,
+                attributes: newAttributes,
+                originalAttributes: originalAttributes,
+            } as ElementOptions );
+        }
 
         removeAttributesFromElement( element, attributeName );
     }
@@ -224,7 +226,9 @@ import { Observation } from "./ts/data/observation";
         for ( const newAttributeSetter of newAttributesSetters ) {
             const [ attributeName, attributeValue ] = newAttributeSetter.split( Char.equals );
             
-            result[ attributeName ] = attributeValue;
+            if ( Is.definedString( attributeName ) && Is.definedString( attributeValue ) ) {
+                result[ attributeName ] = attributeValue;
+            }
         }
 
         return result;

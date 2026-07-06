@@ -6,6 +6,7 @@
 - Massively improved the number fetching for custom sizing attributes.
 - Minor documentation changes to reflect more accepted names.
 - Renamed config.ts to configuration.ts.
+- Fixed a fault that would caused script errors to occur when attributes have not been setup correctly.
 - 
 
 

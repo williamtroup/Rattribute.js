@@ -3,6 +3,7 @@
 ## Version 1.3.1:
 - Fixed a fault that prevented the elements from refreshing when removeAttributes is disabled.
 - Minor internal renames to variables.
+- Massively improved the number fetching for custom sizing attributes.
 - 
 
 

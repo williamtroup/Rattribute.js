@@ -152,15 +152,27 @@ import { Observation } from "./ts/data/observation";
                 const attributeName: string = attribute.name;
 
                 if ( attributeName.startsWith( Constant.CustomAttribute.RATTRIBUTE_JS_CUSTOM ) ) {
-                    const attributeNameParts: string[] = attributeName.split( Char.dash );
-                    const attributeWidth: number = Default.getNumber( parseInt( attributeNameParts[ attributeNameParts.length - 1 ] ), 0 );
-                    const attributeValue: string = attribute.value;
+                    let removeAttribute: boolean = false;
 
-                    if ( attributeWidth > 0 && Is.definedString( attributeValue ) ) {
-                        addElementToScreenWidthElements( attributeWidth, element, attributeValue, attributeName );
-                        added = true;
+                    const matches: RegExpMatchArray | null = attributeName.match( /\d+(\.\d+)?/g );
+
+                    if ( Is.defined( matches ) && matches!.length === 1 ) {
+                        const attributeWidth: number = Default.getNumber( parseInt( matches![ 0 ] ), 0 );
+                        const attributeValue: string = attribute.value;
+
+                        if ( attributeWidth > 0 && Is.definedString( attributeValue ) ) {
+                            addElementToScreenWidthElements( attributeWidth, element, attributeValue, attributeName );
+                            added = true;
+
+                        } else {
+                            removeAttribute = true;
+                        }
 
                     } else {
+                        removeAttribute = true;
+                    }
+
+                    if ( removeAttribute ) {
                         removeAttributesFromElement( element, attributeName );
                     }
                 }

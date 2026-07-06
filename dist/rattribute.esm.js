@@ -261,13 +261,21 @@ var o;
             if (t.defined(s)) {
                 const o = s.name;
                 if (o.startsWith(i.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
-                    const i = o.split("-");
-                    const u = e.getNumber(parseInt(i[i.length - 1]), 0);
-                    const f = s.value;
-                    if (u > 0 && t.definedString(f)) {
-                        g(u, n, f, o);
-                        r = true;
+                    let i = false;
+                    const u = o.match(/\d+(\.\d+)?/g);
+                    if (t.defined(u) && u.length === 1) {
+                        const f = e.getNumber(parseInt(u[0]), 0);
+                        const l = s.value;
+                        if (f > 0 && t.definedString(l)) {
+                            g(f, n, l, o);
+                            r = true;
+                        } else {
+                            i = true;
+                        }
                     } else {
+                        i = true;
+                    }
+                    if (i) {
                         m(n, o);
                     }
                 }

@@ -2,15 +2,15 @@
 Rattribute.js
 
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Rattribute.js%2C%20a%20free%20JavaScript%json%20converter&url=https://github.com/williamtroup/Rattribute.js&hashtags=javascript,json,html,converter)
-[![npm](https://img.shields.io/badge/npmjs-v1.3.0-blue)](https://www.npmjs.com/package/rattribute.js)
-[![nuget](https://img.shields.io/badge/nuget-v1.3.0-purple)](https://www.nuget.org/packages/Rattribute.js/)
+[![npm](https://img.shields.io/badge/npmjs-v1.3.1-blue)](https://www.npmjs.com/package/rattribute.js)
+[![nuget](https://img.shields.io/badge/nuget-v1.3.1-purple)](https://www.nuget.org/packages/Rattribute.js/)
 [![license](https://img.shields.io/badge/license-MIT-green)](https://github.com/williamtroup/Rattribute.js/blob/main/LICENSE.txt)
 [![discussions Welcome](https://img.shields.io/badge/discussions-Welcome-red)](https://github.com/williamtroup/Rattribute.js/discussions)
 [![coded by William Troup](https://img.shields.io/badge/coded_by-William_Troup-yellow)](https://william-troup.com/)
 </h1>
 
 > <p align="center">❓ Rattribute.js allows you to define different HTML attributes for different viewport widths using simple data-* attributes. Whether you need to change classes, targets, ARIA attributes, or any other HTML attribute, Rattribute.js updates your elements automatically as the browser size changes — without writing responsive JavaScript.</p>
-> <p align="center">v1.3.0</p>
+> <p align="center">v1.3.1</p>
 <br />
 <br />
 
@@ -58,7 +58,7 @@ npm install rattribute.js
 Or, you can also use the following CDN links:
 
 ```markdown
-https://cdn.jsdelivr.net/gh/williamtroup/Rattribute.js@1.3.0/dist/rattribute.min.js
+https://cdn.jsdelivr.net/gh/williamtroup/Rattribute.js@1.3.1/dist/rattribute.min.js
 ```
 <br>
 <br>
@@ -119,9 +119,9 @@ That's it! Nice and simple. Please refer to the code if you need more help (full
 To customize, and get more out of Rattribute.js, please read through the following documentation.
 
 
-### 1. Public Functions:
+### 1. Public API:
 
-To see a list of all the public functions available, click [here](docs/PUBLIC_FUNCTIONS.md).
+To see a list of all the API functions available, click [here](docs/PUBLIC_API.md).
 
 
 ### 2. Configuration:

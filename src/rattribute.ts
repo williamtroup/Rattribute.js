@@ -4,7 +4,7 @@
  * A lightweight JavaScript library for automatically changing HTML element attributes based on responsive screen sizes.
  * 
  * @file        rattribute.ts
- * @version     v1.3.0
+ * @version     v1.3.1
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
@@ -19,7 +19,7 @@ import {
 import { type PublicApi } from "./ts/api";
 
 import { Is } from "./ts/data/is";
-import { Configuration } from "./ts/options/config";
+import { Configuration } from "./ts/options/configuration";
 import { DocumentElement } from "./ts/dom/document-element";
 import { Constant } from "./ts/constant";
 import { Char, ScreenSize, Value } from "./ts/data/enum";
@@ -51,6 +51,10 @@ import { Observation } from "./ts/data/observation";
         const domElements: HTMLCollectionOf<Element> = document.getElementsByTagName( "*" );
         const elements: HTMLElement[] = [].slice.call( domElements );
         const elementsLength: number = elements.length;
+
+        if ( !_configurationOptions.removeAttributes ) {
+            _screenWidthElements = {} as Record<string, ElementOptions[]>;
+        }
 
         for ( let elementIndex: number = 0; elementIndex < elementsLength; elementIndex++ ) {
             if ( processElement( elements[ elementIndex ] as HTMLElement ) ) {
@@ -148,15 +152,27 @@ import { Observation } from "./ts/data/observation";
                 const attributeName: string = attribute.name;
 
                 if ( attributeName.startsWith( Constant.CustomAttribute.RATTRIBUTE_JS_CUSTOM ) ) {
-                    const attributeNameParts: string[] = attributeName.split( Char.dash );
-                    const attributeWidth: number = Default.getNumber( parseInt( attributeNameParts[ attributeNameParts.length - 1 ] ), 0 );
-                    const attributeValue: string = attribute.value;
+                    let removeAttribute: boolean = false;
 
-                    if ( attributeWidth > 0 && Is.definedString( attributeValue ) ) {
-                        addElementToScreenWidthElements( attributeWidth, element, attributeValue, attributeName );
-                        added = true;
+                    const matches: RegExpMatchArray | null = attributeName.match( /\d+(\.\d+)?/g );
+
+                    if ( Is.defined( matches ) && matches!.length === 1 ) {
+                        const attributeWidth: number = Default.getNumber( parseInt( matches![ 0 ] ), 0 );
+                        const attributeValue: string = attribute.value;
+
+                        if ( attributeWidth > 0 && Is.definedString( attributeValue ) ) {
+                            addElementToScreenWidthElements( attributeWidth, element, attributeValue, attributeName );
+                            added = true;
+
+                        } else {
+                            removeAttribute = true;
+                        }
 
                     } else {
+                        removeAttribute = true;
+                    }
+
+                    if ( removeAttribute ) {
                         removeAttributesFromElement( element, attributeName );
                     }
                 }
@@ -167,8 +183,10 @@ import { Observation } from "./ts/data/observation";
     }
 
     function addElementToScreenWidthElements( screenSize: number, element: HTMLElement, attributeValue: string, attributeName: string ) : void {
-        if ( !Object.prototype.hasOwnProperty.call( _screenWidthElements, screenSize.toString() ) ) {
-            _screenWidthElements[ screenSize.toString() ] = [];
+        const storageScreenSize: string = screenSize.toString();
+        
+        if ( !Object.prototype.hasOwnProperty.call( _screenWidthElements, storageScreenSize ) ) {
+            _screenWidthElements[ storageScreenSize ] = [];
         }
 
         const newAttributes: Record<string, string> = getNewAttributes( attributeValue );
@@ -184,11 +202,13 @@ import { Observation } from "./ts/data/observation";
             element.id = `${prefix}${crypto.randomUUID().replaceAll( Char.dash, Char.empty )}`;
         }
 
-        _screenWidthElements[ screenSize.toString() ].push( {
-            element: element,
-            attributes: newAttributes,
-            originalAttributes: originalAttributes,
-        } as ElementOptions );
+        if ( Object.keys( newAttributes ).length > 0 ) {
+            _screenWidthElements[ storageScreenSize ].push( {
+                element: element,
+                attributes: newAttributes,
+                originalAttributes: originalAttributes,
+            } as ElementOptions );
+        }
 
         removeAttributesFromElement( element, attributeName );
     }
@@ -206,7 +226,9 @@ import { Observation } from "./ts/data/observation";
         for ( const newAttributeSetter of newAttributesSetters ) {
             const [ attributeName, attributeValue ] = newAttributeSetter.split( Char.equals );
             
-            result[ attributeName ] = attributeValue;
+            if ( Is.definedString( attributeName ) && Is.definedString( attributeValue ) ) {
+                result[ attributeName ] = attributeValue;
+            }
         }
 
         return result;
@@ -351,14 +373,14 @@ import { Observation } from "./ts/data/observation";
 
 	/*
 	 * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	 * Public API Functions:
+	 * Public API:
 	 * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	 */
 
-    const _public: PublicApi = {
+    const _publicApi: PublicApi = {
         /*
          * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-         * Public API Functions:  Automation
+         * Public API:  Automation
          * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
          */
 
@@ -369,23 +391,19 @@ import { Observation } from "./ts/data/observation";
                 updateElements();
             }
 
-            return _public;
+            return _publicApi;
         },
         
         stop: function () : PublicApi {
             _enabled = false;
 
-            return _public;
+            return _publicApi;
         },
 
         fetch: function () : PublicApi {
-            if ( !_configurationOptions.removeAttributes ) {
-                _screenWidthElements = {} as Record<string, ElementOptions[]>;
-            }
-
             fetchAll();
 
-            return _public;
+            return _publicApi;
         },
 
         refresh: function () : PublicApi {
@@ -393,7 +411,7 @@ import { Observation } from "./ts/data/observation";
                 updateElements();
             }
 
-            return _public;
+            return _publicApi;
         },
 
         getElements: function () : HTMLElement[] {
@@ -444,13 +462,13 @@ import { Observation } from "./ts/data/observation";
 
             _elementsIgnored = [];
 
-            return _public;
+            return _publicApi;
         },
 
 
         /*
          * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-         * Public API Functions:  Configuration
+         * Public API:  Configuration
          * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
          */
 
@@ -474,18 +492,18 @@ import { Observation } from "./ts/data/observation";
                 }
             }
 
-            return _public;
+            return _publicApi;
         },
 
 
         /*
          * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-         * Public API Functions:  Additional Data
+         * Public API:  Additional Data
          * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
          */
 
         getVersion: () : string => {
-            return "1.3.0";
+            return "1.3.1";
         }
     };
 
@@ -507,7 +525,7 @@ import { Observation } from "./ts/data/observation";
         } );
 
         if ( !Is.defined( window.$rattribute ) ) {
-            window.$rattribute = _public;
+            window.$rattribute = _publicApi;
         }
     } )();
 } )();

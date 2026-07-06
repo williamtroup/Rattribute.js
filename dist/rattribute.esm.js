@@ -183,6 +183,9 @@ var o;
         const e = document.getElementsByTagName("*");
         const n = [].slice.call(e);
         const r = n.length;
+        if (!s.removeAttributes) {
+            u = {};
+        }
         for (let e = 0; e < r; e++) {
             if (b(n[e])) {
                 t = true;
@@ -258,13 +261,21 @@ var o;
             if (t.defined(s)) {
                 const o = s.name;
                 if (o.startsWith(i.CustomAttribute.RATTRIBUTE_JS_CUSTOM)) {
-                    const i = o.split("-");
-                    const u = e.getNumber(parseInt(i[i.length - 1]), 0);
-                    const f = s.value;
-                    if (u > 0 && t.definedString(f)) {
-                        g(u, n, f, o);
-                        r = true;
+                    let i = false;
+                    const u = o.match(/\d+(\.\d+)?/g);
+                    if (t.defined(u) && u.length === 1) {
+                        const f = e.getNumber(parseInt(u[0]), 0);
+                        const l = s.value;
+                        if (f > 0 && t.definedString(l)) {
+                            g(f, n, l, o);
+                            r = true;
+                        } else {
+                            i = true;
+                        }
                     } else {
+                        i = true;
+                    }
+                    if (i) {
                         m(n, o);
                     }
                 }
@@ -273,11 +284,12 @@ var o;
         return r;
     }
     function g(e, n, i, r) {
-        if (!Object.prototype.hasOwnProperty.call(u, e.toString())) {
-            u[e.toString()] = [];
+        const o = e.toString();
+        if (!Object.prototype.hasOwnProperty.call(u, o)) {
+            u[o] = [];
         }
-        const o = A(i);
-        const f = p(n, o);
+        const f = A(i);
+        const l = p(n, f);
         if (s.assignMissingIds && !t.definedString(n.id)) {
             let e = s.elementIdPrefix;
             if (t.definedString(e)) {
@@ -285,11 +297,13 @@ var o;
             }
             n.id = `${e}${crypto.randomUUID().replaceAll("-", "")}`;
         }
-        u[e.toString()].push({
-            element: n,
-            attributes: o,
-            originalAttributes: f
-        });
+        if (Object.keys(f).length > 0) {
+            u[o].push({
+                element: n,
+                attributes: f,
+                originalAttributes: l
+            });
+        }
         m(n, r);
     }
     function m(t, e) {
@@ -297,14 +311,16 @@ var o;
             t.removeAttribute(e);
         }
     }
-    function A(t) {
-        const e = {};
-        const n = t.split(";");
-        for (const t of n) {
-            const [n, i] = t.split("=");
-            e[n] = i;
+    function A(e) {
+        const n = {};
+        const i = e.split(";");
+        for (const e of i) {
+            const [i, r] = e.split("=");
+            if (t.definedString(i) && t.definedString(r)) {
+                n[i] = r;
+            }
         }
-        return e;
+        return n;
     }
     function p(e, n) {
         const r = {};
@@ -417,9 +433,6 @@ var o;
             return I;
         },
         fetch: function() {
-            if (!s.removeAttributes) {
-                u = {};
-            }
             a();
             return I;
         },
@@ -484,7 +497,7 @@ var o;
             }
             return I;
         },
-        getVersion: () => "1.3.0"
+        getVersion: () => "1.3.1"
     };
     (() => {
         s = n.Options.get();

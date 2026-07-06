@@ -4,7 +4,7 @@
  * A lightweight JavaScript library for automatically changing HTML element attributes based on responsive screen sizes.
  * 
  * @file        observation.ts
- * @version     v1.3.0
+ * @version     v1.3.1
  * @author      Bunoon
  * @license     MIT License
  * @copyright   Bunoon 2026
@@ -18,10 +18,10 @@ import { Is } from "../data/is";
 export namespace Observation {
     let _mutationObserver: MutationObserver = null! as MutationObserver;
 
-    export function setup( configurationOptions: ConfigurationOptions, mutationFunc: Function ) : void {
+    export function setup( configurationOptions: ConfigurationOptions, callback: Function ) : void {
         if ( configurationOptions.observationMode ) {
             if ( !Is.defined( _mutationObserver ) ) {
-                _mutationObserver = new MutationObserver( () : void => mutationFunc() );
+                _mutationObserver = new MutationObserver( () : void => callback() );
 
                 const observeConfig: MutationObserverInit = {
                     attributes: false,
